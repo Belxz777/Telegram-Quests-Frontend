@@ -1,0 +1,9 @@
+        //https://api-bdc.net/data/ip-geolocation-full?key=bdc_a3fd490909df46c3b6e259e86e2425e3
+        //http://api.ipstack.com/check?access_key=2160ab9b543cbefda685b40e8350ffc4&%20language%20=%20ru
+    //https://ipapi.co/json/
+      /*setTimeout(async()=>{
+  let response = await axios.get(`http://ip-api.com/json/${ip}/`)
+  setaugedInfo(response.data)
+  console.log(response.data)
+  console.log(response)
+  },2000)*/
