@@ -49,19 +49,7 @@ export default function Scaner() {
           }
 
       </div>
-      <motion.div
-      className=" w-10 h-2 bg-orange-600 flex justify-center items-center"
-      animate={{
-        rotate: [0, 0, 180, 180, 0],
-        borderRadius: ["0%", "0%", "0%", "0%", "0%"]
-      }}
-      transition={{
-        duration: 2,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatDelay: 1
-      }}
-    />
+
       <h1 className=' text-center font-extrabold text-scin-base text-xl  '>
   Включено автоопределение кода  просто наведите камеру 
 </h1>

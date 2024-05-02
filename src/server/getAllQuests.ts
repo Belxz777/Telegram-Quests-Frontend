@@ -1,8 +1,7 @@
+"use server "
+const url =  "https://kdnhfs81-8000.euw.devtunnels.ms/"
 async function getAllQuests(): Promise<QuizData>  {
-if(!process.env.BACKEND_URL){
-throw new Error("")
-}
-    const res = await fetch(`https://kdnhfs81-8000.euw.devtunnels.ms/Quests/`);
+    const res = await fetch(`${url}Quests/`);
     if (!res.ok) {
         console.log(res.status)
         throw new Error('Failed to fetch data')
@@ -13,7 +12,7 @@ throw new Error("")
 }
 async function getAllQuestsByLatLon(lat:any,lon:any): Promise<QuizData>  {
 
-        const res = await fetch(`https://kdnhfs81-8000.euw.devtunnels.ms/Quests/${lat}/${lon}/`);
+        const res = await fetch(`${url}Quests/${lat}/${lon}/`);
         if (!res.ok) {
             console.log(res.status)
             throw new Error('Failed to fetch data')
@@ -22,4 +21,4 @@ async function getAllQuestsByLatLon(lat:any,lon:any): Promise<QuizData>  {
         console.log(receiveddata)
         return receiveddata
     }
-export {getAllQuests,getAllQuestsByLatLon}
+export { getAllQuests,getAllQuestsByLatLon};
