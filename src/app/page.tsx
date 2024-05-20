@@ -42,7 +42,7 @@ const router = useRouter()
   <AiOutlineCompress/>
   QRcode сканер
 </button>
-<button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl" onClick={()=> router.push(`/help`)}>
+<button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl" onClick={()=> router.push(`/start`)}>
   <AiOutlineIssuesClose/>
 Начать
 </button>

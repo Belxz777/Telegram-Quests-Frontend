@@ -11,17 +11,19 @@ type Props = {}
 
   function Karta ({}: Props) {
   const [quizData,setQuizData] = useState<QuizData>([{
-    "id":0,
-    "question":"",
-    "answer":"",
-    "variants":["", "","",""],
-    "location": "",
-    "hardness":"",
-    "lat":0,
-    "lon": 0,
-    "author":"",
-    "quizIn": "",
-    "categorie":""
+    id:0,
+    question:"",
+    answer:"",
+    variants:["", "","",""],
+    location: "",
+    hardness:"",
+    lat:0,
+    lon: 0,
+    author:"",
+    quizIn: "",
+    categorie:"",
+    image:"",
+    rebus:false
   }])
   
   const [augedInfo, setaugedInfo] = useState<augedInfo>({
