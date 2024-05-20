@@ -14,7 +14,9 @@ type augedInfo =  {
       lon: number,
       author:string,
       quizIn: string, 
+      quizId:number,
       categorie:string,
       image:string,
-      rebus:boolean
+      rebus:boolean,
+      todo:boolean,
     }]

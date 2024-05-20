@@ -41,9 +41,11 @@ const [quizData, setQuizData] = useState<QuizData>([{
 "lon": 0,
 "author": "",
 "quizIn": "",
+"quizId":0,
 "categorie": "",
 "image":"",
-"rebus":false
+"rebus":false,
+"todo":false,
     }])
 //http://localhost:4000/Quests/46.147.176.2
 useEffect(() => {
@@ -64,15 +66,7 @@ return (
 {
 quizData[0] ?
 <>
-{
-quizData.map((quest, index) =>
-!quest.rebus ?
-<Question quizData={quizData} />
-:
-null
-
-      )
-}
+<Question quizData={quizData}  />
 </>
 
 :

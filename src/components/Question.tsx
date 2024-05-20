@@ -33,17 +33,19 @@ const itemVariants: Variants = {
     },
     closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
   };
-const Question = (props: Props) => {
+const  Question = (props: Props) => {
 const [isOpen, setIsOpen] = useState(false);
 const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 const [userAnswers, setUserAnswers] = useState<{ question: string; answer: string; isCorrect: boolean }[]>([]);
 const [showResult, setShowResult] = useState<boolean>(false);
 const [rebus, setrebus] = useState('')
+const [todo, settodo] = useState<any>(null)
 const handleAnswerClick = (selectedVariant: string) => {
 const isCorrect = selectedVariant === props.quizData[currentQuestion].answer;
 setUserAnswers([...userAnswers, { question: props.quizData[currentQuestion].question, answer: selectedVariant, isCorrect }]);
 if (currentQuestion < props.quizData.length - 1) {
 setCurrentQuestion(currentQuestion + 1);
+setrebus("")
 } else {
 setShowResult(true);
 }
@@ -52,22 +54,26 @@ setShowResult(true);
 return (
 <div>
 {showResult ?
-<Result quizData={props.quizData} useAnswers={userAnswers} />
+<Result quizData={props.quizData} useAnswers={userAnswers} todo={todo} />
 :
-
 <div >
-<motion.nav
+  {
+props.quizData ?
+  <motion.nav
 initial={false}
 animate={isOpen ? "open" : "closed"}
 className="w-full flex justify-center items-center  flex-col"
 >
-<p className=' text-link-base  text-right font-extrabold items-center text-2xl  flex-col'>{props.quizData[currentQuestion].quizIn}</p>
+<p className=' text-link-base  text-right font-extrabold items-center text-2xl  flex-col'>{props.quizData[currentQuestion]!.quizIn }</p>
 {
 props.quizData[currentQuestion].rebus ?
 <div className='flex justify-center items-center flex-col'>
-<p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>
+{props.quizData[currentQuestion].question ?
+<p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>{props.quizData[currentQuestion].question} </p>
+:
+<p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>}
 <img src={props.quizData[currentQuestion].image} alt="" />
-<label>Введите ответ</label>
+<label>Введите ответ</label>  
 <motion.input
 className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl'
 value={rebus}
@@ -76,7 +82,7 @@ onChange={(e) => setrebus(e.target.value)}
 <motion.button
 whileTap={{ scale: 0.97 }}
 onClick={() => handleAnswerClick(rebus)}
-className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full text-xl '
+className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full text-xl  mt-4'
 >
 Отправить
 </motion.button>
@@ -88,8 +94,23 @@ whileTap={{ scale: 0.97 }}
 onClick={() => setIsOpen(!isOpen)}
 className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl '
 >
-{props.quizData[currentQuestion].question}
+{props.quizData[currentQuestion].question} 
 </motion.button>
+{props.quizData[currentQuestion].todo ? <motion.button className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full text-xl  mt-4'
+ onClick={()=>{
+  if (currentQuestion < props.quizData.length - 1) {
+    setCurrentQuestion(currentQuestion + 1);
+    } else {
+    setShowResult(true);
+    }
+    settodo(props.quizData[currentQuestion])
+}
+}>Перейти 
+{
+  props.quizData[currentQuestion].question
+}
+</motion.button>
+:
 <motion.ul
 variants={
 variants
@@ -100,10 +121,15 @@ style={{ pointerEvents: isOpen ? "auto" : "none" }}
 <motion.li variants={itemVariants} key={index} onClick={() => handleAnswerClick(variant)} className=' bg-hint-base  text-button-base font-bold py-2 px-14 rounded-full text-xl '>{index + 1}: {variant}</motion.li>
 ))}
 </motion.ul>
+}
+
 </>
 }
 
 </motion.nav>
+:
+null
+}
 </div>
 }
 </div>

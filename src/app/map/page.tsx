@@ -19,11 +19,13 @@ type Props = {}
     hardness:"",
     lat:0,
     lon: 0,
+    quizId:0,
     author:"",
     quizIn: "",
     categorie:"",
     image:"",
-    rebus:false
+    rebus:false,
+    todo:false,
   }])
   
   const [augedInfo, setaugedInfo] = useState<augedInfo>({

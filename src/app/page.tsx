@@ -4,11 +4,14 @@ import pint from '../../public/pins.png'
 import { AiOutlineAlignRight, AiOutlineCompress, AiOutlineIssuesClose } from "react-icons/ai";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
+import { useCloudStorage } from '@tma.js/sdk-react';
 import { useInitData,  useMiniApp} from '@tma.js/sdk-react';
 import { ClosingBehavior, postEvent } from '@tma.js/sdk';
 
 export default function General() {
+
+
+const cloudStorage = useCloudStorage();
   const initData = useInitData()
   const closingBehaviour = new ClosingBehavior(false, postEvent);
   closingBehaviour.enableConfirmation()
