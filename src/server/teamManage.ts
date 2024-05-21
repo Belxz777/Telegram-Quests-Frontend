@@ -12,10 +12,10 @@ name: name
 });
 if (!res.ok) {
 console.log(res.status)
-throw new Error('Failed to fetch data')
+return 
 }
 if (res.status !== 201) {
-return "Error "
+return 
 }
 const response= await res.json();
 

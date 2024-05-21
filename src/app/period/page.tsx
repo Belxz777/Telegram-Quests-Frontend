@@ -8,25 +8,18 @@ import { getNextLocation } from '@/server/getAllQuests'
  
  const Periodic = (props: Props) => {
     const cloudStorage = useCloudStorage()
-    const [currentQuiz, setcurrentQuiz] = useState(0)
+    const [currentQuiz, setcurrentQuiz] = useState("")
     const [nextData, setnextData] = useState<any>(null)
     useEffect(()=>{
-    const fetchData = async () => {
-        const currentQuizData  = await cloudStorage.get("currentQuiz").then((quizId) =>
-     {       setcurrentQuiz(Number(quizId))}
-        )
-
-    }
     const setCurrentQuiz = async () =>{
-        if(currentQuiz==0){
-            alert("иди нахуй")
-            return
-        }
-            const response =  await getNextLocation(Number(currentQuiz))
-        alert(response)
-        setnextData(response)
+ await cloudStorage.get("currentQuiz").then(async (quizId) => {
+   const response =  await getNextLocation(Number(quizId))
+    setnextData(response)
+  })
+
+         
+  
     }
-    fetchData()
     setCurrentQuiz()
     },[])
 //todo сделать что бы можно было нормально делать
@@ -43,7 +36,9 @@ import { getNextLocation } from '@/server/getAllQuests'
   <Map defaultState={{ center: [nextData.lat,nextData.lon] , zoom: 18} }  width={window.outerWidth}  height={window.outerHeight} >
     <>
         <Placemark geometry={[nextData.lat,nextData.lon]}  properties={{
-            iconCaption:`${nextData.quizIn}`,
+            iconCaption:`
+          Ваш следующий квест  здесь`,
+            iconColor:"green"
       }}
       options={{
         preset: "islands#circleDotIcon",
@@ -64,17 +59,21 @@ import { getNextLocation } from '@/server/getAllQuests'
       />
   </Map>
   : 
-  <Map defaultState={{ center: [34,43] , zoom: 18} }  width={window.outerWidth}  height={window.outerHeight} >
+  <Map defaultState={{ center: [56.8496, 53.2052] , zoom: 11} }  width={window.outerWidth}  height={window.outerHeight} >
     <>
-        <Placemark geometry={[22,12]}  properties={{
-            iconCaption:`:sdsd`,
-      }}
+        <Placemark geometry={[22,12]} 
+         properties={
+          {
+            iconColor: `green`,
+            iconCaption: `Вы находитесь здесь`
+            }}
       options={{
         preset: "islands#circleDotIcon",
         cursor:"pointer",
       
       }
       }
+
       />  
   
   </>
@@ -91,7 +90,7 @@ import { getNextLocation } from '@/server/getAllQuests'
   </YMaps>
   </div>
   <div className='flex items-center space-x-2'>
-  <Link href="/qrscanner" className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md '>Я на месте </Link>
+  <Link href="/qrscanner" className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md text-center '>Я на месте </Link>
   </div>
   </>
    )

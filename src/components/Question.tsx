@@ -77,7 +77,7 @@ props.quizData[currentQuestion].rebus ?
 <motion.input
 className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl'
 value={rebus}
-onChange={(e) => setrebus(e.target.value)}
+onChange={(e) => setrebus((e.target.value).toLowerCase())}
 />
 <motion.button
 whileTap={{ scale: 0.97 }}
@@ -105,10 +105,7 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full te
     }
     settodo(props.quizData[currentQuestion])
 }
-}>Перейти 
-{
-  props.quizData[currentQuestion].question
-}
+}>Следующее
 </motion.button>
 :
 <motion.ul
