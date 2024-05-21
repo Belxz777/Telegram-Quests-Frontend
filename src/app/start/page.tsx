@@ -27,7 +27,7 @@ return
 }
 setteamName(response.name)
 setloading(false)
-cloudStorage.set("teamId", response.id).then(() => alert(`Команда ${team} создана!`));
+localStorage.setItem("team", response.name)
   }
   //todo сделать добавление команды и ее сохранение в telegram cloud человека , а также настроить отдачу квеста
   //! не усложнять логику на бекенде

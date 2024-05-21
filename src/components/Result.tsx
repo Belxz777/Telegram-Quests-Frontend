@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Image from 'next/image';
 import Loading from './Loading';
+import { Akatab } from 'next/font/google';
 type Props = {
     quizData: any;
     useAnswers: any;
@@ -17,9 +18,10 @@ const Result = (props: Props) => {
 const cloudStorage = useCloudStorage();
     const calculateScore = () => {
         const correctAnswers = props.useAnswers.filter((answer: { isCorrect: any; }) => answer.isCorrect).length;
+        
         if(correctAnswers == props.quizData.length - 1 ){
-          return `Ты ответил правильно на ${correctAnswers} из  ${props.quizData.length} !
-          Молодец!!!`
+          return `Ты ответил правильно на ${correctAnswers+1} из  ${props.quizData.length} !
+          Молодцы!!!`
         }
         else{
           return ` Ты ответил правильно на ${correctAnswers} из  ${props.quizData.length} !        
@@ -29,35 +31,38 @@ const cloudStorage = useCloudStorage();
       };
     const [photoUrl, setphotoUrl] = useState("")
     const [isAddedPhoto,addPhoto] = useState(false)
-    const [id, setId] = useState("")
-    useEffect(()=>{
-      const fetchData = async () => {
-        
-        let current = props.quizData[0].quizId + 1
-        cloudStorage.set("currentQuiz",current)
-  
-    //  const foundTodoItem = props.quizData.find((item: any) => item.todo === true);
-    //   setTodoItem(foundTodoItem);
-        const team  = await cloudStorage.get("teamId").then((teamId) =>
-          setId(teamId)
-      )
-    }
-    fetchData()
-  },[])
+  //   useEffect(()=>{
+  //   const fetchData = async () => {
+
+
+  //     //  const foundTodoItem = props.quizData.find((item: any) => item.todo === true);
+  //     //   setTodoItem(foundTodoItem);
+  //     // const team = await cloudStorage.get("teamId").then((teamId) => {
+  //     //   setId(teamId || '')
+  //     //   alert(teamId)
+  //     // }
+  //     // )
+  //   }
+
+  //   fetchData()
+  // },[])
+
   const [loading, setloading] = useState(false)
       const sendPhoto = async() =>{
+       let teamName = localStorage.getItem("team") ||""
         setloading(true)
-  if(!props.quizData[0].quizIn || !id || !photoUrl){
-    alert(`${props.quizData[0].quizIn} ${id} ${photoUrl}`)
+  if(!props.quizData[0].quizIn || !teamName || !photoUrl){
+    alert(`${props.quizData[0].quizIn} ${teamName} ${photoUrl}`)
     setloading(false)
-    return
+    return  
   } 
- const response =  await addImage(Number(id), photoUrl,props.quizData.quizIn)
+ const response =  await addImage(teamName, photoUrl,props.quizData[0].quizIn)
+ //!ДОБИТЬ ЛОГИКУ 
 if(!response){
   setloading(false)
 return 
 }
-
+alert(`${props.quizData[0].quizIn} ${photoUrl} ${teamName}`)
 setloading(false)
 addPhoto(true)
       }
@@ -93,9 +98,9 @@ addPhoto(true)
     {
     props.todo.question &&
     <>  
-    <h1  className="text-3xl font-bold tracking-tight text-link-base text-center ">Последнее задание</h1>
+    <h1  className="text-3xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
       <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
-      <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.quizData[0].quizId}</h2>
+      {/* <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.quizData[0].quizId}</h2> */}
       </>
     } 
   <p className="text-gray-600 dark:text-gray-400">

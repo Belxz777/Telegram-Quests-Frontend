@@ -21,8 +21,8 @@ const response= await res.json();
 
 return response
 }
-async function addImage(id:number,url: string,location:string): Promise<any> {
-    const res = await fetch(`${host}team/uploadPhotoUrls/${id}`, {
+async function  addImage(name:string,url: string,location:string): Promise<any> {
+    const res = await fetch(`${host}team/uploadPhotoUrls/${name}`, {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'

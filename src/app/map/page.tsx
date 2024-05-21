@@ -64,7 +64,7 @@ throw new Error('No quests found');
     {
   quizData[0].id == 0 ? 
         <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'} >
-<Map defaultState={{ center: [] , zoom: 18} }  width={width}  height={height} >
+<Map defaultState={{ center: [56.84921, 53.24421] , zoom: 18} }  width={width}  height={height} >
 <Button
       options={{ maxWidth: 190 }}
       data={{ content: "К сожаление бекенд не работает " }}
@@ -76,7 +76,7 @@ throw new Error('No quests found');
 </YMaps>
   :
         <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'} >
-<Map defaultState={{ center: [56.849, 53.244] , zoom: 18} }  width={width}  height={height} >
+<Map defaultState={{ center: [56.84921, 53.24421] , zoom: 18} }  width={width}  height={height} >
 {
   quizData.map((item,index)=>
   <>

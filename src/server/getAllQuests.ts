@@ -31,4 +31,14 @@ async function getAllQuestsByLatLon(lat:any,lon:any): Promise<QuizData>  {
         const receiveddata = await res.json();
         return receiveddata
     }
-export { getAllQuests,getAllQuestsByLatLon,getNextLocation};
+    async function getTeamLocations(name:string): Promise<any>  {
+
+        const res = await fetch(`${url}Quests/questsForTeam/${name}`);
+        if (!res.ok) {
+            console.log(res.status)
+            throw new Error('Failed to fetch data')
+        }
+        const receiveddata = await res.json();
+        return receiveddata
+    }
+export { getAllQuests,getAllQuestsByLatLon,getNextLocation,getTeamLocations};

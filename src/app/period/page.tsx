@@ -3,27 +3,22 @@
  import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
 import Link from 'next/link'
 import { useCloudStorage } from '@tma.js/sdk-react'
-import { getNextLocation } from '@/server/getAllQuests'
+import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
  type Props = {}
  
  const Periodic = (props: Props) => {
     const cloudStorage = useCloudStorage()
-    const [currentQuiz, setcurrentQuiz] = useState("")
     const [nextData, setnextData] = useState<any>(null)
     useEffect(()=>{
     const setCurrentQuiz = async () =>{
- await cloudStorage.get("currentQuiz").then(async (quizId) => {
-   const response =  await getNextLocation(Number(quizId))
-    setnextData(response)
-  })
-
-         
-  
+const name = localStorage.getItem("team") || ''
+   const response =  await getTeamLocations(name)
+    setnextData(response)  
     }
     setCurrentQuiz()
     },[])
 //todo сделать админ панель и добавить задания еще также в принципе еще раз пересмотреть логику
-
+// ! ЗДЕСЬ БУДЕТ КАРТА С ТОЧКАМИ КОТОРЫЕ ЕЩЕ НЕ ПОСЕТИЛА КОМАНДА
    return (
     <>
     {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
@@ -36,7 +31,23 @@ import { getNextLocation } from '@/server/getAllQuests'
         nextData ?
   <Map defaultState={{ center: [nextData.lat,nextData.lon] , zoom: 18} }  width={window.outerWidth}  height={window.outerHeight} >
     <>
-        <Placemark geometry={[nextData.lat,nextData.lon]}  properties={{
+    {
+ nextData.map((item:any,index:number)=>
+  <>
+    <Placemark geometry={[item.lat,item.lon]}  properties={{
+      iconCaption:`${item.name}`,
+}}
+options={{
+  preset: "islands#circleDotIcon",
+  cursor:"pointer",
+}
+}
+key={index}
+/>  
+</>
+  )
+} 
+        {/* <Placemark geometry={[nextData.lat,nextData.lon]}  properties={{
             iconCaption:`
           Ваш следующий квест  здесь`,
             iconColor:"green"
@@ -47,7 +58,7 @@ import { getNextLocation } from '@/server/getAllQuests'
       
       }
       }
-      />  
+      />   */}
   
   </>
   <ZoomControl options={{
