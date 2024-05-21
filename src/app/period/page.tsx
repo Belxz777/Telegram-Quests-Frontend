@@ -22,7 +22,8 @@ import { getNextLocation } from '@/server/getAllQuests'
     }
     setCurrentQuiz()
     },[])
-//todo сделать что бы можно было нормально делать
+//todo сделать админ панель и добавить задания еще также в принципе еще раз пересмотреть логику
+
    return (
     <>
     {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
