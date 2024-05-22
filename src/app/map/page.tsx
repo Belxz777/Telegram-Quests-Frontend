@@ -7,6 +7,7 @@ import axios from 'axios'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { getIp } from '@/server/getIP'
 import { getAllQuests } from '@/server/getAllQuests'
+import { useBackButton } from '@tma.js/sdk-react'
 type Props = {}
 
   function Karta ({}: Props) {
@@ -34,6 +35,13 @@ type Props = {}
     lon:53.198824,
   })
   const router = useRouter()
+  const backButton = useBackButton()
+
+backButton.show()
+backButton.on('click', () =>{
+  router.push("/")
+})
+
 const height = window.innerHeight - 100
 const width = window.innerWidth
   useEffect( () => {
@@ -55,12 +63,7 @@ throw new Error('No quests found');
    // const  coordinaets = [{longtail:56.856825,sovtail:53.198824,title:'Квест в падике'},{longtail:56.862081,sovtail:53.218237,title:'Квест на парусах'},]
     
   return (
-    <main className='  '>
-                    <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex" onClick={()=> router.push(`/`)}>
-<AiOutlineArrowLeft  />
-Обратно на главную
-</button>
-    <div className='  w-full '>
+    <div className='  w-full  overflow-hidden '>
     {
   quizData[0].id == 0 ? 
         <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'} >
@@ -119,7 +122,6 @@ onClick={()=> router.push(`/quest/${item.lat}/${item.lon}`)}
 </YMaps>
 }
 </div>
-</main>
   )
 }
 export default Karta

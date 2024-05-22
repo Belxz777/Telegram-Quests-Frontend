@@ -2,16 +2,26 @@
 import Loading from '@/components/Loading'
 import {createTeam} from '@/server/teamManage'
 import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
-import { useCloudStorage } from '@tma.js/sdk-react'
+import { useBackButton, useCloudStorage, withBackButton } from '@tma.js/sdk-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 type Props = {}
 
 const page = (props: Props) => {
-  
+  const router = useRouter()
 const cloudStorage = useCloudStorage();
+const backButton = useBackButton()
+
+backButton.show()
+backButton.on('click', () =>{
+  router.push("/")
+})
+
+
   const [team, setteam] = useState("")
   const [error, seterror] = useState("")
   const [teamName, setteamName] = useState(null)
@@ -32,6 +42,7 @@ localStorage.setItem("team", response.name)
   //todo сделать добавление команды и ее сохранение в telegram cloud человека , а также настроить отдачу квеста
   //! не усложнять логику на бекенде
   return (
+    
        <main className="flex flex-col items-center justify-center  min-h-screen bg-scin-base px-4 md:px-6">
     {
       loading && <Loading text='Создание'/>
@@ -44,7 +55,7 @@ localStorage.setItem("team", response.name)
  Локацию  вашего первого задания  вам выдаст организатор
 </p>
 <div className='flex items-center space-x-2'>
-<Link href="/qrscanner" className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md  mt-5'>Я на месте </Link>
+<Link href="/qrscanner"prefetch={true} className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md  mt-5'>Я на месте </Link>
 </div>
 </>
   :

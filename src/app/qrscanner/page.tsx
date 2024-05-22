@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import{ motion} from 'framer-motion'
 import { AiOutlineAim, AiOutlineArrowLeft } from "react-icons/ai";
+import { useBackButton } from "@tma.js/sdk-react";
 export default function Scaner() {
   type ScanResult = {
     text: string;
@@ -12,6 +13,13 @@ export default function Scaner() {
   const [data, setData] = useState<boolean>();
   const [mdata, setmData] = useState<number[]>([]);
   const router = useRouter()
+  const backButton = useBackButton()
+
+backButton.show()
+backButton.on('click', () =>{
+  router.push("/")
+})
+
   const RequestFunc= async(result:string)=>{
     const coordinatesArray  =  await result.split(',').map(coord => parseFloat(coord));
     if(coordinatesArray.length!==2){
@@ -23,24 +31,23 @@ export default function Scaner() {
    }
   }
   return (
-    <div className=" bg-scin-base h-screen w-screen">
-<button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex" onClick={()=> router.push(`/`)}>
-<AiOutlineArrowLeft  />
-Обратно на главную
-</button>
-      <div className=" rounded-xl pt-10  border-4 border-base mt-5">
+    <div className=" bg-scin-base h-screen w-screen ">
+      <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">
         <QrReader
+      containerStyle={
+      {
+ width: "100%" 
+      }
+      }
           onResult={(result: any , error: any) => {
             if (result) {
               setData(result?.text)
            RequestFunc(result?.text)
-         // alert(coordinatesArray)
-
             }
             if (error) {
          console.log(error)
             }
-          } } constraints={{ facingMode: "environment" } }   className=" rounded-xl "    />
+          } } constraints={{ facingMode: "environment" } }   className=" rounded-xl  w-full"     />
           {
             data ? 
             <h2 className=" text-link-base text-black   text-2xl hover:text-emerald-100 text-center ">Код отсканирован</h2>
@@ -51,7 +58,7 @@ export default function Scaner() {
       </div>
 
       <h1 className=' text-center font-extrabold text-scin-base text-xl  '>
-  Включено автоопределение кода  просто наведите камеру 
+  Включено автоопределение кода , просто наведите камеру 
 </h1>
     </div>
   );

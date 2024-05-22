@@ -1,110 +1,97 @@
  "use client"
- import React, { useEffect, useState } from 'react'
+ import React, { useEffect, useRef, useState } from 'react'
  import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
 import Link from 'next/link'
 import { useCloudStorage } from '@tma.js/sdk-react'
 import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
+import Loading from '@/components/Loading'
+import { useRouter } from 'next/navigation'
  type Props = {}
  
- const Periodic = (props: Props) => {
-    const cloudStorage = useCloudStorage()
-    const [nextData, setnextData] = useState<any>(null)
-    useEffect(()=>{
-    const setCurrentQuiz = async () =>{
-const name = localStorage.getItem("team") || ''
-   const response =  await getTeamLocations(name)
-    setnextData(response)  
+const Periodic = (props: Props) => {
+  const cloudStorage = useCloudStorage()
+  const router = useRouter()
+  const [nextData, setnextData] = useState<any>(null)
+  const [loading, setloading] = useState(false)
+  const [error, seterror] = useState(false)
+  useEffect(() => {
+    const setCurrentQuiz = async () => {
+      setloading(true)
+      const name = localStorage.getItem("team") || ''
+      const response = await getTeamLocations(name)
+      if (!response) {
+        seterror(true)
+      }
+      setnextData(response)
+      setloading(false)
     }
     setCurrentQuiz()
-    },[])
-//todo сделать админ панель и добавить задания еще также в принципе еще раз пересмотреть логику
-// ! ЗДЕСЬ БУДЕТ КАРТА С ТОЧКАМИ КОТОРЫЕ ЕЩЕ НЕ ПОСЕТИЛА КОМАНДА
-   return (
+  }, [])
+  //todo сделать админ панель и добавить задания еще также в принципе еще раз пересмотреть логику
+  // ! ЗДЕСЬ БУДЕТ КАРТА С ТОЧКАМИ КОТОРЫЕ ЕЩЕ НЕ ПОСЕТИЛА КОМАНДА
+  const ref = useRef<any | null>(null)
+  const data ="Мы на месте"
+  return (
     <>
-    {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
-  <p className="text-4xl md:text-5xl font-bold text-link-base  text-center">
-    Ваше следующее  задание находится:
-  </p>
-  <div className="mt-12 w-full max-w-4xl aspect-square  bg-scin-base rounded-2xl overflow-hidden" >
-  <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'} >
-  {
-        nextData ?
-  <Map defaultState={{ center: [nextData.lat,nextData.lon] , zoom: 18} }  width={window.outerWidth}  height={window.outerHeight} >
-    <>
-    {
- nextData.map((item:any,index:number)=>
-  <>
-    <Placemark geometry={[item.lat,item.lon]}  properties={{
-      iconCaption:`${item.name}`,
-}}
-options={{
-  preset: "islands#circleDotIcon",
-  cursor:"pointer",
-}
-}
-key={index}
-/>  
-</>
-  )
-} 
-        {/* <Placemark geometry={[nextData.lat,nextData.lon]}  properties={{
-            iconCaption:`
-          Ваш следующий квест  здесь`,
-            iconColor:"green"
-      }}
-      options={{
-        preset: "islands#circleDotIcon",
-        cursor:"pointer",
-      
-      }
-      }
-      />   */}
-  
-  </>
-  <ZoomControl options={{
-  }} />
-  <Button
-        options={{ maxWidth: 128 }}
-        data={{ content: "Расширить " }}
-        defaultState={{ selected: true }}
-  
-      />
-  </Map>
-  : 
-  <Map defaultState={{ center: [56.8496, 53.2052] , zoom: 11} }  width={window.outerWidth}  height={window.outerHeight} >
-    <>
-        <Placemark geometry={[22,12]} 
-         properties={
-          {
-            iconColor: `green`,
-            iconCaption: `Вы находитесь здесь`
-            }}
-      options={{
-        preset: "islands#circleDotIcon",
-        cursor:"pointer",
-      
-      }
-      }
 
-      />  
-  
-  </>
-  <ZoomControl options={{
-  }} />
-  <Button
-        options={{ maxWidth: 128 }}
-        data={{ content: "Расширить " }}
-        defaultState={{ selected: true }}
-  
-      />
-  </Map>
- }
-  </YMaps>
-  </div>
-  <div className='flex items-center space-x-2'>
-  <Link href="/qrscanner" className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md text-center '>Я на месте </Link>
-  </div>
-  </>
-   )
- }
+      {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
+      <p className="text-4xl md:text-5xl font-bold text-link-base  text-center select-none overflow-hidden">
+        Оставшиеся задания вашей команды:
+      </p>
+      <div className=" w-full max-w-4xl aspect-square  bg-scin-base rounded-2xl h-screen overflow-hidden" >
+        {
+          loading && <Loading text='Загрузка'></Loading>
+        }
+        {
+          error && <p className="text-4xl md:text-5xl font-bold text-link-base  text-center">
+            Ошибка:
+          </p>
+        }
+        <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'}  >
+          {
+            nextData ?
+              <Map defaultState={{ center: [56.8496, 53.2052], zoom: 12 }} width={window.outerWidth} height={window.outerHeight} >
+                <>
+                  {
+                    nextData.map((item: any, index: number) =>
+                      <>
+                        <Placemark geometry={[item.lat, item.lon]} properties={{
+                          iconCaption: `${item.name}`,
+                        }}
+                          options={{
+                            preset: "islands#circleDotIcon",
+                            cursor: "pointer",
+                          }
+                          }
+                          key={index}
+                        />
+                      </>
+                    )
+                  }
+                </>
+                <ZoomControl options={{
+                }} />
+                <Button
+                  options={{
+                    maxWidth: 200,
+                    size:"small",
+                    selectOnClick: true,
+
+                  }}
+                  onClick={()=> router.push(`/qrscanner`)}
+                  data={{ content: "Мы на месте" }}
+          defaultState={{ selected: true}}
+                  instanceRef={ref}
+                ></Button>
+              </Map>
+              :
+         null
+          }
+        </YMaps>
+
+
+      </div>
+    </>
+  )
+}
  export default Periodic

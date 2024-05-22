@@ -1,19 +1,20 @@
 'use client'
 import { useEffect,useRef,useState,useMemo } from 'react'
 import pint from '../../public/pins.png'
-import { AiOutlineAlignRight, AiOutlineCompress, AiOutlineIssuesClose } from "react-icons/ai";
+import { AiFillHeart, AiOutlineAlignRight, AiOutlineCompress, AiOutlineIssuesClose } from "react-icons/ai";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCloudStorage } from '@tma.js/sdk-react';
 import { useInitData,  useMiniApp,useViewport} from '@tma.js/sdk-react';
 import { ClosingBehavior, postEvent } from '@tma.js/sdk';
+import Link from 'next/link';
 
 export default function General() {
 
 
   const cloudStorage = useCloudStorage();
   const initData = useInitData()
-
+const [isTeam, setisTeam] = useState(false)
   const closingBehaviour = new ClosingBehavior(false, postEvent);
   closingBehaviour.enableConfirmation()
   const miniApp = useMiniApp();
@@ -21,7 +22,11 @@ export default function General() {
   // const viewport = initViewport();
   const initDataJson = useMemo(() => {
     if (!initData) {
-      return 'Init data is empty.';
+      return 'Init data is empty.'; 
+    }
+    let teamName = localStorage.getItem("team") || null
+    if(teamName){
+setisTeam(true)
     }
     const { authDate, chat, hash, canSendAfter, queryId, receiver, user, startParam } = initData
     return JSON.stringify({
@@ -36,39 +41,40 @@ export default function General() {
     }, null, ' ');
   }, [initData]);
   useEffect(() => {
-    viewport.expand()
+      viewport.expand()
     miniApp.ready()
   }, [])
-  const router = useRouter()
 
   return (
-    <>
+    <div className="overflow-hidden">
       <header>
         <div className='flex  justify-between '>
-          <button className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl' onClick={() => router.push(`/qrscanner`)}>
+          <button className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3' >
             <AiOutlineCompress />
-            QRcode сканер
+           <Link href={"/qrscanner"} prefetch={false}  className='bg-button-base hover:bg-hint-base text-button-base font-bold  rounded-full text-xl' >  QRcode сканер</Link>
           </button>
-          <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl" onClick={() => router.push(`/start`)}>
+          {
+            !isTeam ?
+                      <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3" >
             <AiOutlineIssuesClose />
-            Начать
+            <Link href={"/start"} prefetch={true}>    Начать </Link>
           </button>
-          <button className=' bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl ' onClick={() => router.push(`/map`)}>
-            <AiOutlineAlignRight />
-            Карта
-          </button>
+          :
+          <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl  w-1/3" >
+          <AiOutlineIssuesClose />
+          <Link href={"/period"} prefetch={true}>   Продолжить </Link>
+        </button>
+          }      
+            <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4  rounded-full text-xl  w-1/3">
+          <AiFillHeart/>
+         <Link href={"/map"} prefetch={false}>  Помощь  </Link>
+        </button>
         </div>
+
       </header>
       <main className='flex w-screen h-screen justify-center items-center flex-col'>
-        <Image src={pint} alt='' className=' bg-button-base rounded-full  ' />
-        <h1 className=' text-center font-extrabold text-scin-base text-xl  '>
-          С помощью этого приложения вы сможете находить и решать квесты в городе Ижевске
-        </h1>
-        <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl" onClick={() => router.push(`/help`)}>
-          <AiOutlineIssuesClose />
-          Помощь
-        </button>
+        <Image src={pint} alt='' className=' bg-button-base rounded-full mb-28   select-none '  loading='lazy'/>
       </main>
-    </>
+    </div>
   )
 }
