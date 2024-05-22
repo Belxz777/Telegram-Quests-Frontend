@@ -2,7 +2,7 @@
  import React, { useEffect, useRef, useState } from 'react'
  import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
 import Link from 'next/link'
-import { useCloudStorage } from '@tma.js/sdk-react'
+import { useBackButton, useCloudStorage } from '@tma.js/sdk-react'
 import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
 import Loading from '@/components/Loading'
 import { useRouter } from 'next/navigation'
@@ -14,6 +14,13 @@ const Periodic = (props: Props) => {
   const [nextData, setnextData] = useState<any>(null)
   const [loading, setloading] = useState(false)
   const [error, seterror] = useState(false)
+  const backButton = useBackButton()
+
+backButton.show()
+backButton.on('click', () =>{
+  router.push("/")
+})
+
   useEffect(() => {
     const setCurrentQuiz = async () => {
       setloading(true)

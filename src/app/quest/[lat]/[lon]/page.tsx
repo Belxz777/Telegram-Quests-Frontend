@@ -9,6 +9,7 @@ import { getAllQuestsByLatLon } from '@/server/getAllQuests'
 import Result from '@/components/Result'
 import Question from '@/components/Question'
 import Back from '@/components/Back'
+import { useBackButton } from '@tma.js/sdk-react'
 interface Props  {
     params:{lat:number,lon:number}
 }
@@ -21,14 +22,7 @@ const itemVariants: Variants = {
   },
   closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
 };
-/**
-* Renders the Quest component, which fetches and displays quiz data based on the provided latitude and longitude parameters.
-*
-* @param {Object} params - The parameters object containing the latitude and longitude values.
-* @param {string} params.lat - The latitude value.
-* @param {string} params.lon - The longitude value.
-* @returns {JSX.Element} - The rendered Quest component.
-*/
+
 function Quest({ params }: Props) {
 const [quizData, setQuizData] = useState<QuizData>([{
 "id": 0,
@@ -48,6 +42,15 @@ const [quizData, setQuizData] = useState<QuizData>([{
 "todo":false,
     }])
 //http://localhost:4000/Quests/46.147.176.2
+// const backButton = useBackButton()
+// const router = useRouter()
+// backButton.show()
+// backButton.on('click', () =>{
+//   router.push("/")
+// })
+
+
+
 useEffect(() => {
 const fetchData = async () => {
 try {
@@ -64,13 +67,8 @@ fetchData()
 return (
 <>
 {
-quizData[0] ?
-<>
+quizData[0] &&
 <Question quizData={quizData}  />
-</>
-
-:
-<Back />
 }
 </>
 );

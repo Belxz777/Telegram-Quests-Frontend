@@ -41,11 +41,14 @@ const [showResult, setShowResult] = useState<boolean>(false);
 const [rebus, setrebus] = useState('')
 const [todo, settodo] = useState<any>(null)
 const handleAnswerClick = (selectedVariant: string) => {
-const isCorrect = selectedVariant === props.quizData[currentQuestion].answer;
+let isCorrect = selectedVariant === props.quizData[currentQuestion].answer;
+if(props.quizData[currentQuestion].answer=="" ){
+  isCorrect = true
+}
 setUserAnswers([...userAnswers, { question: props.quizData[currentQuestion].question, answer: selectedVariant, isCorrect }]);
 if (currentQuestion < props.quizData.length - 1) {
 setCurrentQuestion(currentQuestion + 1);
-setrebus("")
+setrebus("")  
 } else {
 setShowResult(true);
 }

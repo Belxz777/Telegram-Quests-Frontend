@@ -49,21 +49,31 @@ setisTeam(true)
     <div className="overflow-hidden">
       <header>
         <div className='flex  justify-between '>
-          <button className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3' >
-            <AiOutlineCompress />
-           <Link href={"/qrscanner"} prefetch={false}  className='bg-button-base hover:bg-hint-base text-button-base font-bold  rounded-full text-xl' >  QRcode сканер</Link>
-          </button>
+
+    
+           <Link href={"/qrscanner"} prefetch={false}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3' >          <AiOutlineCompress />
+           QRcode сканер</Link>
           {
             !isTeam ?
-                      <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3" >
-            <AiOutlineIssuesClose />
-            <Link href={"/start"} prefetch={true}>    Начать </Link>
-          </button>
+            <>
+                 
+
+            <Link href={"/start"} prefetch={true}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3">              <AiOutlineIssuesClose />  Начать </Link>
+      
+          <Link href={"/period"} prefetch={true} className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl  w-1/3">   
+           <AiOutlineIssuesClose />   Продолжить 
+           </Link>
+           </>
           :
-          <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl  w-1/3" >
-          <AiOutlineIssuesClose />
-          <Link href={"/period"} prefetch={true}>   Продолжить </Link>
-        </button>
+          <>
+                 
+
+          <Link href={"/start"} prefetch={true}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3">              <AiOutlineIssuesClose />  Начать </Link>
+    
+        <Link href={"/period"} prefetch={true} className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl  w-1/3">   
+         <AiOutlineIssuesClose />   Продолжить 
+         </Link>
+         </>
           }      
             <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4  rounded-full text-xl  w-1/3">
           <AiFillHeart/>

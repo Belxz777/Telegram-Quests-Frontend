@@ -15,7 +15,6 @@ type Props = {
 
 const Result = (props: Props) => {
   
-const cloudStorage = useCloudStorage();
     const calculateScore = () => {
         const correctAnswers = props.useAnswers.filter((answer: { isCorrect: any; }) => answer.isCorrect).length;
         
@@ -24,29 +23,13 @@ const cloudStorage = useCloudStorage();
           Молодцы!!!`
         }
         else{
-          return ` Ты ответил правильно на ${correctAnswers} из  ${props.quizData.length} !        
+          return ` Ты ответил правильно на ${correctAnswers+1} из  ${props.quizData.length} !        
          В следующий раз точно получится!!! `
         }
       
       };
     const [photoUrl, setphotoUrl] = useState("")
     const [isAddedPhoto,addPhoto] = useState(false)
-  //   useEffect(()=>{
-  //   const fetchData = async () => {
-
-
-  //     //  const foundTodoItem = props.quizData.find((item: any) => item.todo === true);
-  //     //   setTodoItem(foundTodoItem);
-  //     // const team = await cloudStorage.get("teamId").then((teamId) => {
-  //     //   setId(teamId || '')
-  //     //   alert(teamId)
-  //     // }
-  //     // )
-  //   }
-
-  //   fetchData()
-  // },[])
-
   const [loading, setloading] = useState(false)
       const sendPhoto = async() =>{
        let teamName = localStorage.getItem("team") ||""
@@ -62,17 +45,11 @@ if(!response){
   setloading(false)
 return 
 }
-alert(`${props.quizData[0].quizIn} ${photoUrl} ${teamName}`)
 setloading(false)
 addPhoto(true)
       }
-    const router= useRouter()
   return (
        <main className="flex flex-col items-center justify-center h-[100dvh]  bg-scin-base  px-4 md:px-6">
-                    <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex  float-right" onClick={()=> router.push(`/`)}>
-<AiOutlineArrowLeft  />
-Обратно на главную
-</button>
       <div className="max-w-md w-full space-y-6">
         <div className="text-center space-y-2">
 {

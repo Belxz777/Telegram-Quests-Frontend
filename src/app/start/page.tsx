@@ -63,7 +63,7 @@ localStorage.setItem("team", response.name)
   <h1 className="text-4xl md:text-5xl font-bold    text-link-base  text-center">Начни игру</h1>
   <div className="flex items-center space-x-2 flex-col">
     <input
-      className="flex-1 bg-white/10 border-2 border-white/20 rounded-md px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+      className="flex-1  rounded-md px-4 py-2  bg-hint-base  "
       placeholder="Введите название команды"
       type="text"
       value={team}
