@@ -43,7 +43,7 @@ localStorage.setItem("team", response.name)
   //! не усложнять логику на бекенде
   return (
     
-       <main className="flex flex-col items-center justify-center  min-h-screen bg-scin-base px-4 md:px-6">
+       <main className="flex flex-col items-center  min-h-screen bg-scin-base px-4 md:px-6">
     {
       loading && <Loading text='Создание'/>
     }
@@ -51,11 +51,11 @@ localStorage.setItem("team", response.name)
   teamName ?
   <>
   <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center ">Команда {teamName} создана</h1>
-<p className="text-4xl md:text-5xl font-bold text-link-base  text-center  bg-hint-base rounded-lg mt-2">
+<p className="text-4xl md:text-5xl font-bold text-link-base  text-center  bg-scin-base rounded-lg mt-2">
  Локацию  вашего первого задания  вам выдаст организатор
 </p>
 <div className='flex items-center space-x-2'>
-<Link href="/qrscanner"prefetch={true} className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md  mt-5'>Я на месте </Link>
+<Link href="/qrscanner"prefetch={true}  className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md  mt-5'>Я на месте </Link>
 </div>
 </>
   :

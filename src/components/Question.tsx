@@ -1,7 +1,7 @@
 import { motion, Variants } from 'framer-motion'
 import React, { useState } from 'react'
 import Result from './Result';
-
+import Image from 'next/image';
 type Props = {
     quizData:QuizData
 }
@@ -11,7 +11,7 @@ const variants = {
         transition: {
           type: "spring",
           bounce: 0,
-          duration: 0.7,
+          duration: 0.4,
           delayChildren: 0.3,
           staggerChildren: 0.05
         }
@@ -40,7 +40,7 @@ const [userAnswers, setUserAnswers] = useState<{ question: string; answer: strin
 const [showResult, setShowResult] = useState<boolean>(false);
 const [rebus, setrebus] = useState('')
 const [todo, settodo] = useState<any>(null)
-const handleAnswerClick = (selectedVariant: string) => {
+const handleAnswerClick = (selectedVariant: string) => { 
 let isCorrect = selectedVariant === props.quizData[currentQuestion].answer;
 if(props.quizData[currentQuestion].answer=="" ){
   isCorrect = true
@@ -53,7 +53,6 @@ setrebus("")
 setShowResult(true);
 }
 };
-
 return (
 <div>
 {showResult ?
@@ -67,20 +66,25 @@ initial={false}
 animate={isOpen ? "open" : "closed"}
 className="w-full flex justify-center items-center  flex-col"
 >
-<p className=' text-link-base  text-right font-extrabold items-center text-2xl  flex-col'>{props.quizData[currentQuestion]!.quizIn }</p>
+<p className=' text-link-base    font-extrabold items-center text-xl  flex-col'>{props.quizData[currentQuestion]!.quizIn }</p>
 {
 props.quizData[currentQuestion].rebus ?
 <div className='flex justify-center items-center flex-col'>
 {props.quizData[currentQuestion].question ?
-<p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>{props.quizData[currentQuestion].question} </p>
+<p className=' text-link-base   text-center font-extrabold  text-3xl  flex-col  select-none'>{props.quizData[currentQuestion].question} </p>
 :
 <p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>}
-<img src={props.quizData[currentQuestion].image} alt="" />
-<label>Введите ответ</label>  
+<img src={props.quizData[currentQuestion].image} alt=""    className=''/>
 <motion.input
-className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl'
+placeholder='Введите ответ'
+className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl  mt-5 placeholder-white'
 value={rebus}
-onChange={(e) => setrebus((e.target.value).toLowerCase())}
+onChange={(e) => {
+if(!e.target.value){
+  return
+}
+setrebus((e.target.value).toLowerCase())
+}}
 />
 <motion.button
 whileTap={{ scale: 0.97 }}
@@ -95,7 +99,7 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full t
 <motion.button
 whileTap={{ scale: 0.97 }}
 onClick={() => setIsOpen(!isOpen)}
-className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl '
+className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-2xl '
 >
 {props.quizData[currentQuestion].question} 
 </motion.button>
@@ -118,7 +122,7 @@ variants
 style={{ pointerEvents: isOpen ? "auto" : "none" }}
 >
 {props.quizData[currentQuestion].variants.map((variant, index) => (
-<motion.li variants={itemVariants} key={index} onClick={() => handleAnswerClick(variant)} className=' bg-hint-base  text-button-base font-bold py-2 px-14 rounded-full text-xl '>{index + 1}: {variant}</motion.li>
+<motion.li variants={itemVariants} key={index} onClick={() => handleAnswerClick(variant)} className=' cursor-pointer bg-hint-base  text-button-base font-bold py-5 mt-3 px-20 rounded-full text-xl '>{index + 1}: {variant}</motion.li>
 ))}
 </motion.ul>
 }

@@ -10,6 +10,7 @@ import Result from '@/components/Result'
 import Question from '@/components/Question'
 import Back from '@/components/Back'
 import { useBackButton } from '@tma.js/sdk-react'
+import Loading from '@/components/Loading'
 interface Props  {
     params:{lat:number,lon:number}
 }
@@ -42,17 +43,19 @@ const [quizData, setQuizData] = useState<QuizData>([{
 "todo":false,
     }])
 //http://localhost:4000/Quests/46.147.176.2
-// const backButton = useBackButton()
-// const router = useRouter()
-// backButton.show()
-// backButton.on('click', () =>{
-//   router.push("/")
-// })
+const backButton = useBackButton()
+const router = useRouter()
+backButton.show()
+backButton.on('click', () =>{
+  router.push("/")
+})
+const [loading, setloading] = useState(false)
 
 
 
 useEffect(() => {
 const fetchData = async () => {
+setloading(true)
 try {
 const data = await getAllQuestsByLatLon(params.lat, params.lon)
 setQuizData(data);
@@ -61,11 +64,16 @@ setQuizData(data);
 catch (e) {
 console.error(e)
 }
+setloading(false)
 }
 fetchData()
 }, [])
 return (
+  
 <>
+{
+  loading && <Loading text='Загрузка'/>
+}
 {
 quizData[0] &&
 <Question quizData={quizData}  />

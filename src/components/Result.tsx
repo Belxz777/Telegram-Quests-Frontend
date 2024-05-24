@@ -14,10 +14,10 @@ type Props = {
 }
 
 const Result = (props: Props) => {
-  
+  const [correct, setcorrect] = useState<any>(null)
     const calculateScore = () => {
         const correctAnswers = props.useAnswers.filter((answer: { isCorrect: any; }) => answer.isCorrect).length;
-        
+        setcorrect(correctAnswers)
         if(correctAnswers == props.quizData.length - 1 ){
           return `Ты ответил правильно на ${correctAnswers+1} из  ${props.quizData.length} !
           Молодцы!!!`
@@ -39,7 +39,7 @@ const Result = (props: Props) => {
     setloading(false)
     return  
   } 
- const response =  await addImage(teamName, photoUrl,props.quizData[0].quizIn)
+ const response =  await addImage(teamName, photoUrl,props.quizData[0].quizIn,correct )
  //!ДОБИТЬ ЛОГИКУ 
 if(!response){
   setloading(false)

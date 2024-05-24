@@ -21,7 +21,8 @@ const response= await res.json();
 
 return response
 }
-async function  addImage(name:string,url: string,location:string): Promise<any> {
+async function  addImage(name:string,url: string,location:string,result:string): Promise<any> {
+  console.log(result)
     const res = await fetch(`${host}team/uploadPhotoUrls/${name}`, {
     method: 'POST',
     headers: {
@@ -29,7 +30,8 @@ async function  addImage(name:string,url: string,location:string): Promise<any> 
     },
     body: JSON.stringify({
   url: url,
-  location:location
+  location:location,
+  result:result
     })
     });
     if (!res.ok) {
