@@ -14,12 +14,8 @@ function SDKProviderError({ error }: SDKProviderErrorProps) {
     <div>
 
   <h1 className=' text-center font-extrabold  text-link-base text-xl  '>
-  <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex" onClick={()=> router.push(`/`)}>
-<AiOutlineArrowLeft  />
-Обратно на главную
-</button>
 Ууп что то пошло не так  ... <br/>
-Если что приложение запукается только через telegram)
+Если что приложение запукается только через telegram
 
 </h1>
       <blockquote>
