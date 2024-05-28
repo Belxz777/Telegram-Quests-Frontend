@@ -57,7 +57,7 @@ backButton.on('click', () =>{
         <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'}  >
           {
             nextData ?
-              <Map defaultState={{ center: [56.8496, 53.2052], zoom: 12 }} width={window.outerWidth} height={window.outerHeight} >
+              <Map defaultState={{ center: [56.8496, 53.2052], zoom: 12 }} width={window.outerWidth} height={window.outerHeight-100} >
                 <>
                   {
                     nextData.map((item: any, index: number) =>

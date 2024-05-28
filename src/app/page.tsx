@@ -1,5 +1,5 @@
 'use client'
-import { useEffect,useRef,useState,useMemo } from 'react'
+import { useEffect,useRef,useState,useMemo, Suspense } from 'react'
 import pint from '../../public/pins.png'
 import { AiFillHeart, AiOutlineAlignRight, AiOutlineCompress, AiOutlineIssuesClose } from "react-icons/ai";
 import Image from 'next/image';
@@ -19,15 +19,13 @@ const [isTeam, setisTeam] = useState(false)
   closingBehaviour.enableConfirmation()
   const miniApp = useMiniApp();
   const viewport = useViewport();
-  // const viewport = initViewport();
+  // const viewport = initViewport();     
+  const [teamName, setteamName] = useState<string | null>(null)
   const initDataJson = useMemo(() => {
     if (!initData) {
       return 'Init data is empty.'; 
-    }
-    let teamName = localStorage.getItem("team") || null
-    if(teamName){
-setisTeam(true)
-    }
+    }   
+
     const { authDate, chat, hash, canSendAfter, queryId, receiver, user, startParam } = initData
     return JSON.stringify({
       authDate,
@@ -43,33 +41,31 @@ setisTeam(true)
   useEffect(() => {
       viewport.expand()
     miniApp.ready()
+    setteamName( localStorage.getItem("team")?.valueOf() || null)
+    if(teamName){
+setisTeam(true)
+    }
   }, [])
 
   return (
+<Suspense fallback={<div>Loading...</div>}  >
     <div className="overflow-hidden">
       <header>
         <div className='flex  justify-between '>
 
-    
+        <Link href={"/adminPanel"} prefetch={false}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3' >          <AiOutlineCompress />
+          Админка</Link>
            <Link href={"/qrscanner"} prefetch={false}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3' >          <AiOutlineCompress />
            QRcode сканер</Link>
           {
             !isTeam ?
             <>
                  
-
+{teamName && <h1 className='text-3xl font-bold tracking-tight text-link-base text-center'>{teamName}</h1>}
             <Link href={"/start"} prefetch={true}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3">              <AiOutlineIssuesClose />  Начать </Link>
-      
-          <Link href={"/period"} prefetch={true} className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl  w-1/3">   
-           <AiOutlineIssuesClose />   Продолжить 
-           </Link>
            </>
           :
           <>
-                 
-
-          <Link href={"/start"} prefetch={true}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3">              <AiOutlineIssuesClose />  Начать </Link>
-    
         <Link href={"/period"} prefetch={true} className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl  w-1/3">   
          <AiOutlineIssuesClose />   Продолжить 
          </Link>
@@ -86,5 +82,6 @@ setisTeam(true)
         <Image src={pint} alt='' className=' bg-button-base rounded-full mb-28   select-none '  loading='lazy'/>
       </main>
     </div>
+    </Suspense>
   )
 }

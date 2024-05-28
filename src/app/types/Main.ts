@@ -20,3 +20,13 @@ type augedInfo =  {
       rebus:boolean,
       todo:boolean,
     }]
+    type Teams = {
+        id: number,
+        name: string,
+        solved:Array<string>,
+        results: Array<string>,
+      imageDataUrl:Array<string>,
+        createdAt: Date,
+        updatedAt: Date
+    }
+  

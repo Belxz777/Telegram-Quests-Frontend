@@ -78,11 +78,10 @@ props.quizData[currentQuestion].rebus ?
 <motion.input
 placeholder='Введите ответ'
 className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl  mt-5 placeholder-white'
-value={rebus}
+                        value={rebus}
+                        minLength={3}
+                        required
 onChange={(e) => {
-if(!e.target.value){
-  return
-}
 setrebus((e.target.value).toLowerCase())
 }}
 />
