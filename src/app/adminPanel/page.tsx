@@ -9,6 +9,7 @@ type Props = {}
 function AdminPanel({}: Props) {
 const {teamData,fetchData}  = useTeamData()
 //сделать загрузку не всех команд сразу а по 10 штук крч оптимизировать
+// СДЕЛАТЬ ЗАГРУЗКУ ЧТО БЫ АДМИН ВИДЕЛ ЧТО ДАТА ИДЕТ
   return (
     <main key="1" className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
     <header className="flex items-center justify-between bg-white px-6 py-4 shadow dark:bg-gray-900">

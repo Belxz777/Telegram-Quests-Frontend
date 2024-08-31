@@ -92,8 +92,8 @@ setisTeam(true)
 
       </header>
       <main className='flex w-screen h-screen justify-center items-center flex-col'>
-        <Image src={pint} alt='' className=' bg-button-base rounded-full  mb-16  select-none '  loading='lazy'/>
-        {teamName && <h1 className='text-3xl font-bold tracking-tight text-link-base text-center'>Ваша команда: {teamName}</h1>}
+      {teamName && <h1 className='text-3xl font-bold tracking-tight text-link-base text-center'>Ваша команда: {teamName}</h1>}
+        <Image src={pint} alt='' className=' bg-button-base rounded-full   mb-8  select-none '  loading='lazy'/>
       </main>
     </div>
     </Suspense>

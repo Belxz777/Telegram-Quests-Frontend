@@ -17,6 +17,7 @@ type Props = {
 }
 
 const Result = (props: Props) => {
+  // в резалте изменить ui что бы фотка загруженная не выглядела так ущербно , приплюснуто
   const [correct, setcorrect] = useState<any>(null)
     const calculateScore = () => {
         const correctAnswers = props.useAnswers.filter((answer: { isCorrect: any; }) => answer.isCorrect).length;
@@ -111,10 +112,11 @@ addPhoto(true)
         </label>
       </p>
       :
-      <div className="flex justify-center  h-full overflow-hidden ">
+      <div className="flex justify-center  h-screen overflow-hidden ">
                           <Image src={photoUrl ? URL.createObjectURL(photoUrl) : ''} alt='' className='rounded-lg w-2/4 h-full' width="0" height="0" />
                         </div>
                     }
+
 
                     <input className="hidden" id="file" type="file" onChange={(e) => {
                       const files = e.target.files;
