@@ -12,7 +12,8 @@ import { Akatab } from 'next/font/google';
 type Props = {
     quizData: any;
     useAnswers: any;
-    todo:any
+    todo:any,
+    answers:string[]
 }
 
 const Result = (props: Props) => {
@@ -47,7 +48,7 @@ const Result = (props: Props) => {
     setloading(false)
     return
   }
- const response =  await addImage(teamName,photoUrl,props.quizData[0].quizIn,correct )
+ const response =  await addImage(teamName,photoUrl,props.quizData[0].quizIn,correct,props.answers )
  //!ДОБИТЬ ЛОГИКУ 
 if(!response){
   setloading(false)
@@ -85,12 +86,14 @@ addPhoto(true)
   <>
   <div>
     {
-    props.todo.question &&
+    props.todo?.question ?
     <>  
     <h1  className="text-3xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
       <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
       {/* <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.quizData[0].quizId}</h2> */}
       </>
+      :
+      null
     } 
   <p className="text-gray-600 dark:text-gray-400">
 

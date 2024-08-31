@@ -8,6 +8,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { getIp } from '@/server/getIP'
 import { getAllQuests } from '@/server/getAllQuests'
 import { useBackButton } from '@tma.js/sdk-react'
+import Reroute from '@/components/Reroute'
 type Props = {}
 
   function Karta ({}: Props) {
@@ -44,6 +45,7 @@ backButton.on('click', () =>{
 
 const height = window.innerHeight - 100
 const width = window.innerWidth
+const [reroute, setreroute] = useState(false)
   useEffect( () => {
 /**
 * Fetches all quest data and updates the quizData state.
@@ -64,13 +66,19 @@ throw new Error('No quests found');
     
   return (
     <div className='  w-full  overflow-hidden '>
+      {
+           
+            reroute && <Reroute />
+          
+      
+      }
     {
   quizData[0].id == 0 ? 
         <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'} >
 <Map defaultState={{ center: [56.84921, 53.24421] , zoom: 18} }  width={width}  height={height} >
 <Button
       options={{ maxWidth: 190 }}
-      data={{ content: "К сожаление бекенд не работает " }}
+      data={{ content: "Загрузка . . . " }}
       defaultState={{ selected: false }}
 >
 
@@ -93,7 +101,9 @@ options={{
 }
 }
 key={index}
-onClick={()=> router.push(`/quest/${item.lat}/${item.lon}`)}
+onClick={ () =>{
+  setreroute(true)
+ router.push(`/quest/${item.lat}/${item.lon}`)}}
 />  
 </>
   )

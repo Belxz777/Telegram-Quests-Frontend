@@ -1,7 +1,10 @@
 "use server "
-const host =  "https://kdnhfs81-8000.euw.devtunnels.ms/"
+
+import { url } from "@/app/types";
+
 async function createTeam(name: string): Promise<any> {
-const res = await fetch(`${host}team`, {
+  console.log(name,url)
+const res = await fetch(`${url}team`, {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json'
@@ -11,12 +14,14 @@ name: name
 })
 });
 if (!res.ok) {
-console.log(res.status)
+console.log(res.status,url+"teamisnt")
 return 
 }
 if (res.status !== 201) {
+  console.log(res.status,url+"team201")
 return 
 }
+console.log(res.status,url+"teamok")
 const response= await res.json();
 
 return response
@@ -44,13 +49,14 @@ return response
     
 //     return response
 //     }
-    async function  addImage(name:string,image: File,location:string,result:string): Promise<any> {
+    async function  addImage(name:string,image: File,location:string,result:string,answers:string[]): Promise<any> {
       console.log(image.size)
       const formData = new FormData();
       formData.append('file', image); 
       formData.append('location', location);
       formData.append('result', result);
-        const res = await fetch(`${host}team/uploadPhotoUrls/${name}`, {
+      formData.append('answers', JSON.stringify(answers));
+        const res = await fetch(`${url}team/uploadPhotoUrls/${name}`, {
         method: 'POST',
         body: formData
         });

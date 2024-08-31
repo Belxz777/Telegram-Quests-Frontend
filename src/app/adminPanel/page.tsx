@@ -2,10 +2,13 @@
 import { useTeamData } from '@/hooks/useTeamData'
 import React from 'react'
 import Image from 'next/image'
+import { deleteTeam } from '@/server/getAllTeamData'
+import Link from 'next/link'
 type Props = {}
 
 function AdminPanel({}: Props) {
 const {teamData,fetchData}  = useTeamData()
+//сделать загрузку не всех команд сразу а по 10 штук крч оптимизировать
   return (
     <main key="1" className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
     <header className="flex items-center justify-between bg-white px-6 py-4 shadow dark:bg-gray-900">
@@ -43,9 +46,21 @@ const {teamData,fetchData}  = useTeamData()
         key={team.id}>
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <div>
+        <div className='flex items-center justify-center rounded-md bg-gray-100  dark:bg-gray-800'>
           <h3 className="text-lg font-medium  text-white">{team.name}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Всего выполнено {team.solved.length}</p>
+          <button className="rounded-md bg-blue-500  ml-7 mb-5 py-2 px-2 text-xs text-white">
+          <Link href={`adminPanel/${team.name}`}> ПОДРОБНЕЕ</Link>  
+          </button>
+          <button className="rounded-md bg-red-500    ml-14 mb-5 py-2 px-2 text-xs text-white"
+          onClick={()=>{
+            deleteTeam(team.id)
+            alert("Команда удалена")
+            fetchData()
+          }}>
+          УДАЛИТЬ
+            </button>
+          
+          
         </div>
       </div>
     </div>
@@ -56,9 +71,10 @@ const {teamData,fetchData}  = useTeamData()
                                                   {
                                                     imageUrl &&
                                                     <img src={imageUrl} alt={imageUrl}   
-                                                  className="h-32  w-full rounded-md object-cover" />
+                                                  className="  h-72  w-full rounded-md object-cover" />
                                                   }
                                                       <p className="text-sm text-gray-500 dark:text-gray-400  text-center">Правильно  выполнено {team.results[index]}</p>
+                                                      <p className="text-sm text-gray-500 dark:text-gray-400 text-center">Всего выполнено {team.solved.length}</p>
                                                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
                                                         {team.solved[index]}
                                                     </div>

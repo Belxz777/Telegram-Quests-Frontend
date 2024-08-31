@@ -26,7 +26,6 @@ type augedInfo =  {
         solved:Array<string>,
         results: Array<string>,
       imageDataUrl:Array<string>,
-        createdAt: Date,
-        updatedAt: Date
+      answers:Array<string>
     }
   

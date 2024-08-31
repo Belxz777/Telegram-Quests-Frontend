@@ -3,6 +3,8 @@ import React,  {useCallback, useEffect, useRef, useState}  from "react";
 import {QrReader} from "react-qr-reader";
 import { useRouter } from "next/navigation";
 import usePrevious from "@/server/prev";
+import Reroute from "@/components/Reroute";
+import { useBackButton } from "@tma.js/sdk-react";
 export default function Scaner() {
   type ScanResult = {
     text: string;
@@ -44,6 +46,12 @@ export default function Scaner() {
     clearTimeout(timeoutId);
   };
   }, [isResultChecked, router]);
+  const backButton = useBackButton()
+
+  backButton.show()
+  backButton.on('click', () =>{
+    router.push("/")
+  })
   return (
     <div className=" bg-scin-base h-screen w-screen ">
       <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">
