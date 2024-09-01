@@ -37,7 +37,7 @@ function SDKProviderError({ error }: SDKProviderErrorProps) {
 
 function SDKProviderLoading() {
   return(
-  <Reroute/>)
+  <Reroute  text={"Загрузка"} />)
 }
 
 function SDKInitialState() {

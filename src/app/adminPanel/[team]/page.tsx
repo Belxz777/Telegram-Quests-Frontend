@@ -1,7 +1,7 @@
 "use client"
 import { Team } from "@/app/types";
 import Loading from "@/components/Loading";
-import { getTeamData } from "@/server/getAllTeamData"
+import { getTeamDataByName } from "@/server/getAllTeamData"
 import { useBackButton } from "@tma.js/sdk-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
@@ -21,7 +21,7 @@ const [loading, setloading] = useState(true)
 
             const fetchData = async () => {
                 try {
-                    const data = await getTeamData(params.params.team);
+                    const data = await getTeamDataByName(params.params.team);
                     setTeamData(data);
                     setloading(false)
                 } catch (error) {
@@ -34,9 +34,7 @@ const router = useRouter()
             backButton.on('click', () =>{
               router.push("/")
             })
-//доделать загрузку loading анимацию добаивить 
-// сделать что бы каждый квест был отдельным рядом в таблице , то есть map через солвед
-// 
+// сделать норм тему тут и вывод ответов нормально 
     return (
         
       <div className="flex min-h-screen w-full flex-col bg-muted/40">

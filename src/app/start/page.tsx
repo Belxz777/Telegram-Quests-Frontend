@@ -51,7 +51,7 @@ localStorage.setItem("team", response.name)
   
     }
     {
-      reroute && <Reroute />
+      reroute && <Reroute   text="Загрузка  . . ."/>
     }
 
 {

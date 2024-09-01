@@ -33,6 +33,7 @@ const itemVariants: Variants = {
     },
     closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
   };
+  // TODO разобраться сделась проверить как работает с ребусом вообщем 
 const  Question = (props: Props) => {
   const [answers, setAnswers] = useState<string[]>([]);
 const [isOpen, setIsOpen] = useState(false);
@@ -77,12 +78,12 @@ initial={false}
 animate={isOpen ? "open" : "closed"}
 className="w-full flex justify-center items-center  flex-col"
 >
-<p className=' text-link-base    font-extrabold items-center text-xl  flex-col'>{props.quizData[currentQuestion]!.quizIn }</p>
+<p className=' text-link-base    font-extrabold items-center text-xl  flex-col'> <span className='text-2xl'>Квест: </span>{props.quizData[currentQuestion]!.quizIn }</p>
 {
 props.quizData[currentQuestion].rebus ?
-<div className='flex justify-center items-center flex-col'>
+<div className='flex justify-center items-center flex-col mt-6'>
 {props.quizData[currentQuestion].question ?
-<p className=' text-link-base   text-center font-extrabold  text-3xl  flex-col  select-none'>{props.quizData[currentQuestion].question} </p>
+<p className=' text-link-base   text-center font-extrabold  text-3xl  flex-col mt-6 select-none'>{props.quizData[currentQuestion].question} </p>
 :
 <p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>}
 <img src={props.quizData[currentQuestion].image} alt=""    className=''/>
