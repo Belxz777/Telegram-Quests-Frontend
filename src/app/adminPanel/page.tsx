@@ -78,13 +78,14 @@ backButton.on('click', () =>{
                                                       
                                                   {
                                                     imageUrl &&
-                                                    <img src={imageUrl} alt={imageUrl}   
+                                                    <img src={imageUrl} alt={imageUrl}  
+                               
                                                   className="  h-72  w-full rounded-md object-cover" />
                                                   }
                                                       <p className="text-sm text-scin-base text-center">Правильно  выполнено {team.results[index]}</p>
-                                                    {/* <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
                                                         {team.solved[index]}
-                                                    </div> */}
+                                                    </div>
                                                 </div>
                                             ))}
 
