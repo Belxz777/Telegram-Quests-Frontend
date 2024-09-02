@@ -68,7 +68,7 @@ throw new Error('No quests found');
     <div className='  w-full  overflow-hidden '>
       {
            
-            reroute && <Reroute />
+            reroute && <Reroute  text='Загрузка . . .' />
           
       
       }
