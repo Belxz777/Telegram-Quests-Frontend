@@ -41,12 +41,12 @@ const [quizData, setQuizData] = useState<QuizData>([{
 "todo":false,
     }])
 //http://localhost:4000/Quests/46.147.176.2
-// const backButton = useBackButton()
+const backButton = useBackButton()
 const router = useRouter()
-// backButton.show()
-// backButton.on('click', () =>{
-//   router.push("/")
-// })
+backButton.show()
+backButton.on('click', () =>{
+  router.push("/")
+})
 const [loading, setloading] = useState(false)
 
 
