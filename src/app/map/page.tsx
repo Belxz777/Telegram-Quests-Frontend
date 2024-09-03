@@ -1,11 +1,7 @@
 'use client'
 import React,{useState,useEffect,useRef} from 'react'
 import { YMaps, Map,Placemark,Panorama, Clusterer, Button,GeolocationControl,ZoomControl} from '@pbe/react-yandex-maps/'
-import plamarkPng from '../../../public/PlaceMark.png'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
-import { getIp } from '@/server/getIP'
 import { getAllQuests } from '@/server/getAllQuests'
 import { useBackButton } from '@tma.js/sdk-react'
 import Reroute from '@/components/Reroute'
@@ -115,7 +111,6 @@ onClick={ () =>{
   }}
          properties={
   {
-    iconImageHref: {plamarkPng},
     iconColor: `green`,
     iconCaption: `Вы находитесь здесь`
     }}
