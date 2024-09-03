@@ -1,9 +1,9 @@
-type augedInfo =  {
+export type augedInfo =  {
     ip:number,
     lat:number,
     lon: number,
     }
-    type QuizData =[ {
+ export type QuizData =[ {
       id:number,
       question:string,
       answer:string,
@@ -20,7 +20,7 @@ type augedInfo =  {
       rebus:boolean,
       todo:boolean,
     }]
-    type Team = {
+   export type Team = {
 
         id: number,
         name: string,
@@ -29,7 +29,7 @@ type augedInfo =  {
       imageDataUrl:Array<string>,
       answers:Array<string>
     }
-    type someError = {
+   export type someError = {
       message:string,
       statusCode:number,
     }

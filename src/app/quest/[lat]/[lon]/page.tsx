@@ -9,6 +9,7 @@ import Question from '@/components/Question'
 import Back from '@/components/Back'
 import { useBackButton } from '@tma.js/sdk-react'
 import Loading from '@/components/Loading'
+import { QuizData } from '@/app/types/Main'
 interface Props  {
     params:{lat:number,lon:number}
 }

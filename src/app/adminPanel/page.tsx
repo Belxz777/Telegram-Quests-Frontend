@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Loading from '@/components/Loading'
 import { useBackButton } from '@tma.js/sdk-react'
 import { useRouter } from 'next/navigation'
+import { Team } from '../types/Main'
 type Props = {}
 
 function AdminPanel({}: Props) {

@@ -1,6 +1,7 @@
 "use server "
 
 import { url } from "@/app/types";
+import { someError, Team } from "@/app/types/Main";
 
 async function getAllTeams(): Promise<Team[] | Team | null>  {
     const res = await fetch(`${url}team/`);
@@ -33,17 +34,17 @@ async function deleteTeam(id: number): Promise<any> {
 
     return "deleted"
 }
-async function getTeamDataByName(name: string): Promise<Team | someError | null> {
+async function getTeamDataByName(name: string): Promise<Team |  null> {
     if(!name){
         return null
     }
     const res = await fetch(`${url}team/name/${name}`);
     if (!res.ok) {
         console.log(res.status)
-  return {
+  console.error( {
     message: "Error",
     statusCode: res.status
-  }
+  })
     }
     const response = await res.json();
     return response

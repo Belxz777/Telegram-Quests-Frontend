@@ -1,4 +1,5 @@
 
+import { someError, Team } from "@/app/types/Main";
 import { getTeamDataByName } from "@/server/getAllTeamData";
 import { useEffect, useState } from "react"
 

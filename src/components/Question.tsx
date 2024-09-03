@@ -2,6 +2,7 @@ import { motion, Variants } from 'framer-motion'
 import React, { useState } from 'react'
 import Result from './Result';
 import Image from 'next/image';
+import { QuizData } from '@/app/types/Main';
 type Props = {
     quizData:QuizData
 }
@@ -132,7 +133,7 @@ variants
 }
 style={{ pointerEvents: isOpen ? "auto" : "none" }}
 >
-{props.quizData[currentQuestion].variants.map((variant, index) => (
+{props.quizData[currentQuestion].variants.map((variant:any, index:number) => (
 <motion.li variants={itemVariants} key={index} onClick={() => handleAnswerClick(variant)} className=' cursor-pointer bg-hint-base  text-button-base font-bold py-5 mt-3 px-20 rounded-full text-xl '>{index + 1}: {variant}</motion.li>
 ))}
 </motion.ul>

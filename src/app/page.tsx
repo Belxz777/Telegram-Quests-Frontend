@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Reroute from '@/components/Reroute';
 import { GoArrowUpRight } from 'react-icons/go';
 import { getTeamDataByName } from '@/server/getAllTeamData';
+import { Team } from './types/Main';
 
 export default function General() {
 const initData = useInitData()
@@ -80,6 +81,8 @@ const [isLoading , setIsLoading] = useState(true)
         console.log(error);
     }
 };
+const height = window.innerHeight - 200
+const width = window.innerWidth
   return (
 <Suspense fallback={<Reroute text='Загрузка'/>}  >
 {
@@ -97,21 +100,21 @@ const [isLoading , setIsLoading] = useState(true)
            <Link href={"/qrscanner"} prefetch={false} onClick={()=>{
           setreroute(true)
 
-        }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3' >          <AiOutlineCompress />
+        }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >          <AiOutlineCompress />
            QRcode сканер</Link>
 
           {
             team?.name ?
             <Link href={"/period"} prefetch={true} onClick={()=>{
               setreroute(true)
-            }}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-4  px-4 rounded-full text-xl  ">   
+            }}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-4  px-4 rounded-full text-xl mt-4 ">   
      <GoArrowUpRight /> Продолжить 
              </Link>
 :
 <Link href={"/start"} prefetch={true} onClick={()=>{
   setreroute(true)
 
-}}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold  px-4 rounded-full text-xl  mb-2 ">   
+}}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold  px-4 py-4 rounded-full text-xl  mt-4 ">   
  <AiOutlineIssuesClose />  Начать  
  </Link>
 
@@ -122,14 +125,14 @@ const [isLoading , setIsLoading] = useState(true)
       </header>
       <main className='flex w-screen h-4/5 justify-center items-center flex-col'>
       {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
-      <h2 className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>Решено : {team?.solved?.length || 0} квеста</h2>
+      <h2 className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>Решено : {team?.solved?.length || 0} кв.  </h2>
       </>}
 
         <Image src={pint} alt=''  
         onDoubleClick={()=>{
-
         router.push("/adminPanel")
-        }} className=' bg-button-base rounded-full    select-none '  loading='lazy'/>
+        }} className=' bg-button-base rounded-full    select-none '  loading='lazy' />{/*width={width} height={height}*/}
+        <h1 className='text-center text-xl text-scin-base font-extrabold'>Заводские Игры: Квестбот по городу на велосипедах</h1>
           <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4  rounded-full text-xl  w-1/3">
           <AiFillHeart/>
          <Link href={"/map"} prefetch={false}

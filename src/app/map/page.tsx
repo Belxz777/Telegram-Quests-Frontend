@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { getAllQuests } from '@/server/getAllQuests'
 import { useBackButton } from '@tma.js/sdk-react'
 import Reroute from '@/components/Reroute'
+import { augedInfo, QuizData} from '../types/Main'
 type Props = {}
 
   function Karta ({}: Props) {
@@ -26,7 +27,7 @@ type Props = {}
     todo:false,
   }])
   
-  const [augedInfo, setaugedInfo] = useState<augedInfo>({
+  const [extendedInfo, setextendedInfo] = useState<  augedInfo>({
     ip:0,
     lat:56.856825,
     lon:53.198824,
@@ -104,7 +105,7 @@ onClick={ () =>{
 </>
   )
 } 
-<Placemark defaultGeometry={ [augedInfo.lat, augedInfo.lon]}
+<Placemark defaultGeometry={ [extendedInfo.lat, extendedInfo.lon]}
   options={{
     iconColor:'green',
     balloonContent:'Это примерное вычисление'

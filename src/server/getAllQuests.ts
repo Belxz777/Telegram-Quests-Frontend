@@ -1,6 +1,7 @@
 "use server "
 
 import { url } from "@/app/types";
+import { QuizData } from "@/app/types/Main";
 
 async function getAllQuests(): Promise<QuizData>  {
     const res = await fetch(`${url}Quests/`);

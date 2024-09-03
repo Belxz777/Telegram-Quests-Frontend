@@ -5,10 +5,7 @@ export interface ITelegramUser {
     last_name: string;
     username: string;
     language_code: string;
-  }
-  export interface Team {
-    name: string;
-  }
+}
   export interface IWebApp extends Window {
     initData: string;
     initDataUnsafe: {

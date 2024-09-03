@@ -91,7 +91,7 @@ export default function Scaner() {
 
       </div>
 
-      <h1 className=' text-center font-extrabold text-scin-base text-xl  '>
+      <h1 className=' text-center font-extrabold  text-link-base text-xl  '>
         Включено автоопределение кода , просто наведите камеру
       </h1>
     </div>

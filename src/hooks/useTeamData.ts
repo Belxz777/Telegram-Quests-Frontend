@@ -1,3 +1,4 @@
+import { Team } from "@/app/types/Main";
 import { getAllTeams } from "@/server/getAllTeamData";
 import { useEffect, useState } from "react";
 
