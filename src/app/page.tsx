@@ -13,49 +13,47 @@ import { getTeamDataByName } from '@/server/getAllTeamData';
 
 export default function General() {
 
-
-  const initData = useInitData()
 const [isTeam, setisTeam] = useState(false)
 const [team, setteam] = useState<Team | null>(null)
 const [isLoading , setIsLoading] = useState(true)
-  const closingBehaviour = new ClosingBehavior(false, postEvent);
-  closingBehaviour.enableConfirmation()
-  const miniApp = useMiniApp();
-  const viewport = useViewport();
-  // const viewport = initViewport();     
+  // const closingBehaviour = new ClosingBehavior(false, postEvent);
+  // closingBehaviour.enableConfirmation()
+  // const miniApp = useMiniApp();
+  // const viewport = useViewport();
+  // // const viewport = initViewport();     
   const [reroute, setreroute] = useState(false)
   const router = useRouter()
   const [teamName, setteamName] = useState<string | null>(null)
-  const initDataJson = useMemo(() => {
-    if (!initData) {
-      return 'Init data is empty.'; 
-    }   
+  // const initDataJson = useMemo(() => {
+  //   if (!initData) {
+  //     return 'Init data is empty.'; 
+  //   }   
 
-    // const { teamData, fetchData,isError } = useTeamDataByName(teamName)
-    // if (isError) {
-    //   setisTeam(false)
-    //   return
-    // }
-    // else{
-    //   setteam(teamData)
-    //   setisTeam(true)
-    // }
-    const { authDate, chat, hash, canSendAfter, queryId, receiver, user, startParam } = initData
-    return JSON.stringify({
-      authDate,
-      chat,
-      hash,
-      canSendAfter,
-      queryId,
-      receiver,
-      user,
-      startParam,
-    }, null, ' ');
-  }, [initData]);
+  //   // const { teamData, fetchData,isError } = useTeamDataByName(teamName)
+  //   // if (isError) {
+  //   //   setisTeam(false)
+  //   //   return
+  //   // }
+  //   // else{
+  //   //   setteam(teamData)
+  //   //   setisTeam(true)
+  //   // }
+  //   const { authDate, chat, hash, canSendAfter, queryId, receiver, user, startParam } = initData
+  //   return JSON.stringify({
+  //     authDate,
+  //     chat,
+  //     hash,
+  //     canSendAfter,
+  //     queryId,
+  //     receiver,
+  //     user,
+  //     startParam,
+  //   }, null, ' ');
+  // }, [initData]);
 
   useEffect(() => {
-    viewport.expand()
-    miniApp.ready()
+    // viewport.expand()
+    // miniApp.ready()
     const teamName = localStorage.getItem("team")
     if (!teamName) {
       setisTeam(false)
