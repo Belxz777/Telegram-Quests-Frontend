@@ -1,5 +1,7 @@
 "use server "
-const url =  "https://kdnhfs81-8000.euw.devtunnels.ms/"
+
+import { url } from "@/app/types";
+
 async function getAllQuests(): Promise<QuizData>  {
     const res = await fetch(`${url}Quests/`);
     if (!res.ok) {

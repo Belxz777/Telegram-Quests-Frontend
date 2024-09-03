@@ -1,3 +1,4 @@
+export let url = process.env.BACKEND_URL || "https://g6w6qqsb-5000.euw.devtunnels.ms/"
 export interface ITelegramUser {
     id: number;
     first_name: string;
@@ -5,7 +6,9 @@ export interface ITelegramUser {
     username: string;
     language_code: string;
   }
-  
+  export interface Team {
+    name: string;
+  }
   export interface IWebApp extends Window {
     initData: string;
     initDataUnsafe: {

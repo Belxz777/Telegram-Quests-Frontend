@@ -6,6 +6,7 @@ import { useBackButton, useCloudStorage } from '@tma.js/sdk-react'
 import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
 import Loading from '@/components/Loading'
 import { useRouter } from 'next/navigation'
+import Reroute from '@/components/Reroute'
  type Props = {}
  
 const Periodic = (props: Props) => {
@@ -15,7 +16,7 @@ const Periodic = (props: Props) => {
   const [loading, setloading] = useState(false)
   const [error, seterror] = useState(false)
   const backButton = useBackButton()
-
+const [isReroute,setIsReroute] = useState(false)
 backButton.show()
 backButton.on('click', () =>{
   router.push("/")
@@ -40,7 +41,9 @@ backButton.on('click', () =>{
   const data ="Мы на месте"
   return (
     <>
-
+{
+  isReroute && <Reroute text='Переход'/>
+}
       {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
       <p className="text-4xl md:text-5xl font-bold text-link-base  text-center select-none overflow-hidden">
         Оставшиеся задания вашей команды:
@@ -85,7 +88,9 @@ backButton.on('click', () =>{
                     selectOnClick: true,
 
                   }}
-                  onClick={()=> router.push(`/qrscanner`)}
+                  onClick={()=> {router.push(`/qrscanner`)
+setIsReroute(true)
+                  }}
                   data={{ content: "Мы на месте" }}
           defaultState={{ selected: true}}
                   instanceRef={ref}

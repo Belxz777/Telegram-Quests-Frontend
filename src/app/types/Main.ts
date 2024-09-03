@@ -20,13 +20,17 @@ type augedInfo =  {
       rebus:boolean,
       todo:boolean,
     }]
-    type Teams = {
+    type Team = {
+
         id: number,
         name: string,
         solved:Array<string>,
         results: Array<string>,
       imageDataUrl:Array<string>,
-        createdAt: Date,
-        updatedAt: Date
+      answers:Array<string>
+    }
+    type someError = {
+      message:string,
+      statusCode:number,
     }
   

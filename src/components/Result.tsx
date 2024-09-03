@@ -9,14 +9,18 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Image from 'next/image';
 import Loading from './Loading';
 import { Akatab } from 'next/font/google';
+import Reroute from './Reroute';
 type Props = {
     quizData: any;
     useAnswers: any;
-    todo:any
+    todo:any,
+    answers:string[]
 }
 
 const Result = (props: Props) => {
+  // в резалте изменить ui что бы фотка загруженная не выглядела так ущербно , приплюснуто
   const [correct, setcorrect] = useState<any>(null)
+  const [isReroute, setisReroute] = useState(false)
     const calculateScore = () => {
         const correctAnswers = props.useAnswers.filter((answer: { isCorrect: any; }) => answer.isCorrect).length;
         setcorrect(correctAnswers +1)
@@ -47,7 +51,7 @@ const Result = (props: Props) => {
     setloading(false)
     return
   }
- const response =  await addImage(teamName,photoUrl,props.quizData[0].quizIn,correct )
+ const response =  await addImage(teamName,photoUrl,props.quizData[0].quizIn,correct,props.answers )
  //!ДОБИТЬ ЛОГИКУ 
 if(!response){
   setloading(false)
@@ -62,6 +66,9 @@ addPhoto(true)
       }, [])
   return (
        <main className="flex flex-col items-center justify-center h-[100dvh]  bg-scin-base  px-4 md:px-6">
+      {
+        isReroute && <Reroute text='Переход'/>
+      }
       <div className="max-w-md w-full space-y-6">
         <div className="text-center space-y-2">
 {
@@ -77,6 +84,10 @@ addPhoto(true)
   <Link
           className="block text-center w-full   px-2 py-2   bg-hint-base rounded-lg  text-scin-base"
           href="/period"
+          onClick={()=>{
+            setisReroute(true)
+
+          }}
         >
           Перейти к следующему квесту
         </Link>
@@ -85,12 +96,14 @@ addPhoto(true)
   <>
   <div>
     {
-    props.todo.question &&
+    props.todo?.question ?
     <>  
     <h1  className="text-3xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
       <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
       {/* <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.quizData[0].quizId}</h2> */}
       </>
+      :
+      null
     } 
   <p className="text-gray-600 dark:text-gray-400">
 
@@ -98,7 +111,7 @@ addPhoto(true)
 </div>
   <div>
   
-    <div className="mt-1 flex justify-center px-6 pt-2 pb-2 border-2 border-gray-300 border-dashed rounded-md flex-col w-full h-36">
+    <div className="mt-1 flex justify-center px-6 pt-2 pb-2 border-2 border-gray-300 border-dashed rounded-md flex-col w-full   h-[500px]">
       {
         !photoUrl  ?
         <p className=" text-link-base">
@@ -108,10 +121,11 @@ addPhoto(true)
         </label>
       </p>
       :
-      <div className="flex justify-center  h-full overflow-hidden ">
-                          <Image src={photoUrl ? URL.createObjectURL(photoUrl) : ''} alt='' className='rounded-lg w-2/4 h-full' width="0" height="0" />
+      <div className="flex justify-center  h-screen overflow-hidden ">
+                          <Image src={photoUrl ? URL.createObjectURL(photoUrl) : ''} alt='' className='rounded-lg w-full h-full' width="0" height="0" />
                         </div>
                     }
+
 
                     <input className="hidden" id="file" type="file" onChange={(e) => {
                       const files = e.target.files;

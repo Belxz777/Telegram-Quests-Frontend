@@ -5,6 +5,7 @@ import { SDKProvider, DisplayGate } from '@tma.js/sdk-react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
+import Reroute from '@/components/Reroute';
 
 interface SDKProviderErrorProps {
   error: unknown;
@@ -36,9 +37,7 @@ function SDKProviderError({ error }: SDKProviderErrorProps) {
 
 function SDKProviderLoading() {
   return(
-    <h1 className=' text-center font-extrabold text-link-base text-xl  '>
-      Загрузка ...
-  </h1>)
+  <Reroute  text={"Загрузка"} />)
 }
 
 function SDKInitialState() {
