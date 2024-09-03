@@ -22,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
     <head/>
       <body className={inter.className}>
+            <TmaSDKLoader>
         {children}
+      </TmaSDKLoader>
       </body>
     </html>
   )

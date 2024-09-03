@@ -26,12 +26,6 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
-      react-icons:
-        specifier: ^5.1.0
-        version: 5.1.0(react@18.2.0)
-      react-qr-reader:
-        specifier: 3.0.0-beta-1
-        version: 3.0.0-beta-1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -48,6 +42,12 @@ importers:
       postcss:
         specifier: ^8
         version: 8.4.38
+      react-icons:
+        specifier: ^5.1.0
+        version: 5.1.0(react@18.2.0)
+      react-qr-reader:
+        specifier: 3.0.0-beta-1
+        version: 3.0.0-beta-1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.3

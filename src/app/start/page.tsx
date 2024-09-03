@@ -5,7 +5,7 @@ import {createTeam} from '@/server/teamManage'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 type Props = {}
 
