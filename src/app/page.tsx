@@ -66,6 +66,7 @@ const [isLoading , setIsLoading] = useState(true)
     }
     fetchData(teamName)
   }, [])
+  // last version
   const fetchData = async (name:string) => {
     try {
         const data = await getTeamDataByName(name);
