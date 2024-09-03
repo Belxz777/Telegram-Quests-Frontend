@@ -2,13 +2,10 @@
 import Loading from '@/components/Loading'
 import Reroute from '@/components/Reroute'
 import {createTeam} from '@/server/teamManage'
-import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
-import { useBackButton, useCloudStorage, withBackButton } from '@tma.js/sdk-react'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+
 
 type Props = {}
 

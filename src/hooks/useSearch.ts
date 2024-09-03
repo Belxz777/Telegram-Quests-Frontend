@@ -1,11 +1,14 @@
-import { getTeamByName } from "@/server/getAllQuests";
+
+import { getTeamDataByName } from "@/server/getAllTeamData";
 import { useEffect, useState } from "react"
 
 const useSearch =(name:string) =>{
-    const [teamDataOne, setTeamData] = useState< Teams | null>(null);
+    const [teamDataOne, setTeamData] = useState< Team| someError | null>(null);
 async function searchByName (name:string): Promise<any>  {
     try {
-        const data = await  getTeamByName(name);
+        // 
+        const data = await  getTeamDataByName(name);
+
         setTeamData(data);
         
     } catch (error) {

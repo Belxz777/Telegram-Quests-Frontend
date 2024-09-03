@@ -1,10 +1,9 @@
 'use client'
 import { useEffect,useRef,useState,useMemo, Suspense } from 'react'
-import pint from '../../public/pins.png'
+import pint from '../../public/landing.png'
 import { AiFillHeart, AiOutlineAlignRight, AiOutlineCompress, AiOutlineIssuesClose } from "react-icons/ai";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useCloudStorage } from '@tma.js/sdk-react';
 import { useInitData,  useMiniApp,useViewport} from '@tma.js/sdk-react';
 import { ClosingBehavior, postEvent } from '@tma.js/sdk';
 import Link from 'next/link';

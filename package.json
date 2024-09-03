@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4000",
+    "dev": "next dev ",
     "build": "next build ",
-    "start": "next start -p 4000",
+    "start": "next start ",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,15 +16,13 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.1.0",
-    "react-qr-code": "^2.0.12",
-    "react-qr-reader": "3.0.0-beta-1",
-    "telegram-webapps": "^7.2.0"
+    "react-qr-reader": "3.0.0-beta-1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "framer-motion": "^11.1.7",
+    "framer-motion": "^11.3.31",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

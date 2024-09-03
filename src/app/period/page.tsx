@@ -1,7 +1,6 @@
  "use client"
  import React, { useEffect, useRef, useState } from 'react'
  import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
-import Link from 'next/link'
 import { useBackButton, useCloudStorage } from '@tma.js/sdk-react'
 import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
 import Loading from '@/components/Loading'
