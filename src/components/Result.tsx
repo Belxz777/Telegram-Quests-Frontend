@@ -80,6 +80,13 @@ addPhoto(true)
   <>
   <h1 className='text-3xl font-bold tracking-tight text-link-base text-center'>Фото успешно отправлено {isAddedPhoto}  </h1>
   <h2  className=' text-link-base text-center font-bold items-center text-2xl'>Результат квиза</h2>
+  <p>
+    {
+      props.answers ? <h1> {props.answers.map((item,index)=>
+        <h1 key={index}>{item}</h1>
+      )} </h1> : <h1>Они underfined</h1>
+    }
+  </p>
   <p className=' text-link-base text-center font-extrabold items-center text-2xl '>Правильных ответов: {correct}</p>
   <Link
           className="block text-center w-full   px-2 py-2   bg-hint-base rounded-lg  text-scin-base"

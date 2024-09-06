@@ -17,6 +17,7 @@ const initData = useInitData()
 const [isTeam, setisTeam] = useState(false)
 const [team, setteam] = useState<Team | null>(null)
 const [isLoading , setIsLoading] = useState(true)
+const [err,setErr] = useState(false)
   const closingBehaviour = new ClosingBehavior(false, postEvent);
   closingBehaviour.enableConfirmation()
   const miniApp = useMiniApp();
@@ -78,6 +79,7 @@ const [isLoading , setIsLoading] = useState(true)
             setisTeam(true);
         }
     } catch (error) {
+      setErr(true)
         console.log(error);
     }
 };
@@ -89,7 +91,10 @@ const width = window.innerWidth
       reroute && <Reroute text="Переход  . . ."/>
     }
     {
-      isLoading && <Reroute  text="Загрузка  . . ."/>
+
+    }
+    {
+     !err && isLoading  ? <Reroute  text="Загрузка  . . ."/> : null
     }
 
     <div className="overflow-hidden h-screen">

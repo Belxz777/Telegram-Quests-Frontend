@@ -48,6 +48,7 @@ const handleAnswerClick = (selectedVariant: string) => {
     return;
   }
   setAnswers([...answers, selectedVariant]);
+  console.log(answers)
   // if(props.quizData[currentQuestion].rebus){
   //   setrebus(selectedVariant)
   // }

@@ -38,7 +38,7 @@ async function getTeamDataByName(name: string): Promise<Team |  null> {
     if(!name){
         return null
     }
-    const res = await fetch(`${url}team/name/${name}`);
+    const res = await fetch(`${url}team/getByName/${name}`);
     if (!res.ok) {
         console.log(res.status)
   console.error( {
