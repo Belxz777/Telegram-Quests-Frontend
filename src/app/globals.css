@@ -12,7 +12,18 @@
     --telegram-button-text-color: var(--tg-theme-button-text-color, #ffffff);
     --telegram-secondary-bg-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
   }
-
+  @keyframes congratulation {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .animate-congratulation {
+    animation: congratulation 1s ease-out;
+  }
+  @keyframes confetti {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
   html {
     @apply font-sans;
   }

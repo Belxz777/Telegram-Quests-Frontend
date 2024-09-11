@@ -30,7 +30,7 @@ const page = (props: Props) => {
     seterror("")
 const response  = await createTeam(team)
 if(!response){
-seterror(`Ошибка имя  команды уже занято ${response}`)
+seterror(`Ошибка имя  команды уже занято , придумайте другое`)
 setloading(false)
 return
 }
@@ -38,8 +38,7 @@ setteamName(response.name)
 setloading(false)
 localStorage.setItem("team", response.name)
   }
-  //todo сделать добавление команды и ее сохранение в telegram cloud человека , а также настроить отдачу квеста
-  //! не усложнять логику на бекенде
+
   return (
     
        <main className="flex flex-col items-center  min-h-screen bg-scin-base px-4 md:px-6">
@@ -53,29 +52,31 @@ localStorage.setItem("team", response.name)
 
 {
   teamName ?
-  <>
-  <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center ">Команда {teamName} создана</h1>
-<p className="text-4xl md:text-5xl font-bold text-link-base  text-center  bg-scin-base rounded-lg mt-2">
+  <div className=' mt-36'>
+  <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center ">Команда <span className='  font-extrabold text-5xl'>{teamName}</span> создана</h1>
+<p className="text-4xl md:text-5xl font-bold text-scin-base  text-center  bg-scin-base rounded-lg mt-2">
  Локацию  вашего первого задания  вам выдаст организатор
 </p>
 <div className='flex items-center space-x-2'>
-<Link href="/qrscanner"prefetch={true} onClick={()=>{
-  setreroute(true)
-}} className='bg-button-base text-button-base font-medium px-4 py-2 rounded-md  mt-5'>Я на месте </Link>
+<div className="flex justify-center w-full">
+  <Link href="/qrscanner" prefetch={true} onClick={() => {
+    setreroute(true)
+  }} className='bg-button-base text-button-base font-medium text-base  px-6 py-4 rounded-md mt-5'>Я на месте</Link>
 </div>
-</>
+</div>
+</div>
   :
   <div className="max-w-md w-full space-y-6">
   <h1 className="text-4xl md:text-5xl font-bold    text-link-base  text-center  pt-3.5 select-none">Начни велоквест</h1>
-  <div className="flex items-center space-x-2 flex-col">
+  <div className="flex items-center space-x-2 flex-col mt-52">
     <input
-      className="flex-1  rounded-md px-4 py-2  bg-hint-base text-link-base font-bold  "
+      className="flex-1  rounded-md  px-4 py-10 text-2xl  text-center mx-6 bg-scin-base text-scin-base font-bold border-base   "
       placeholder="Введите название команды"
       type="text"
       value={team}
 onChange={(e) => setteam(e.target.value)}
     />
-    <button className= " bg-button-base text-button-base font-medium px-4 py-2 rounded-md  mt-4"
+    <button className= " bg-button-base text-button-base font-medium px-6 py-4 rounded-md  mt-4"
      onClick={() => handleCreateTeam()}>
       Начать
     </button>

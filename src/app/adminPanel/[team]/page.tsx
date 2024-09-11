@@ -21,10 +21,9 @@ export default function Component(params: Props) {
     fetchData();
     backButton.show();
     backButton.on("click", () => {
-      router.push("/");
+      router.push("/adminPanel");;
     });
     // Очистка обработчика события при размонтировании компонента
-
   }, []);
 
   const fetchData = async () => {
@@ -44,7 +43,7 @@ export default function Component(params: Props) {
         <Loading text="Загрузка данных подождите..." />
       ) : (
         <>
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b   bg-hint-base px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <div className="relative ml-auto flex-1 md:grow-0">
               <h1 className="text-2xl md:text-5xl font-bold text-link-base select-none overflow-hidden">
                 Команда: {teamData?.name}
@@ -52,17 +51,17 @@ export default function Component(params: Props) {
             </div>
           </header>
           <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-            <table className="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+            <table className="w-full border-collapse bg-scin-base shadow-md rounded-lg overflow-hidden border-base">
               <thead>
-                <tr className="bg-gray-200">
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-link-base">
+                <tr className="bg-hint-base">
+                  <th className="px-6 py-3 text-left text-lg font-bold text-link-base">
                     Квест
                   </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-link-base">
+                  <th className="px-6 py-3 text-left text-lg font-bold text-link-base">
                     Ответы
                   </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-link-base">
-                    <GoCheck />
+                  <th className="px-6 py-3 text-left text-xl font-extrabold text-link-base">
+                <GoCheck />
                   </th>
                 </tr>
               </thead>
@@ -71,23 +70,18 @@ export default function Component(params: Props) {
                   teamData.solved.map((solvedItem: string, index: number) => (
                     <tr
                       key={`${teamData.id}-${index}`}
-                      className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                      className={index % 2 === 0 ? " bg-scin-base" : "bg-scin-base"}
                     >
-                      <td className="border px-6 py-4 text-sm text-gray-700">
+                      <td className="border px-6 py-4 text-lg text-scin-base">
                         {solvedItem}
                       </td>
-                      <td className="border px-6 py-4 text-sm text-gray-700">
-                        <ul className="list-disc list-inside">
-                          {teamData.answers[index]
-                            .split("\n")
-                            .filter((ans) => ans.trim() !== "")
-                            .map((answer: string, i: number) => (
-                              <li key={i}>{answer.replace("• ", "")}</li>
-                            ))}
+                      <td className="border px-6 py-4 text-sm text-scin-base">
+                        <ul className="list-disc list-inside  font-extrabold">
+                          {teamData.answers}
                         </ul>
                       </td>
-                      <td className="border px-6 py-4 text-sm text-gray-700">
-                        {teamData.results[index]} балл
+                      <td className="border px-4 py-4    text-lg">
+                      <span className=" font-extrabold"> {teamData.results[index]} </span>  б.
                       </td>
                     </tr>
                   ))
@@ -95,7 +89,7 @@ export default function Component(params: Props) {
                   <tr>
                     <td
                       colSpan={3}
-                      className="px-6 py-4 text-center text-sm text-gray-500"
+                      className="px-6 py-4 text-center text-sm  text-link-base"
                     >
                       Нет данных для отображения.
                     </td>

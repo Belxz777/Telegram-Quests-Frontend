@@ -18,10 +18,9 @@ console.log(res.status,url+"teamisnt")
 return 
 }
 if (res.status !== 201) {
-  console.log(res.status,url+"team201")
 return 
 }
-console.log(res.status,url+"teamok")
+
 const response= await res.json();
 
 return response
@@ -55,7 +54,7 @@ return response
       formData.append('file', image); 
       formData.append('location', location);
       formData.append('result', result);
-      formData.append('answers', JSON.stringify(answers));
+      formData.append('answers',answers.join(','));
         const res = await fetch(`${url}team/uploadPhotoUrls/${name}`, {
         method: 'POST',
         body: formData
