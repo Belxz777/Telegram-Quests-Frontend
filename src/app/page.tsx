@@ -71,9 +71,11 @@ const [isLoading , setIsLoading] = useState(true)
         if (data === null) {
             setteam(null);
             setlanding(false)
+            alert('Команда не найдена')
         } else if ('statusCode' in data) {
             setisTeam(false);
             setlanding(false)
+            alert("err")
         } else {
             setteam(data);
             setisTeam(true);
@@ -87,7 +89,10 @@ const [isLoading , setIsLoading] = useState(true)
 <Suspense fallback={<Reroute text='Загрузка'/>}  >
 {
   landing ?
+  <>
   <Landing />
+  <h1>{team?.name}</h1>
+  </>
   :
   <>
   {
