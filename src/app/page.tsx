@@ -59,6 +59,7 @@ const [isLoading , setIsLoading] = useState(true)
     const teamName = localStorage.getItem("team")
     if (!teamName) {
       setisTeam(false)
+      setlanding(false)
       setIsLoading(false)
           return
     }
