@@ -11,6 +11,7 @@ import Reroute from '@/components/Reroute';
 import { GoArrowUpRight } from 'react-icons/go';
 import { getTeamDataByName } from '@/server/getAllTeamData';
 import { Team } from './types/Main';
+import Landing from '@/components/Landing';
 
 export default function General() {
 const initData = useInitData()
@@ -23,7 +24,7 @@ const [isLoading , setIsLoading] = useState(true)
   const viewport = useViewport();     
   const [reroute, setreroute] = useState(false)
   const router = useRouter()
-  const [teamName, setteamName] = useState<string | null>(null)
+  const [landing, setlanding] = useState(true)
   const initDataJson = useMemo(() => {
     if (!initData) {
       return 'Init data is empty.'; 
@@ -54,11 +55,12 @@ const [isLoading , setIsLoading] = useState(true)
   useEffect(() => {
     viewport.expand()
     miniApp.ready()
+
     const teamName = localStorage.getItem("team")
     if (!teamName) {
       setisTeam(false)
       setIsLoading(false)
-      return
+          return
     }
     fetchData(teamName)
   }, [])
@@ -67,39 +69,35 @@ const [isLoading , setIsLoading] = useState(true)
         const data = await getTeamDataByName(name);
 
         if (data === null) {
-          setIsLoading(false)
             setteam(null);
+            setlanding(false)
         } else if ('statusCode' in data) {
-          setIsLoading(false)
             setisTeam(false);
+            setlanding(false)
         } else {
-          setIsLoading(false)
             setteam(data);
             setisTeam(true);
+            setlanding(false)
         }
     } catch (error) {
         console.log(error);
     }
 };
-const height = window.innerHeight - 200
-const width = window.innerWidth
   return (
 <Suspense fallback={<Reroute text='Загрузка'/>}  >
 {
+  landing ?
+  <Landing />
+  :
+  <>
+  {
       reroute && <Reroute text="Переход  . . ."/>
     }
-    {
-      isLoading && <Reroute  text="Загрузка  . . ."/>
-    }
-
     <div className="overflow-hidden h-screen">
       <header className="bg-scin-base text-scin-base shadow  h-1/5">
         <div className='flex justify-around '>
-
-
            <Link href={"/qrscanner"} prefetch={false} onClick={()=>{
           setreroute(true)
-
         }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >          <AiOutlineCompress />
            QRcode сканер</Link>
 
@@ -144,6 +142,8 @@ const width = window.innerWidth
         </button>
       </main>
     </div>
+  </>
+}
     </Suspense>
   )
 }

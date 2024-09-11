@@ -6,6 +6,7 @@ export const useTeamData = () =>{
     const [teamData, setTeamData] = useState<Team[] | Team | null>(null);
   const [isLoading, setIsLoading] = useState(true);
     const [isNotFound, setIsNotFound] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false)
 useEffect(()=>{
 fetchData()
 },[])
@@ -26,5 +27,5 @@ fetchData()
     if(isNotFound){
         setIsLoading(false);
     }
-    return {teamData,fetchData,isLoading,isNotFound}
+    return {teamData,fetchData,isLoading,isNotFound,isAdmin}
 }

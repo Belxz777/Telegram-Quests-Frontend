@@ -52,12 +52,15 @@ export default function Scaner() {
   backButton.on('click', () =>{
     router.push("/")
   })
+  const width = window.innerWidth;
   return (
     <div className=" bg-scin-base h-screen w-screen ">
       <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">
         <QrReader
           containerStyle={{
-            width: "100%"
+            width: "100%" ,
+            
+            
           }}
           onResult={(result:any, error:any) =>{  
           if(!!result){
@@ -69,12 +72,12 @@ export default function Scaner() {
           }}
           scanDelay={300}
           constraints={{ facingMode: "environment" }}
-          className=" rounded-xl  w-full"
+          className=" rounded-xl"
         />
         {
           data === true ?
           <div className="flex flex-col items-center justify-center">
-            <h2 className="text-link-base text-black text-2xl hover:text-emerald-100 text-center">Код отсканирован</h2>
+            <h2 className="text-link-base  text-2xl hover:text-emerald-100 text-center">Код отсканирован</h2>
               <button
                 className="bg-button-base   justify-center items-center hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex"
                 onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}

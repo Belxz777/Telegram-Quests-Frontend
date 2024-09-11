@@ -10,6 +10,7 @@ import Image from 'next/image';
 import Loading from './Loading';
 import { Akatab } from 'next/font/google';
 import Reroute from './Reroute';
+import Confetti from './Confetti';
 type Props = {
     quizData: any;
     useAnswers: any;
@@ -78,11 +79,10 @@ addPhoto(true)
 {
   isAddedPhoto ?
   <>
-  <h1 className='text-3xl font-bold tracking-tight text-link-base text-center'>Фото успешно отправлено {isAddedPhoto}  </h1>
-  <h2  className=' text-link-base text-center font-bold items-center text-2xl'>Результат квиза</h2>
-  <p className=' text-link-base text-center font-extrabold items-center text-2xl '>Правильных ответов: {correct}</p>
+  <h1 className='text-3xl font-bold tracking-tight text-link-base text-center'>Задание успешно выполено ! {isAddedPhoto}  </h1>
+  <p className=' text-link-base text-center font-extrabold items-center text-4xl '>Правильных ответов: {correct} </p>
   <Link
-          className="block text-center w-full   px-2 py-2   bg-hint-base rounded-lg  text-scin-base"
+          className="block text-center w-full   mt-5 px-2 py-4   bg-hint-base rounded-lg  text-scin-base"
           href="/period"
           onClick={()=>{
             setisReroute(true)
@@ -91,6 +91,7 @@ addPhoto(true)
         >
           Перейти к следующему квесту
         </Link>
+       <Confetti />
   </>
   :
   <>
@@ -98,8 +99,8 @@ addPhoto(true)
     {
     props.todo?.question ?
     <>  
-    <h1  className="text-3xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
-      <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
+    <h1  className="text-2xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
+      <h2 className="text-3xl font-extrabold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
       {/* <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.quizData[0].quizId}</h2> */}
       </>
       :
@@ -122,7 +123,7 @@ addPhoto(true)
       </p>
       :
       <div className="flex justify-center  h-screen overflow-hidden ">
-                          <Image src={photoUrl ? URL.createObjectURL(photoUrl) : ''} alt='' className='rounded-lg w-full h-full' width="0" height="0" />
+                          <Image src={photoUrl ? URL.createObjectURL(photoUrl) : ''} alt='' className='rounded-lg w-auto   h-auto' width="0" height={"0"} />
                         </div>
                     }
 

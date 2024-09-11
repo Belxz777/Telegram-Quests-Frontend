@@ -35,7 +35,7 @@ const config: Config = {
 
    },
 borderColor:{
-  base:' var(--tg-theme-link-color)'
+base:' var(--tg-theme-link-color)'
 }
   
     },
