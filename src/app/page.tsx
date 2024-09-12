@@ -72,11 +72,9 @@ const [isLoading , setIsLoading] = useState(true)
         if (data === null) {
             setteam(null);
             setlanding(false)
-            alert('Команда не найдена')
         } else if ('statusCode' in data) {
             setisTeam(false);
             setlanding(false)
-            alert("err")
         } else {
             setteam(data);
             setisTeam(true);
@@ -92,7 +90,6 @@ const [isLoading , setIsLoading] = useState(true)
   landing ?
   <>
   <Landing />
-  <h1>{team?.name}</h1>
   </>
   :
   <>
@@ -127,7 +124,7 @@ const [isLoading , setIsLoading] = useState(true)
         </div>
 
       </header>
-      <main className='flex w-screen h-4/5 justify-center items-center flex-col'>
+      <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-5 '>
       {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
       <h2 className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>Решено : {team?.solved?.length || 0} кв.  </h2>
       </>}
@@ -135,7 +132,7 @@ const [isLoading , setIsLoading] = useState(true)
         <Image src={pint} alt=''  
         onDoubleClick={()=>{
         router.push("/adminPanel")
-        }} className=' bg-button-base rounded-full    select-none '  loading='lazy' />{/*width={width} height={height}*/}
+        }} className=' bg-button-base rounded-full mt-10    select-none '  loading='lazy' />{/*width={width} height={height}*/}
         <h1 className='text-center text-xl text-scin-base font-extrabold'>Заводские Игры: Квестбот по городу на велосипедах</h1>
           <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4  rounded-full text-xl  w-1/3">
           <AiFillHeart/>

@@ -56,6 +56,8 @@ const Result = (props: Props) => {
  //!ДОБИТЬ ЛОГИКУ 
 if(!response){
   setloading(false)
+  addPhoto(false)
+  alert(response)
 return 
 }
 setloading(false)

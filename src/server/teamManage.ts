@@ -53,7 +53,7 @@ return response
       const formData = new FormData();
       formData.append('file', image); 
       formData.append('location', location);
-      formData.append('result', result);
+    formData.append('result', result);
       formData.append('answers',answers.join(','));
         const res = await fetch(`${url}team/uploadPhotoUrls/${name}`, {
         method: 'POST',

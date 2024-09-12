@@ -87,7 +87,7 @@ props.quizData[currentQuestion].rebus ?
 <p className=' text-link-base   text-center font-extrabold  text-3xl  flex-col mt-6 select-none'>{props.quizData[currentQuestion].question} </p>
 :
 <p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>}
-<img src={props.quizData[currentQuestion].image} alt=""    className=''/>
+<img src={props.quizData[currentQuestion].image} alt=""    className='  select-none'/>
 <motion.input
 placeholder='Введите ответ'
 className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl  mt-5 placeholder-white'
