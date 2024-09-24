@@ -67,9 +67,14 @@ backButton.on('click', () =>{
                   <button
                     className="rounded-md bg-red-500  mt-4  ml-7 mb-5 py-2 px-2 text-xs text-scin-base"
                     onClick={() => {
+                     let isDel =  confirm("Вы уверены что хотите удалить команду?")
+                     if(isDel) {
                       deleteTeam(team.id);
                       alert("Команда удалена");
                       fetchData();
+                     }
+  
+
                     }}
                   >
                     УДАЛИТЬ
