@@ -103,7 +103,10 @@ const [isLoading , setIsLoading] = useState(true)
           setreroute(true)
         }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >          <AiOutlineCompress />
            QRcode сканер</Link>
-
+           <Link href={"/crm"} prefetch={false} onClick={()=>{
+          setreroute(true)
+        }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >          <AiOutlineCompress />
+           КРМ</Link>
           {
             team?.name ?
             <Link href={"/period"} prefetch={true} onClick={()=>{

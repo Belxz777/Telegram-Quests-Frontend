@@ -1,7 +1,7 @@
 "use server "
 
 import { url } from "@/app/types";
-import { QuizData } from "@/app/types/Main";
+import { Quiz, QuizData } from "@/app/types/Main";
 
 async function getAllQuests(): Promise<QuizData>  {
     const res = await fetch(`${url}Quests/`);
@@ -44,4 +44,19 @@ async function getAllQuestsByLatLon(lat:any,lon:any): Promise<QuizData>  {
         const receiveddata = await res.json();
         return receiveddata
     }
-export { getAllQuests,getAllQuestsByLatLon,getNextLocation,getTeamLocations};
+    async function createNewQuest(quest:Quiz): Promise<any>  {
+    const res = await fetch(`${url}Quests/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(quest),
+    });
+    if (!res.ok) {
+        console.log(res.status)
+        throw new Error('Failed to fetch data')
+    }
+    const receiveddata = await res.json();
+    return receiveddata
+    }
+export { getAllQuests,getAllQuestsByLatLon,getNextLocation,getTeamLocations,createNewQuest};

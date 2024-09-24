@@ -6,20 +6,28 @@ export type augedInfo =  {
  export type QuizData =[ {
       id:number,
       question:string,
-      answer:string,
-      variants:string[],
-      location: string,
-      hardness:string,
+      answer:string | null,
+      variants:string[] | null,
       lat:number,
       lon: number,
-      author:string,
       quizIn: string, 
       quizId:number,
-      categorie:string,
-      image:string,
+      image:string | null,
       rebus:boolean,
       todo:boolean,
     }]
+    export type Quiz ={
+      question:string,
+      answer:string | null,
+      variants:string[] | null,
+      lat:number | string,
+    lon: number | string,
+      quizIn: string, 
+      quizId:number,
+      image:string | null,
+      rebus:boolean,
+      todo:boolean,
+    }
    export type Team = {
 
         id: number,
