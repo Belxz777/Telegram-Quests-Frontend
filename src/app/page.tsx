@@ -125,7 +125,7 @@ const [isLoading , setIsLoading] = useState(true)
       </header>
       <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-5 '>
       {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
-          <h2>
+          <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>
             {(() => {
               const startTime = localStorage.getItem("time")
               if (startTime) {
@@ -135,7 +135,10 @@ const [isLoading , setIsLoading] = useState(true)
                 const hours = Math.floor(minutes / 60)
                 return `Прошло времени: ${hours}ч ${minutes % 60}м ${seconds % 60}с`
               }
-              return "Время не установлено"
+              else{
+                localStorage.setItem("time",  new Date().getTime().toString())
+                return "Время  не установлено"
+              }
             })()}
           </h2>
       </>}
