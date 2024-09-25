@@ -36,6 +36,19 @@ const itemVariants: Variants = {
   };
   // TODO разобраться сделась проверить как работает с ребусом вообщем 
 const  Question = (props: Props) => {
+  const getRandomEncouragingPhrase =()=>{
+    const encouragingPhrases = [
+      "Отличная работа, команда! Так держать!",
+      "Вы на верном пути! Продолжайте в том же духе!",
+      "Каждый шаг приближает вас к победе! Не сдавайтесь!",
+      "Вы справляетесь просто потрясающе!",
+      "Двигайтесь дальше!",
+      "Продолжайте в том же духе!",
+    ];
+    
+    return encouragingPhrases[Math.floor(Math.random() * encouragingPhrases.length)];
+    
+  }
   const [answers, setAnswers] = useState<string[]>([]);
 const [isOpen, setIsOpen] = useState(false);
 const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -115,7 +128,7 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full te
 >
   {
     props.quizData[currentQuestion].todo ?
-    <h1>Отлично ,  вы почти все прошли!!!</h1>
+    <h1>{getRandomEncouragingPhrase()}</h1>
     :
     props.quizData[currentQuestion].question
   }

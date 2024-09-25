@@ -79,7 +79,6 @@ if(newQuest){
               value={quest.answer}
               onChange={handleChange}
               className=" ml-5 bg-hint-base rounded-md  text-hint-base px-4 py-2"
-              required
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
