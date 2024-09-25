@@ -103,6 +103,7 @@ const [isLoading , setIsLoading] = useState(true)
           setreroute(true)
         }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >          <AiOutlineCompress />
            QRcode сканер</Link>
+  
           {
             team?.name ?
             <Link href={"/period"} prefetch={true} onClick={()=>{
@@ -110,6 +111,7 @@ const [isLoading , setIsLoading] = useState(true)
             }}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-4  px-4 rounded-full text-xl mt-4 ">   
      <GoArrowUpRight /> Продолжить 
              </Link>
+
 :
 <Link href={"/start"} prefetch={true} onClick={()=>{
   setreroute(true)
@@ -142,16 +144,7 @@ const [isLoading , setIsLoading] = useState(true)
             })()}
           </h2>
       </>}
-
-        <Image src={pint} alt=''  
-        onDoubleClick={()=>{
-          let isAdmin = prompt("Введите пароль администратора")
-          if(isAdmin == "ivan"){
-            router.push("/adminPanel")
-          }
-        }} className=' bg-button-base rounded-full mt-10    select-none '  loading='lazy' />{/*width={width} height={height}*/}
-        <h1 className='text-center text-xl text-scin-base font-extrabold'>Заводские Игры: Квестбот по городу на велосипедах</h1>
-          <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4  rounded-full text-xl  w-1/3">
+      <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold  px-2  rounded-full text-xl  w-1/5">
           <AiFillHeart/>
          <Link href={"/map"} prefetch={false}
          onClick={()=>{
@@ -160,6 +153,14 @@ const [isLoading , setIsLoading] = useState(true)
         }} 
          >  Помощь  </Link>
         </button>
+        <Image src={pint} alt=''  
+        onDoubleClick={()=>{
+          let isAdmin = prompt("Введите пароль администратора")
+          if(isAdmin == "ivan"){
+            router.push("/adminPanel")
+          }
+        }} className=' bg-button-base rounded-full mt-10    select-none '  loading='lazy' />{/*width={width} height={height}*/}
+        <h1 className='text-center text-xl text-scin-base font-extrabold'>Заводские Игры: Квестбот по городу на велосипедах</h1>
       </main>
     </div>
   </>
