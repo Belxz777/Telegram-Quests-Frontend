@@ -18,13 +18,13 @@ export type augedInfo =  {
     }]
     export type Quiz ={
       question:string,
-      answer:string | null,
-      variants:string[] | null,
+      answer:string ,
+      variants:string[] ,
       lat:number | string,
     lon: number | string,
       quizIn: string, 
       quizId:number,
-      image:string | null,
+      image:string ,
       rebus:boolean,
       todo:boolean,
     }

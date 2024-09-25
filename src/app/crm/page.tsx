@@ -7,12 +7,12 @@ export default function Component() {
   const [quest, setQuest] = useState<Quiz>({
     question: "",
     answer: "",
-    variants: null ,
+    variants: [] ,
     lat: "",
     lon: "",
     quizIn: "",
     quizId: 0,
-    image:  null,
+    image:  "",
     rebus: false,
     todo: false,
   })
@@ -139,7 +139,7 @@ if(newQuest){
               id="image"
               name="image"
               type="url"
-              value={quest.image || null}
+              value={quest.image }
               onChange={handleChange}
               className=" ml-5 bg-hint-base rounded-md  text-hint-base px-4 py-2"
             />
