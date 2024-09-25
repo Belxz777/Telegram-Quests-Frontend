@@ -68,7 +68,7 @@ if(newQuest){
                             setQuest(prev => ({ ...prev, variants: values }))
                           }}
               className=" ml-5 bg-hint-base rounded-md  text-hint-base px-4 py-2"
-              required
+      
             />
           </div>
           <div className="space-y-2">
@@ -92,7 +92,7 @@ if(newQuest){
                 step="any"
                 value={quest.lat}
                 onChange={handleChange}
-              className=" ml-2 w-2/3 bg-hint-base rounded-md  text-hint-base px-4 py-2"
+              className=" ml-2 w-3/4 bg-hint-base rounded-md  text-hint-base px-4 py-2"
                 required
               />
             </div>
@@ -105,7 +105,7 @@ if(newQuest){
                 step="any"
                 value={quest.lon}
                 onChange={handleChange}
-              className=" ml-2 w-2/3 bg-hint-base rounded-md  text-hint-base px-4 py-2"
+              className=" ml-2 w-3/4 bg-hint-base rounded-md  text-hint-base px-4 py-2"
                 required
               />
             </div>
