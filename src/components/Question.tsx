@@ -113,7 +113,12 @@ whileTap={{ scale: 0.97 }}
 onClick={() => setIsOpen(!isOpen)}
 className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-2xl '
 >
-{props.quizData[currentQuestion].question} 
+  {
+    props.quizData[currentQuestion].todo ?
+    <h1>Отлично ,  вы почти все прошли!!!</h1>
+    :
+    props.quizData[currentQuestion].question
+  }
 </motion.button>
 {props.quizData[currentQuestion].todo ? <motion.button className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full text-xl  mt-4'
  onClick={()=>{
