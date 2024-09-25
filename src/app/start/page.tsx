@@ -37,7 +37,7 @@ return
 }
 setteamName(response.name)
 setloading(false)
-localStorage.setItem("team", response.name)
+localStorage.setItem("time",  new Date().getTime().toString())
   }
 
   return (

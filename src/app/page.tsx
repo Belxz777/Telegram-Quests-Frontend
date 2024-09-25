@@ -125,6 +125,19 @@ const [isLoading , setIsLoading] = useState(true)
       </header>
       <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-5 '>
       {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
+          <h2>
+            {(() => {
+              const startTime = localStorage.getItem("time")
+              if (startTime) {
+                const elapsedTime = new Date().getTime() - parseInt(startTime)
+                const seconds = Math.floor(elapsedTime / 1000)
+                const minutes = Math.floor(seconds / 60)
+                const hours = Math.floor(minutes / 60)
+                return `Прошло времени: ${hours}ч ${minutes % 60}м ${seconds % 60}с`
+              }
+              return "Время не установлено"
+            })()}
+          </h2>
       </>}
 
         <Image src={pint} alt=''  

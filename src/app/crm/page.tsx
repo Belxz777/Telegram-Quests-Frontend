@@ -148,7 +148,7 @@ if(newQuest){
             <button
             title=""
               type="button"
-              onClick={() => handleToggle("rebus")}
+              onClick={() => setQuest(prev => ({ ...prev, rebus: !quest.rebus }))}
               className={`w-10 h-6 flex items-center ${
                 quest.rebus ? " bg-button-base" : "bg-gray-200"
               } rounded-full p-1 transition-colors duration-300 focus:outline-none`}
@@ -164,7 +164,7 @@ if(newQuest){
           <div className="flex items-center space-x-2">
             <button
               type="button"
-              onClick={() => handleToggle("todo")}
+              onClick={() => setQuest(prev => ({ ...prev, todo: !quest.todo }))}
               className={`w-10 h-6 flex items-center ${
                 quest.todo ? " bg-button-base" : "bg-gray-200"
               } rounded-full p-1 transition-colors duration-300 focus:outline-none`}
