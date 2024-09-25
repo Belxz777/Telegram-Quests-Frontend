@@ -125,7 +125,6 @@ const [isLoading , setIsLoading] = useState(true)
       </header>
       <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-5 '>
       {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
-      <h2 className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>Решено : {team?.solved?.length || 0} кв.  </h2>
       </>}
 
         <Image src={pint} alt=''  

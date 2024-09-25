@@ -6,13 +6,13 @@ export type augedInfo =  {
  export type QuizData =[ {
       id:number,
       question:string,
-      answer:string | null,
-      variants:string[] | null,
+      answer:string ,
+      variants:string[] ,
       lat:number,
       lon: number,
       quizIn: string, 
       quizId:number,
-      image:string | null,
+      image:string ,
       rebus:boolean,
       todo:boolean,
     }]

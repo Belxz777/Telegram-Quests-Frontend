@@ -108,6 +108,9 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full t
 </div>
 :
 <>
+{
+  setCurrentQuestion(currentQuestion + 1)
+}
 <motion.button
 whileTap={{ scale: 0.97 }}
 onClick={() => setIsOpen(!isOpen)}
