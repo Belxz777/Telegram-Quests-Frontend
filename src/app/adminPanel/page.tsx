@@ -39,6 +39,9 @@ backButton.on('click', () =>{
       <line x1="9" x2="9" y1="21" y2="9" />
     </svg>
     <h1 className="text-xl font-bold text-link-base">Прогресс команд</h1>
+    <Link href={"/crm"} prefetch={false} onClick={()=>{
+        }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >      
+           Crm</Link>
   </div>
 </header>
 
