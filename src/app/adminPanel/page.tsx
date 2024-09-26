@@ -42,6 +42,10 @@ backButton.on('click', () =>{
     <Link href={"/crm"} prefetch={false} onClick={()=>{
         }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >      
            Crm</Link>
+           <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold  px-2  rounded-full text-xl  w-1/5">
+         <Link href={"/map"} prefetch={false}
+         >  Помощь  </Link>
+        </button>
   </div>
 </header>
 
