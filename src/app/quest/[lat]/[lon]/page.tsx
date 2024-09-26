@@ -1,12 +1,9 @@
 "use client"
 import React,{useEffect, useState} from 'react'
-import {motion,Variants} from 'framer-motion'
+import {Variants} from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { getAllQuestsByLatLon } from '@/server/getAllQuests'
-import Result from '@/components/Result'
 import Question from '@/components/Question'
-import Back from '@/components/Back'
 import { useBackButton } from '@tma.js/sdk-react'
 import Loading from '@/components/Loading'
 import { QuizData } from '@/app/types/Main'
@@ -70,8 +67,10 @@ return (
   loading && <Loading text='Загрузка'/>
 }
 {
-quizData[0] &&
+quizData[0] ?
 <Question quizData={quizData}  />
+:
+<h1 className='text-3xl text-link-base'>Ошибка </h1>
 }
 </>
 );

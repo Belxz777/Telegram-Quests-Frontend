@@ -25,6 +25,7 @@ const [isLoading , setIsLoading] = useState(true)
   const [reroute, setreroute] = useState(false)
   const router = useRouter()
   const [landing, setlanding] = useState(true)
+  const [error, seterror] = useState(false)
   const initDataJson = useMemo(() => {
     if (!initData) {
       return 'Init data is empty.'; 
@@ -81,6 +82,8 @@ const [isLoading , setIsLoading] = useState(true)
             setlanding(false)
         }
     } catch (error) {
+      seterror(true)
+      setlanding(false)
         console.log(error);
     }
 };
@@ -89,7 +92,13 @@ const [isLoading , setIsLoading] = useState(true)
 {
   landing ?
   <>
-  <Landing />
+  {
+    error ?
+    <Landing  status='Ошибка' />
+    :
+    
+  <Landing  status='Загрузка . . .' />
+}
   </>
   :
   <>
@@ -125,7 +134,7 @@ const [isLoading , setIsLoading] = useState(true)
         </div>
 
       </header>
-      <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-5 '>
+      <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-1 '>
       {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
           <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>
             {(() => {
@@ -150,7 +159,7 @@ const [isLoading , setIsLoading] = useState(true)
           if(isAdmin == "ivan"){
             router.push("/adminPanel")
           }
-        }} className=' bg-button-base rounded-full mt-5    select-none '  loading='lazy' />{/*width={width} height={height}*/}
+        }} className=' bg-button-base rounded-full     select-none '  loading='lazy' />{/*width={width} height={height}*/}
         <h1 className='text-center text-xl text-scin-base font-extrabold'>Заводские Игры: Квестбот по городу на велосипедах</h1>
       </main>
     </div>

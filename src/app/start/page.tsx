@@ -44,31 +44,33 @@ localStorage.setItem("time",  new Date().getTime().toString())
   return (
     
        <main className="flex flex-col items-center  min-h-screen bg-scin-base px-4 md:px-6">
-    {
-      reroute && <Reroute   text="Загрузка  . . ."/>
-    }
+        {
+          teamName &&
+          <button 
+          onClick={() => setisExpanded(!isExpanded)} 
+          className="flex items-center ml-auto bg-button-base rounded-lg"
+        >
+          <span className="  text-button-base px-4 py-2 font-medium">Подробнее</span>
+          {isExpanded ? <FiSlack className="h-4 w-4 mr-4    transform rotate-180  hover:animate-spin" /> : <FiSlack className="h-4 w-4 mr-4 bg-button-base hover:animate-spin" />}
+        </button>
+        }
 {
   
   teamName ? (
   <div className=' mt-36'>
   
-  <button 
-          onClick={() => setisExpanded(!isExpanded)} 
-          className="flex items-center ml-auto bg-button-base rounded-lg"
-        >
-          <span className="mr-1  text-button-base px-4 py-2 font-medium">Подробнее</span>
-          {isExpanded ? <FiSlack className="h-4 w-4 mr-4   transform rotate-180  hover:animate-spin" /> : <FiSlack className="h-4 w-4 mr-4 bg-button-base hover:animate-spin" />}
-        </button>
-      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96' : 'max-h-0'}`}>
+
+  <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center ">Команда <span className='  font-extrabold text-5xl'>{teamName}</span> создана.</h1>
+  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96' : 'max-h-0'}`}>
         <div className="p-4 bg-secondary rounded-md">
           <p className="  text-scin-base text-xl text-center">
           Локацию  вашего первого задания  вам выдаст организатор.
           </p>
         </div>
       </div>
-  <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center ">Команда <span className='  font-extrabold text-5xl'>{teamName}</span> создана.</h1>
 <div className='flex items-center space-x-2'>
 <div className="flex justify-center w-full">
+  
   <Link href="/qrscanner" prefetch={true} onClick={() => {
     setreroute(true)
   }} className='bg-button-base text-button-base font-medium text-xl  px-6 py-4 rounded-md mt-5'>Мы на месте</Link>

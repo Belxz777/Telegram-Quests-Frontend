@@ -23,16 +23,16 @@ export default function Scaner() {
     let timeoutId: NodeJS.Timeout;
     if (!isResultChecked && result && !data) {
       setIsResultChecked(true); 
-      const coordinatesArray = result.text.split(',').map(coord => parseFloat(coord));
+      const coordinatesArray = result.text.split(',').map(coord => parseFloat(coord).toFixed(6));
       if (
         coordinatesArray.length !== 2 ||
-        isNaN(coordinatesArray[0]) ||
-        isNaN(coordinatesArray[1])
+        isNaN(parseFloat(coordinatesArray[0])) ||
+        isNaN(parseFloat(coordinatesArray[1]))
       ) {
         setData(false);
       } else {
         setData(true);
-        setcoordinatesArray(coordinatesArray);
+        setcoordinatesArray(coordinatesArray.map(coord => parseFloat(coord)));
       }
     }
     if (error) {
@@ -78,9 +78,13 @@ export default function Scaner() {
           data === true ?
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-link-base  text-2xl hover:text-emerald-100 text-center">Код отсканирован</h2>
+            <h3 className="text-link-base  text-2xl hover:text-emerald-100 text-center">{
+            coordinatesArray && <span>{coordinatesArray[0]  } {coordinatesArray[1]}</span>
+}
+            </h3>
               <button
                 className="bg-button-base   justify-center items-center hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex"
-                onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}
+                onClick={() => coordinatesArray && router.push(`/quest/56.849320/${coordinatesArray[1]}`)}
               >
                 Перейти
               </button>

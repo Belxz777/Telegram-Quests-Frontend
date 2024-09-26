@@ -101,8 +101,8 @@ addPhoto(true)
     {
     props.todo?.question ?
     <>  
-    <h1  className="text-2xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
-      <h2 className="text-3xl font-extrabold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
+    <h1  className="text-xl font-bold tracking-tight text-link-base text-center ">Последнее задание:</h1>
+      <h2 className="text-2xl font-extrabold tracking-tight text-link-base text-center ">{props.todo.question} </h2>
       {/* <h2 className="text-2xl font-bold tracking-tight text-link-base text-center ">{props.quizData[0].quizId}</h2> */}
       </>
       :

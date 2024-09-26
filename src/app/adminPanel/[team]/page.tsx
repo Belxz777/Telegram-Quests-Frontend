@@ -77,11 +77,11 @@ export default function Component(params: Props) {
                       </td>
                       <td className="border px-6 py-4 text-sm text-scin-base">
                         <ul className="list-disc list-inside  font-extrabold">
-                          {teamData.answers}
+                          {teamData.answers[index]}
                         </ul>
                       </td>
-                      <td className="border px-4 py-4    text-lg">
-                      <span className=" font-extrabold"> {teamData.results[index]} </span>  б.
+                      <td className="border px-4 py-4 text-scin-base    text-lg">
+                      <span className=" font-extrabold text-scin-base"> {teamData.results[index]} </span>  б.
                       </td>
                     </tr>
                   ))

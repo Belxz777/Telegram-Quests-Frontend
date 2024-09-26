@@ -50,7 +50,7 @@ const  Question = (props: Props) => {
     
   }
   const [answers, setAnswers] = useState<string[]>([]);
-const [isOpen, setIsOpen] = useState(false);
+const [isOpen, setIsOpen] = useState(true);
 const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 const [userAnswers, setUserAnswers] = useState<{ question: string; answer: string; isCorrect: boolean }[]>([]);
 const [showResult, setShowResult] = useState<boolean>(false);

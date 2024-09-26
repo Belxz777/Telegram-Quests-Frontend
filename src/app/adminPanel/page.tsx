@@ -1,10 +1,12 @@
 "use client"
 import { useTeamData } from '@/hooks/useTeamData'
 import React from 'react'
-import Image from 'next/image'
 import { deleteTeam } from '@/server/getAllTeamData'
 import Link from 'next/link'
 import Loading from '@/components/Loading'
+import { CgAdd } from "react-icons/cg"
+import { CgAttachment } from "react-icons/cg";
+
 import { useBackButton } from '@tma.js/sdk-react'
 import { useRouter } from 'next/navigation'
 import { Team } from '../types/Main'
@@ -40,11 +42,11 @@ backButton.on('click', () =>{
     </svg>
     <h1 className="text-xl font-bold text-link-base">Прогресс команд</h1>
     <Link href={"/crm"} prefetch={false} onClick={()=>{
-        }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >      
-           Crm</Link>
-           <button className=" bg-button-base hover:bg-hint-base text-button-base font-bold  px-2  rounded-full text-xl  w-1/5">
+        }}  className=' text-button-base font-bold rounded-full text-xl w-1/3  mt-4' >      
+           <CgAdd/></Link>
+           <button className=" text-button-base font-bold  px-2  rounded-full text-xl  w-1/5">
          <Link href={"/map"} prefetch={false}
-         >  Помощь  </Link>
+         >  <CgAttachment/></Link>
         </button>
   </div>
 </header>
