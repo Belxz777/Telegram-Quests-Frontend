@@ -84,7 +84,7 @@ export default function Scaner() {
             </h3>
               <button
                 className="bg-button-base   justify-center items-center hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex"
-                onClick={() => coordinatesArray && router.push(`/quest/56.849320/${coordinatesArray[1]}`)}
+                onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}
               >
                 Перейти
               </button>
