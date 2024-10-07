@@ -52,7 +52,6 @@ export default function Scaner() {
   backButton.on('click', () =>{
     router.push("/")
   })
-  const width = window.innerWidth;
   return (
     <div className=" bg-scin-base h-screen w-screen ">
       <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">

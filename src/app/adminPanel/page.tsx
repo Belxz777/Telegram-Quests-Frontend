@@ -42,9 +42,9 @@ backButton.on('click', () =>{
     </svg>
     <h1 className="text-xl font-bold text-link-base">Прогресс команд</h1>
     <Link href={"/crm"} prefetch={false} onClick={()=>{
-        }}  className=' text-button-base font-bold rounded-full text-xl w-1/3  mt-4' >      
+        }}  className=' text-link-base font-bold rounded-full text-xl  px-2 w-1/3  ' >      
            <CgAdd/></Link>
-           <button className=" text-button-base font-bold  px-2  rounded-full text-xl  w-1/5">
+           <button className="  text-link-base font-bold  px-2  rounded-full text-xl  w-1/5">
          <Link href={"/map"} prefetch={false}
          >  <CgAttachment/></Link>
         </button>

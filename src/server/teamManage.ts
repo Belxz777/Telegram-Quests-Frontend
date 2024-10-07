@@ -60,7 +60,7 @@ return response
         body: formData
         });
         if (res.status !== 201) {
-      throw new Error('Failed to fetch data')
+        return 
         }
 
         const response= await res.json();

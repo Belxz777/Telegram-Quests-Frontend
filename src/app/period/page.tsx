@@ -6,6 +6,7 @@ import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
 import Loading from '@/components/Loading'
 import { useRouter } from 'next/navigation'
 import Reroute from '@/components/Reroute'
+import ErrorPage from '@/components/errorMessage/error'
  type Props = {}
  
 const Periodic = (props: Props) => {
@@ -19,6 +20,7 @@ const [isReroute,setIsReroute] = useState(false)
 backButton.show()
 backButton.on('click', () =>{
   router.push("/")
+  setIsReroute(true)
 })
 
   useEffect(() => {
@@ -34,14 +36,16 @@ backButton.on('click', () =>{
     }
     setCurrentQuiz()
   }, [])
-  //todo сделать админ панель и добавить задания еще также в принципе еще раз пересмотреть логику
-  // ! ЗДЕСЬ БУДЕТ КАРТА С ТОЧКАМИ КОТОРЫЕ ЕЩЕ НЕ ПОСЕТИЛА КОМАНДА
   const ref = useRef<any | null>(null)
-  const data ="Мы на месте"
   return (
     <>
 {
-  isReroute && <Reroute text='Переход'/>
+  error  ? 
+<ErrorPage linkHref='' linkText='Перезагрузить ' errorMessage='Произошла ошибка при загрузке информации о заданиях. Попробуйте еще раз или ообратитесь к организатору.' />
+:
+<>
+{
+  isReroute && <Reroute text='Переход  . . .'/>
 }
       {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
       <p className="text-4xl md:text-5xl font-bold text-link-base  text-center select-none overflow-hidden">
@@ -49,12 +53,7 @@ backButton.on('click', () =>{
       </p>
       <div className=" w-full max-w-4xl aspect-square  bg-scin-base rounded-2xl h-screen overflow-hidden" >
         {
-          loading && <Loading text='Загрузка'></Loading>
-        }
-        {
-          error && <p className="text-4xl md:text-5xl font-bold text-link-base  text-center">
-            Ошибка:
-          </p>
+          loading && <Loading text='Загрузка . . .'></Loading>
         }
         <YMaps key={'c04094f5-7ea3-4e2d-9305-f0be2330dfd6'}  >
           {
@@ -102,6 +101,8 @@ setIsReroute(true)
 
 
       </div>
+      </>
+}
     </>
   )
 }

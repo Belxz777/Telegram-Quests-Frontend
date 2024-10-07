@@ -97,11 +97,14 @@ className="w-full flex justify-center items-center  flex-col"
 props.quizData[currentQuestion].rebus ?
 <div className='flex justify-center items-center flex-col mt-6'>
 {props.quizData[currentQuestion].question ?
-<p className=' text-link-base   text-center font-extrabold  text-3xl  flex-col mt-6 select-none'>{props.quizData[currentQuestion].question} </p>
+<p className=' text-link-base   text-center font-extrabold  text-4xl  flex-col mt-6 select-none'>{props.quizData[currentQuestion].question} </p>
 :
 <p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>}
-<img src={props.quizData[currentQuestion].image} alt=""    className='  select-none'/>
-<motion.input
+<img src={props.quizData[currentQuestion].image} alt=""    className='  select-none
+ mx-8 px-4 pt-4
+  rounded-2xl
+'/>
+<input
 placeholder='Введите ответ'
 className='bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-xl  mt-5 placeholder-white'
                         value={rebus}
@@ -124,7 +127,7 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full t
 <motion.button
 whileTap={{ scale: 0.97 }}
 onClick={() => setIsOpen(!isOpen)}
-className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-2xl '
+className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-3xl '
 >
   {
     props.quizData[currentQuestion].todo ?
@@ -133,7 +136,7 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full te
     props.quizData[currentQuestion].question
   }
 </motion.button>
-{props.quizData[currentQuestion].todo ? <motion.button className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full text-xl  mt-4'
+{props.quizData[currentQuestion].todo ? <motion.button className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-lg text-xl  mt-4'
  onClick={()=>{
   if (currentQuestion < props.quizData.length - 1) {
     setCurrentQuestion(currentQuestion + 1);
@@ -152,7 +155,10 @@ variants
 style={{ pointerEvents: isOpen ? "auto" : "none" }}
 >
 {props.quizData[currentQuestion].variants.map((variant:any, index:number) => (
-<motion.li variants={itemVariants} key={index} onClick={() => handleAnswerClick(variant)} className=' cursor-pointer bg-hint-base  text-button-base font-bold py-5 mt-3 px-20 rounded-full text-xl '>{index + 1}: {variant}</motion.li>
+<motion.li variants={itemVariants} key={index} onClick={() => handleAnswerClick(variant)} className='relative cursor-pointer bg-hint-base text-button-base font-bold py-5 mt-3 px-20 rounded-2xl text-3xl'>
+  {variant}
+  <span className='absolute top-2 right-2 text-sm'>{index + 1}</span>
+</motion.li>
 ))}
 </motion.ul>
 }

@@ -10,7 +10,7 @@ const Loading = (props: Props) => {
     <div className="flex flex-col items-center space-y-4">
     <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2  border-base mb-8 mx-auto">
       </div>
-      <p className="  text-link-base  text-sm">{props.text}..</p>
+      <p className="  text-link-base  text-2xl">{props.text}</p>
     </div>
   </div>
   )

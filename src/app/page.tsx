@@ -12,6 +12,8 @@ import { GoArrowUpRight } from 'react-icons/go';
 import { getTeamDataByName } from '@/server/getAllTeamData';
 import { Team } from './types/Main';
 import Landing from '@/components/Landing';
+import React from 'react';
+import ErrorPage from '@/components/errorMessage/error';
 
 export default function General() {
 const initData = useInitData()
@@ -94,7 +96,7 @@ const [isLoading , setIsLoading] = useState(true)
   <>
   {
     error ?
-    <Landing  status='Ошибка' />
+<ErrorPage linkText='Ошибка' linkHref='/' errorMessage='Ошибка при подключении к серверу' />
     :
     
   <Landing  status='Загрузка . . .' />
@@ -106,18 +108,19 @@ const [isLoading , setIsLoading] = useState(true)
       reroute && <Reroute text="Переход  . . ."/>
     }
     <div className="overflow-hidden h-screen">
-      <header className="bg-scin-base text-scin-base shadow  h-1/5">
+      <header className="bg-scin-base text-scin-base shadow  h-1/5  max-h-min">
         <div className='flex justify-around '>
            <Link href={"/qrscanner"} prefetch={false} onClick={()=>{
           setreroute(true)
-        }}  className='bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl w-1/3  mt-4' >          <AiOutlineCompress />
+        }}  className='text-scin-base hover:text-link-base px-4 rounded-f text-auto  font-extrabold w-1/3  mt-4
+bg-clip-border border-base  border-dashed border-2  rounded-xl h-1/2 select-none' >          <AiOutlineCompress />
            QRcode сканер</Link>
   
           {
             team?.name ?
             <Link href={"/period"} prefetch={true} onClick={()=>{
               setreroute(true)
-            }}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold py-4  px-4 rounded-full text-xl mt-4 ">   
+            }}  className='text-scin-base   select-none hover:text-link-base py-2 px-4 rounded-f text-auto w-1/3  font-extrabold  mt-4 bg-clip-border border-base  border-dashed border-2  rounded-xl h-1/2'>   
      <GoArrowUpRight /> Продолжить 
              </Link>
 
@@ -125,7 +128,8 @@ const [isLoading , setIsLoading] = useState(true)
 <Link href={"/start"} prefetch={true} onClick={()=>{
   setreroute(true)
 
-}}  className=" bg-button-base hover:bg-hint-base text-button-base font-bold  px-4 py-4 rounded-full text-xl  mt-4 ">   
+}}   className='text-scin-base hover:text-link-base px-4 rounded-f text-auto  font-extrabold w-1/3  mt-4
+bg-clip-border border-base  border-dashed border-2  rounded-xl h-1/2 select-none'>   
  <AiOutlineIssuesClose />  Начать  
  </Link>
 
@@ -134,9 +138,9 @@ const [isLoading , setIsLoading] = useState(true)
         </div>
 
       </header>
-      <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-1 '>
-      {team?.name  && <> <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-4'>Ваша команда: {team?.name}</h1>
-          <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-4'>
+      <main className='flex w-screen h-4/5 justify-center items-center flex-col mt-2  '>
+      {team?.name  && <> <h1 className='text-2xl font-bold tracking-tight text-link-base text-center mb-1 mt-2'>Ваша команда: {team?.name}</h1>
+          <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-2'>
             {(() => {
               const startTime = localStorage.getItem("time")
               if (startTime) {
@@ -154,13 +158,14 @@ const [isLoading , setIsLoading] = useState(true)
           </h2>
       </>}
         <Image src={pint} alt=''  
+        
         onDoubleClick={()=>{
           let isAdmin = prompt("Введите пароль администратора")
           if(isAdmin == "ivan"){
             router.push("/adminPanel")
           }
-        }} className=' bg-button-base rounded-full     select-none '  loading='lazy' />{/*width={width} height={height}*/}
-        <h1 className='text-center text-xl text-scin-base font-extrabold'>Заводские Игры: Квестбот по городу на велосипедах</h1>
+        }} className=' bg-button-base rounded-full mx-8     size-96   select-none '  loading='lazy' />{/*width={width} height={height}*/}
+        <h1 className='text-center text-xl text-scin-base font-extrabold select-none'>Заводские Игры: Квестбот по городу на велосипедах</h1>
       </main>
     </div>
   </>

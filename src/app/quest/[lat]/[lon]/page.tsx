@@ -61,17 +61,16 @@ setloading(false)
 fetchData()
 }, [])
 return (
-  
 <>
-{
-  loading && <Loading text='Загрузка'/>
-}
-{
-quizData[0] ?
-<Question quizData={quizData}  />
-:
-<h1 className='text-3xl text-link-base'>Ошибка </h1>
-}
+{quizData && !loading ? (
+  <Question quizData={quizData}  />
+) : (
+  loading ? (
+    <Loading text="Загрузка данных подождите..." />
+  ) : (
+    <h1 className='text-3xl'>Ошибка </h1>
+  )
+)}
 </>
 );
 }

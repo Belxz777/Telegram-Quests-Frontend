@@ -31,7 +31,7 @@ const page = (props: Props) => {
     seterror("")
 const response  = await createTeam(team)
 if(!response){
-seterror(`Ошибка имя  команды уже занято , придумайте другое`)
+seterror(`Ошибка имя  команды уже занято , придумайте другое.`)
 setloading(false)
 return
 }
@@ -83,13 +83,13 @@ localStorage.setItem("time",  new Date().getTime().toString())
       <h1 className="text-4xl md:text-5xl font-bold    text-link-base  text-center  pt-3.5 select-none">Начни велоквест</h1>
       <div className="flex items-center space-x-2 flex-col mt-52">
         <input
-          className="flex-1  rounded-md  px-4 py-10 text-2xl   placeholder:text-xl text-center mx-6 bg-scin-base text-scin-base font-bold border-base   "
+          className="flex-1  rounded-md  px-4 py-10 text-2xl   placeholder:text-xl text-center mx-6 bg-scin-base text-scin-base font-bold bg-clip-border border-base  border-dashed border-2   select-none  "
           placeholder="Введите название команды"
           type="text"
           value={team}
     onChange={(e) => setteam(e.target.value)}
         />
-        <button className= "bg-button-base text-button-base font-medium text-xl  px-6 py-4 rounded-md mt-5"
+        <button className= "bg-button-base text-button-base font-medium text-2xl  px-6 py-4 rounded-md mt-5"
          onClick={() => handleCreateTeam()}>
           Начать
         </button>
