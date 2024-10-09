@@ -120,7 +120,7 @@ bg-clip-border border-base  border-dashed border-2  rounded-xl h-1/2 select-none
             team?.name ?
             <Link href={"/period"} prefetch={true} onClick={()=>{
               setreroute(true)
-            }}  className='text-scin-base   select-none hover:text-link-base py-2 px-4 rounded-f text-auto w-1/3  font-extrabold  mt-4 bg-clip-border border-base  border-dashed border-2  rounded-xl h-1/2'>   
+            }}  className='text-scin-base   select-none hover:text-link-base py-2 px-4 text-wrap   text-auto w-2/3  font-extrabold  mt-4 bg-clip-border border-base  border-dashed border-2  rounded-xl h-1/2'>   
      <GoArrowUpRight /> Продолжить 
              </Link>
 
