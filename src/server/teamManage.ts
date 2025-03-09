@@ -1,4 +1,4 @@
-"use server "
+"use server"
 
 import { url } from "@/app/types";
 
@@ -7,7 +7,7 @@ async function createTeam(name: string): Promise<any> {
 const res = await fetch(`${url}team`, {
 method: 'POST',
 headers: {
-'Content-Type': 'application/json'
+'Content-Type': 'application/json',
 },
 body: JSON.stringify({
 name: name
