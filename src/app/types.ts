@@ -1,4 +1,4 @@
-export let url = "https://rppsv05p-8000.euw.devtunnels.ms/"
+export let url = "http://localhost:8000/"
 export interface ITelegramUser {
     id: number;
     first_name: string;

@@ -167,6 +167,7 @@ const [isLoading , setIsLoading] = useState(true)
       {team?.name  && <> <h1 className='text-2xl font-bold tracking-tight text-link-base text-center mb-1 mt-2'>Ваша команда: {team?.name}</h1>
           <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-2'>
             {(() => {
+            
               const startTime = localStorage.getItem("time")
               if (startTime) {
                 const elapsedTime = new Date().getTime() - parseInt(startTime)

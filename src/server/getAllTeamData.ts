@@ -4,7 +4,7 @@ import { url } from "@/app/types";
 import { someError, Team } from "@/app/types/Main";
 
 async function getAllTeams(): Promise<Team[] | Team | null>  {
-    const res = await fetch(`${url}team/`);
+    const res = await fetch(`${url}teams/`);
     if (!res.ok) {
         console.log(res.status)
         throw new Error('Failed to fetch data')
@@ -17,7 +17,7 @@ async function getAllTeams(): Promise<Team[] | Team | null>  {
     return response
 }
 async function deleteTeam(id: number): Promise<any> {
-    const res = await fetch(`${url}team/${id}`, {
+    const res = await fetch(`${url}teams/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ async function getTeamDataByName(name: string): Promise<Team |  null> {
     if(!name){
         return null
     }
-    const res = await fetch(`${url}team/getByName/${name}`);
+    const res = await fetch(`${url}teams/getByName/${name}`);
     if (!res.ok) {
         console.log(res.status)
   console.error( {

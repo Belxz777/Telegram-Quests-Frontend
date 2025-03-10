@@ -8,14 +8,19 @@ export type augedInfo =  {
       question:string,
       answer:string ,
       variants:string[] ,
-      lat:number,
-      lon: number,
-      quizIn: string, 
-      quizId:number,
+     location:LocationData,
       image:string ,
       rebus:boolean,
       todo:boolean,
     }]
+    export type LocationData = {
+      id:number,
+      lat:number,
+      lon: number,
+      name: string,
+      description:string,
+
+    }
     export type Quiz ={
       question:string,
       answer:string ,

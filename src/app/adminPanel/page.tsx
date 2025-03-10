@@ -32,7 +32,7 @@ backButton.on('click', () =>{
   }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
     <span>Создать</span>
     </Link>
-    <Link href={" /map"} prefetch={false} onClick={()=>{
+    <Link href={" /location"} prefetch={false} onClick={()=>{
   }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
     <span>Карта</span>
     </Link>

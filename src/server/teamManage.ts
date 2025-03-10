@@ -3,7 +3,7 @@
 import { url } from "@/app/types";
 
 async function createTeam(name: string): Promise<any> {
-const res = await fetch(`${url}team/`, {
+const res = await fetch(`${url}teams/`, {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ return response
       formData.append('location', location);
     formData.append('result', result);
       formData.append('answers',answers.join(','));
-        const res = await fetch(`${url}team/uploadPhotoUrls/${name}`, {
+        const res = await fetch(`${url}teams/uploadPhotoUrls/${name}`, {
         method: 'POST',
         body: formData
         });

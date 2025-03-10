@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import usePrevious from "@/server/prev";
 import Reroute from "@/components/Reroute";
 import { useBackButton } from "@tma.js/sdk-react";
+import { getLocationByLatLon } from "@/server/getAllQuests";
 export default function Scaner() {
   type ScanResult = {
     text: string;
@@ -52,6 +53,24 @@ export default function Scaner() {
   backButton.on('click', () =>{
     router.push("/")
   })
+  const getLocationIfIS = async()=>{
+    if (coordinatesArray) {
+      const check = await getLocationByLatLon(coordinatesArray[0], coordinatesArray[1])
+    alert(coordinatesArray[0])
+      if(!check) {
+       alert("Такой локации не существует")
+      }
+      if(check.id!==undefined) {
+        alert(check.id)
+              router.push(`/quest/${check.id}`)
+      }
+      alert("checl robot")
+
+    }
+
+    // onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}
+
+  }
   return (
     <div className=" bg-scin-base h-screen w-screen ">
       <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">
@@ -81,7 +100,7 @@ export default function Scaner() {
             </h3>
               <button
                 className="bg-button-base   justify-center items-center hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex"
-                onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}
+               onClick={()=>getLocationIfIS}
               >
                 Перейти
               </button>

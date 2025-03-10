@@ -14,10 +14,13 @@ type Props = {}
     question:"",
     answer:"",
     variants:["", "","",""],
-    lat:0,
-    lon: 0,
-    quizId:0,
-    quizIn: "",
+    location: {
+        id:0,
+        lat: 0,
+        lon: 0,
+        name: '',
+        description: ''
+      },
     image:"",
     rebus:false,
     todo:false,
@@ -84,8 +87,8 @@ throw new Error('No quests found');
 {
   quizData.map((item,index)=>
   <>
-    <Placemark geometry={[item.lat,item.lon]}  properties={{
-      iconCaption:`${item.quizIn}`,
+    <Placemark geometry={[item.location.lat,item.location.lon]}  properties={{
+      iconCaption:`${item.location.name}`,
 }}
 options={{
   preset: "islands#circleDotIcon",
@@ -96,7 +99,7 @@ options={{
 key={index}
 onClick={ () =>{
   setreroute(true)
- router.push(`/quest/${item.lat}/${item.lon}`)}}
+ router.push(`/location/${item.location.id}`)}}
 />  
 </>
   )
