@@ -95,9 +95,9 @@ className="w-full flex justify-center items-center  flex-col"
 <p className=' text-link-base    font-extrabold items-center text-xl  flex-col'> <span className='text-2xl'>Квест: </span>{props.quizData[currentQuestion]!.quizIn }</p>
 {
 props.quizData[currentQuestion].rebus ?
-<div className='flex justify-center items-center flex-col mt-6'>
+<div className='flex justify-center items-center flex-col mt-2'>
 {props.quizData[currentQuestion].question ?
-<p className=' text-link-base   text-center font-extrabold  text-4xl  flex-col mt-6 select-none'>{props.quizData[currentQuestion].question} </p>
+<p className=' text-link-base   text-center font-extrabold  text-4xl  flex-col mt-2 select-none'>{props.quizData[currentQuestion].question} </p>
 :
 <p className=' text-link-base  text-right font-extrabold items-center text-xl  flex-col'>Ребус</p>}
 <img src={props.quizData[currentQuestion].image} alt=""    className='  select-none
@@ -127,7 +127,7 @@ className=' bg-button-base  text-button-base font-bold py-2 px-4  rounded-full t
 <motion.button
 whileTap={{ scale: 0.97 }}
 onClick={() => setIsOpen(!isOpen)}
-className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-full text-3xl '
+className=' bg-button-base  text-button-base font-bold py-2 px-4 rounded-2xl text-3xl '
 >
   {
     props.quizData[currentQuestion].todo ?
