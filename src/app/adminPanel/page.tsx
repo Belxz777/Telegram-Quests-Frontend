@@ -27,27 +27,15 @@ backButton.on('click', () =>{
 
 <header className="flex items-center justify-between min-w-full    bg-scin-base px-6 py-4 shadow ">
   <div className="flex items-center gap-4">
-    <svg
-      className="h-6 w-6 text-scin-base"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <rect height="18" rx="2" ry="2" width="18" x="3" y="3" />
-      <line x1="3" x2="21" y1="9" y2="9" />
-      <line x1="9" x2="9" y1="21" y2="9" />
-    </svg>
     <h1 className="text-xl font-bold text-link-base">Прогресс команд</h1>
-    <Link href={"/crm"} prefetch={false} onClick={()=>{
-        }}  className=' text-link-base font-bold rounded-full text-xl  px-2 w-1/3  ' >      
-           <CgAdd/></Link>
-           <button className="  text-link-base font-bold  px-2  rounded-full text-xl  w-1/5">
-         <Link href={"/map"} prefetch={false}
-         >  <CgAttachment/></Link>
-        </button>
+    <Link href={"/createQuests"} prefetch={false} onClick={()=>{
+  }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
+    <span>Создать</span>
+    </Link>
+    <Link href={" /map"} prefetch={false} onClick={()=>{
+  }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
+    <span>Карта</span>
+    </Link>
   </div>
 </header>
 

@@ -1,4 +1,4 @@
-export let url = process.env.BACKEND_URL || "https://bba6qqs1ih7d5ofeo1ro.containers.yandexcloud.net/"
+export let url = "https://rppsv05p-8000.euw.devtunnels.ms/"
 export interface ITelegramUser {
     id: number;
     first_name: string;

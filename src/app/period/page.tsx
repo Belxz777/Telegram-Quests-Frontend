@@ -19,7 +19,7 @@ const Periodic = (props: Props) => {
 const [isReroute,setIsReroute] = useState(false)
 backButton.show()
 backButton.on('click', () =>{
-  router.push("/")
+  router.back()
   setIsReroute(true)
 })
 

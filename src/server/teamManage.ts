@@ -3,8 +3,7 @@
 import { url } from "@/app/types";
 
 async function createTeam(name: string): Promise<any> {
-  console.log(name,url)
-const res = await fetch(`${url}team`, {
+const res = await fetch(`${url}team/`, {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json'
@@ -15,9 +14,6 @@ name: name
 });
 if (!res.ok) {
 console.log(res.status,url+"teamisnt")
-return 
-}
-if (res.status !== 201) {
 return 
 }
 

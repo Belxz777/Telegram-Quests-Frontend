@@ -58,8 +58,6 @@ export default function Scaner() {
         <QrReader
           containerStyle={{
             width: "100%" ,
-            
-            
           }}
           onResult={(result:any, error:any) =>{  
           if(!!result){

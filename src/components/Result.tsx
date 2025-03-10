@@ -77,14 +77,14 @@ addPhoto(true)
        <main className="flex flex-col items-center justify-center h-[100dvh]  bg-scin-base  px-4 md:px-6">
         {
           error  && !isReroute ?
-           <ErrorPage linkHref={`/quest/${props.quizData[0].lat}/${props.quizData[0].lon}`} linkText='Сканируйте еще раз' errorMessage='Произошла ошибка при отправке фотографии(ошибка с форматом фотографии , обратитесь к администратору)'
+           <ErrorPage linkHref={`/qrscanner`} linkText='Сканируйте еще раз' errorMessage='Произошла ошибка при отправке фотографии(ошибка с форматом фотографии , обратитесь к администратору)'
             />
 :
 
       <div className="max-w-md w-full space-y-6">
         {
           isReroute  &&
-          <Reroute text='Переход  . . .'/>
+          <Reroute text='Переход  . . .'/>  
         }
         <div className="text-center space-y-2">
 {
