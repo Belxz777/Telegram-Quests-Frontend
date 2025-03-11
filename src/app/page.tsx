@@ -136,8 +136,18 @@ const [isLoading , setIsLoading] = useState(true)
             onClick={() => {
               if (team) {
                 setreroute(true)
-                
+        
+                  setTimeout(() => {
+                    router.push("/period")
+                  }, 1000)
               }
+                else {
+                  setreroute(true)
+                  setTimeout(() => {
+                    router.push("/start")
+                  }, 1000)
+                }
+                
             }}
             className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-button-base text-hint-base rounded-xl font-medium transition-colors"
           >

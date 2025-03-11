@@ -13,6 +13,17 @@ export type augedInfo =  {
       rebus:boolean,
       todo:boolean,
     }]
+    export type Quiz = {
+      id:number,
+      question:string,
+      answer:string ,
+      variants:string[] ,
+     location:LocationData,
+      image:string ,
+      rebus:boolean,
+      todo:boolean,
+    }
+
     export type LocationData = {
       id:number,
       lat:number,
@@ -21,18 +32,7 @@ export type augedInfo =  {
       description:string,
 
     }
-    export type Quiz ={
-      question:string,
-      answer:string ,
-      variants:string[] ,
-      lat:number | string,
-    lon: number | string,
-      quizIn: string, 
-      quizId:number,
-      image:string ,
-      rebus:boolean,
-      todo:boolean,
-    }
+
    export type Team = {
 
         id: number,

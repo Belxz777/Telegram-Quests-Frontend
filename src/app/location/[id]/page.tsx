@@ -3,7 +3,7 @@ import React,{useEffect, useState} from 'react'
 import {Variants} from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { getAllQuestsByLatLon, getLocationByLatLon } from '@/server/getAllQuests'
-import Question from '@/components/Question'
+import Quiz from '@/components/Quiz'
 import { useBackButton } from '@tma.js/sdk-react'
 import Loading from '@/components/Loading'
 import { QuizData } from '@/app/types/Main'
@@ -61,14 +61,12 @@ console.error(e)
 }
 setloading(false)
 }
-alert(quizData[0].answer)
 fetchData()
-alert(quizData[0].answer)
 }, [])
 return (
 <>
 {quizData && !loading ? (
-  <Question quizData={quizData}  />
+  <Quiz quizData={quizData}  />
 ) : (
   loading ? (
     <Loading text="Загрузка данных подождите..." />

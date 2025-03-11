@@ -44,11 +44,11 @@ return response
     
 //     return response
 //     }
-    async function  addImage(name:string,image: File,location:string,result:string,answers:string[]): Promise<any> {
+    async function  addImage(name:string,image: File,location:number,result:string,answers:string[]): Promise<any> {
       console.log(image.size)
       const formData = new FormData();
       formData.append('file', image); 
-      formData.append('location', location);
+      formData.append('location', location.toString());
     formData.append('result', result);
       formData.append('answers',answers.join(','));
         const res = await fetch(`${url}teams/uploadPhotoUrls/${name}`, {

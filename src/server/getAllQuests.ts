@@ -13,6 +13,16 @@ async function getAllQuests(): Promise<QuizData>  {
     console.log(receiveddata)
     return receiveddata
 }
+async function getAllLocations(): Promise<LocationData | LocationData[]>  {
+    const res = await fetch(`${url}location/`);
+    if (!res.ok) {
+        console.log(res.status)
+        throw new Error('Failed to fetch data')
+    }
+    const receiveddata = await res.json();
+    console.log(receiveddata)
+    return receiveddata
+}
 async function getAllQuestsByLatLon(id:number): Promise<QuizData>  {
 
         const res = await fetch(`${url}quests/byLocation/${id}`);
@@ -71,4 +81,4 @@ async function getAllQuestsByLatLon(id:number): Promise<QuizData>  {
     const receiveddata = await res.json();
     return receiveddata
     }
-export { getAllQuests,getAllQuestsByLatLon,getNextLocation,getTeamLocations,createNewQuest, getLocationByLatLon};
+export { getAllQuests,getAllQuestsByLatLon,getNextLocation,getTeamLocations,createNewQuest, getLocationByLatLon,getAllLocations};

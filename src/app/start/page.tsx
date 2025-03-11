@@ -150,8 +150,9 @@ backButton.on('click', () =>{
       console.log("Creating team:", teamName)
       const response  = await createTeam(teamName)
 if(!response){
-seterror(`Ошибка имя  команды уже занято , придумайте другое.`)
-setLoading(false)
+  setLoading(false)
+  alert(`Извините ,возникла ошибка, возможно имя команды уже занято`)
+setTeamName("")
 return
 }
 setLoading(false)
@@ -179,7 +180,7 @@ router.push("/qrscanner")
         <h1 className="text-xl font-bold text-center">Велоквест</h1>
       </header> */}
 {
-  loading ?
+  loading && !error ?
   <Loading text="Создание команды..." />
 :
       <main className="flex-1 container mx-auto max-w-md p-4">
@@ -215,26 +216,26 @@ router.push("/qrscanner")
             </form>
           </section>
         ) : (
-          <section className="bg-scin-base rounded-lg shadow-md p-6">
+          <section className=" bg-scin-base rounded-lg shadow-md p-6">
             <div className="text-center space-y-6">
               <div className="space-y-2">
                 <h2 className="text-xl font-bold">Команда создана!</h2>
-                <p className="text-gray-600">
+                <p className=" text-scin-base">
                   Ваша команда <span className="font-semibold">"{createdTeamName}"</span> успешно зарегистрирована.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <p className="text-gray-700">Когда вы прибудете на место старта, нажмите кнопку ниже:</p>
+                <p className="text-hint-base ">Когда вы прибудете на место старта, нажмите кнопку ниже:</p>
                 <button
                   onClick={handleImAtLocation}
-                  className="w-full py-4 px-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-md transition-colors text-lg"
+                  className="w-full py-4 px-4 bg-green-500 hover:bg-green-600 text-button-base font-bold rounded-md transition-colors text-lg"
                 >
                   Мы на месте
                 </button>
               </div>
 
-              <p className="text-sm text-gray-500 mt-8">Отсканируйте qr-code на локации для получения задания</p>
+              <p className="text-sm text-hint-base mt-8">Отсканируйте qr-code на локации для получения задания</p>
             </div>
           </section>
         )}
