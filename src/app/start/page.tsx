@@ -220,7 +220,7 @@ router.push("/qrscanner")
             <div className="text-center space-y-6">
               <div className="space-y-2">
                 <h2 className="text-xl font-bold">Команда создана!</h2>
-                <p className=" text-scin-base">
+                <p className=" text-hint-base">
                   Ваша команда <span className="font-semibold">"{createdTeamName}"</span> успешно зарегистрирована.
                 </p>
               </div>
