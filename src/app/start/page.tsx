@@ -1,14 +1,14 @@
-'use client'
-import Loading from '@/components/Loading'
-import Reroute from '@/components/Reroute'
-import {createTeam} from '@/server/teamManage'
-import { useBackButton } from '@tma.js/sdk-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
-import { FiSlack } from "react-icons/fi";
-type Props = {}
+// 'use client'
+// import Loading from '@/components/Loading'
+// import Reroute from '@/components/Reroute'
+// import {createTeam} from '@/server/teamManage'
+// import { useBackButton } from '@tma.js/sdk-react'
+// import Link from 'next/link'
+// import { useRouter } from 'next/navigation'
+// import React, { useState } from 'react'
+// import { AiOutlineArrowLeft } from 'react-icons/ai'
+// import { FiSlack } from "react-icons/fi";
+// type Props = {}
 
 // const page = (props: Props) => {
 //   const router = useRouter()
