@@ -34,6 +34,7 @@ export default function Scaner() {
       } else {
         setData(true);
         setcoordinatesArray(coordinatesArray.map(coord => parseFloat(coord)));
+        getLocationIfIS()
       }
     }
     if (error) {
@@ -56,16 +57,16 @@ export default function Scaner() {
   const getLocationIfIS = async()=>{
     if (coordinatesArray) {
       const check = await getLocationByLatLon(coordinatesArray[0], coordinatesArray[1])
-    alert(coordinatesArray[0])
-      if(!check) {
-       alert("Такой локации не существует")
-      }
+    alert(check.id)
       if(check.id!==undefined) {
         alert(check.id)
               router.push(`/quest/${check.id}`)
       }
       alert("checl robot")
 
+    }
+    else{
+      alert("issue")
     }
 
     // onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}
@@ -100,7 +101,7 @@ export default function Scaner() {
             </h3>
               <button
                 className="bg-button-base   justify-center items-center hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex"
-               onClick={()=>getLocationIfIS}
+               onClick={ getLocationIfIS}
               >
                 Перейти
               </button>

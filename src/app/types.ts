@@ -1,4 +1,5 @@
-export let url = "http://localhost:8000/"
+export let url = "http://localhost:8000/" 
+//"https://telegram-quests-backend.onrender.com/"
 export interface ITelegramUser {
     id: number;
     first_name: string;

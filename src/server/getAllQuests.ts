@@ -34,14 +34,14 @@ async function getAllQuestsByLatLon(id:number): Promise<QuizData>  {
         console.log(receiveddata)
         return receiveddata
     }
-    async function getLocationByLatLon(lat:any,lon:any): Promise<LocationData>  {
+    async function getLocationByLatLon(lat:number,lon:number): Promise<LocationData>  {
+        
 
-        const res = await fetch(`${url}location/byCoordinates/${lat}/${lon}`);
+        const res = await fetch(`http://localhost:8000/location/byCoordinates/${lat}/${lon}`);
         if (!res.ok) {
             console.log(res.status)
-            throw new Error('Failed to fetch data')
-        }
-        console.log(res)
+            throw new Error(`${url}location/byCoordinates/${lat}/${lon} status ${res.status}`)
+        }   
         const response= await res.json();
   
         return response

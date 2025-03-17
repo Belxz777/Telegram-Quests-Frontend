@@ -108,7 +108,7 @@ const [isLoading , setIsLoading] = useState(true)
       reroute && <Reroute text="Переход  . . ."/>
     }
     <div className=" h-screen">
-    <header className="bg-scin-base shadow-sm p-4 top-0 w-full z-10  mb-10">
+    <header className="bg-scin-base shadow-sm p-4 top-0 w-full z-10  h-1/5 mb-10">
         <nav className="max-w-screen-sm mx-auto flex justify-between gap-4">
           <Link
             href="/qrscanner"
