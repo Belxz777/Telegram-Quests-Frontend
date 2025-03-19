@@ -2,6 +2,7 @@
 // import Loading from '@/components/Loading'
 // import Reroute from '@/components/Reroute'
 // import {createTeam} from '@/server/teamManage'
+// import { useBackButton } from '@tma.js/sdk-react'
 // import Link from 'next/link'
 // import { useRouter } from 'next/navigation'
 // import React, { useState } from 'react'
@@ -119,12 +120,11 @@ export default function BikeQuestTeamCreation() {
   const [isTeamCreated, setIsTeamCreated] = useState(false)
   const [createdTeamName, setCreatedTeamName] = useState("")
   const router = useRouter()
-// const cloudStorage = useCloudStorage();
 const backButton = useBackButton()
 
 backButton.show()
 backButton.on('click', () =>{
-  router.back()
+  router.push("/")
 })
 
 
@@ -220,7 +220,7 @@ router.push("/qrscanner")
             <div className="text-center space-y-6">
               <div className="space-y-2">
                 <h2 className="text-xl font-bold">Команда создана!</h2>
-                <p className=" text-scin-base">
+                <p className=" text-hint-base">
                   Ваша команда <span className="font-semibold">"{createdTeamName}"</span> успешно зарегистрирована.
                 </p>
               </div>

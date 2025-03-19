@@ -53,7 +53,7 @@ backButton.on('click', () =>{
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center rounded-md bg-scin-base">
-                <h3 className="text-lg font-medium  text-scin-base">
+                <h3 className="text-lg font-medium  text-hint-base">
                   Команда:{" "}
                   <span className="text-xl font-extrabold">{team.name}</span>
                 </h3>
