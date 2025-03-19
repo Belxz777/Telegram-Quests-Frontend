@@ -3,17 +3,7 @@ export type augedInfo =  {
     lat:number,
     lon: number,
     }
- export type QuizData =[ {
-      id:number,
-      question:string,
-      answer:string ,
-      variants:string[] ,
-     location:LocationData,
-      image:string ,
-      rebus:boolean,
-      todo:boolean,
-    }]
-    export type Quiz = {
+    export type quiztype = {
       id:number,
       question:string,
       answer:string ,
@@ -30,11 +20,8 @@ export type augedInfo =  {
       lon: number,
       name: string,
       description:string,
-
     }
-
    export type Team = {
-
         id: number,
         name: string,
         solved:Array<string>,

@@ -6,7 +6,7 @@ import { getAllQuestsByLatLon, getLocationByLatLon } from '@/server/getAllQuests
 import Quiz from '@/components/Quiz'
 import { useBackButton } from '@tma.js/sdk-react'
 import Loading from '@/components/Loading'
-import { QuizData } from '@/app/types/Main'
+import { quiztype } from '@/app/types/Main'
 interface Props  {
     params:{id:number}
 }
@@ -21,7 +21,7 @@ const itemVariants: Variants = {
 };
 
 function Quest({ params }: Props) {
-const [quizData, setQuizData] = useState<QuizData>([{
+const [quizData, setQuizData] = useState<quiztype[]>([{
     id:0,
     question:"",
     answer:"",
@@ -34,7 +34,7 @@ const [quizData, setQuizData] = useState<QuizData>([{
         description: ''
       },
     image:"",
-    rebus:false,
+    rebus:false,  
     todo:false
     }])
 //http://localhost:4000/Quests/46.147.176.2
