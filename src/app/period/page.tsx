@@ -48,8 +48,8 @@ backButton.on('click', () =>{
   isReroute && <Reroute text='Переход  . . .'/>
 }
       {/* <h1 className="text-4xl md:text-5xl font-bold text-link-base text-center">Команда {} создана</h1> */}
-      <p className="text-4xl md:text-5xl font-bold text-link-base  text-center select-none overflow-hidden">
-        Оставшиеся задания вашей команды:
+      <p className="text-4xl md:text-4xl font-bold text-link-base  text-center select-none overflow-hidden">
+        Оставшиеся локации вашей команды:
       </p>
       <div className=" w-full max-w-4xl aspect-square  bg-scin-base rounded-2xl h-screen overflow-hidden" >
         {
@@ -82,15 +82,14 @@ backButton.on('click', () =>{
                 <Button
                   options={{
                     maxWidth: 200,
-                    size:"small",
+                    size:"medium",
                     selectOnClick: true,
-
                   }}
                   onClick={()=> {router.push(`/qrscanner`)
 setIsReroute(true)
                   }}
                   data={{ content: "Мы на месте" }}
-          defaultState={{ selected: true}}
+          defaultState={{ selected:false}}
                   instanceRef={ref}
                 ></Button>
               </Map>

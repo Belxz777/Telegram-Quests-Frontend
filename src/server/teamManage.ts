@@ -13,8 +13,7 @@ name: name
 })
 });
 if (!res.ok) {
-console.log(res.status,url+"teamisnt")
-return 
+throw new Error('Failed to create')
 }
 
 const response= await res.json();

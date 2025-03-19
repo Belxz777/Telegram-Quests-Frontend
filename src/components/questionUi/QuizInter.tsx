@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Quiz, QuizData } from "@/app/types/Main"
+
 import Result from "../Result"
+import { quiztype } from "@/app/types/Main"
 
 
 // Типы данных
@@ -17,7 +18,7 @@ interface QuizQuestion {
 }
 
 interface QuizProps {
-  quizData: QuizData[] 
+  quizData: quiztype[] 
 }
 
 // Компонент квеста
@@ -112,7 +113,7 @@ if (showResult) {
     return <Result quizData={props.quizData} userAnswers={userAnswers} todoItems={todoItems} answers={answers} />
   }
 
-  const currentQuizItem = props.quizData[currentQuestion] as unknown as Quiz
+  const currentQuizItem = props.quizData[currentQuestion] as unknown as quiztype
 
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">

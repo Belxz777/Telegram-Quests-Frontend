@@ -1,4 +1,4 @@
-export let url = "https://bbam187qvlqm4676sbke.containers.yandexcloud.net/"
+export let url = "https://telegram-quests-backend.onrender.com/"
 export interface ITelegramUser {
     id: number;
     first_name: string;

@@ -147,8 +147,8 @@ backButton.on('click', () =>{
     setLoading(true)
     if (teamName.trim()) {
       // Here you would typically send the team name to your backend
-      console.log("Creating team:", teamName)
       const response  = await createTeam(teamName)
+      console.log(response)
 if(!response){
   setLoading(false)
   alert(`Извините ,возникла ошибка, возможно имя команды уже занято`)
@@ -174,7 +174,7 @@ router.push("/qrscanner")
   }
 
   return (
-    <div className="min-h-screen bg-scin-base flex flex-col">
+    <div className="min-h-screen   flex flex-col">
 
       {/* <header className=" bg-secodary-base text-link-base  p-4 shadow-md">
         <h1 className="text-xl font-bold text-center">Велоквест</h1>
@@ -183,17 +183,14 @@ router.push("/qrscanner")
   loading && !error ?
   <Loading text="Создание команды..." />
 :
-      <main className="flex-1 container mx-auto max-w-md p-4">
+      <main className="flex-1 container mx-auto max-w-md p-4 bg-scin-base">
         {!isTeamCreated ? (
-          <section className="bg-scin-base rounded-lg shadow-md p-6">
+          <section className=" rounded-lg shadow-md p-6">
             <h2 className="text-xl font-bold mb-6 text-center text-scin-base">Создание команды</h2>
 
             <form onSubmit={handleCreateTeam}>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label htmlFor="teamName" className="block text-sm font-medium">
-                    Название команды
-                  </label>
                   <input
                     id="teamName"
                     type="text"
@@ -216,26 +213,27 @@ router.push("/qrscanner")
             </form>
           </section>
         ) : (
-          <section className=" bg-scin-base rounded-lg shadow-md p-6">
+          <section className="  rounded-lg shadow-md p-6
+          text-link-base">
             <div className="text-center space-y-6">
               <div className="space-y-2">
                 <h2 className="text-xl font-bold">Команда создана!</h2>
-                <p className=" text-hint-base">
+                <p className="">
                   Ваша команда <span className="font-semibold">"{createdTeamName}"</span> успешно зарегистрирована.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <p className="text-hint-base ">Когда вы прибудете на место старта, нажмите кнопку ниже:</p>
+                <p className=" ">Когда вы прибудете на место старта, нажмите кнопку ниже:</p>
                 <button
                   onClick={handleImAtLocation}
-                  className="w-full py-4 px-4 bg-green-500 hover:bg-green-600 text-button-base font-bold rounded-md transition-colors text-lg"
+                  className="w-full py-4 px-4 bg-button-base hover:bg-button-base/50 text-button-base font-bold rounded-md transition-colors text-lg"
                 >
                   Мы на месте
                 </button>
               </div>
 
-              <p className="text-sm text-hint-base mt-8">Отсканируйте qr-code на локации для получения задания</p>
+              <p className="text-sm  mt-8">Отсканируйте qr-code на локации для получения задания</p>
             </div>
           </section>
         )}

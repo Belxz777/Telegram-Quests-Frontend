@@ -1,7 +1,7 @@
-import { Quiz } from "@/app/types/Main"
+import { quiztype } from "@/app/types/Main"
 
 interface RebusQuestionProps {
-    data: Quiz
+    data: quiztype
     rebus: string
     setRebus: React.Dispatch<React.SetStateAction<string>>
     handleAnswerClick: (answer: string) => void

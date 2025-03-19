@@ -1,9 +1,9 @@
 
-import {  QuizData } from '@/app/types/Main';
+import { quiztype } from '@/app/types/Main';
 import QuizInterface from './questionUi/QuizInter';
 
 type Props = {
-    quizData:QuizData[] 
+    quizData:quiztype[] 
   }
 
   // TODO разобраться сделась проверить как работает с ребусом вообщем 

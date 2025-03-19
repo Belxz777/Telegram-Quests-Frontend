@@ -1,8 +1,8 @@
-import { Quiz} from "@/app/types/Main"
+import { quiztype } from "@/app/types/Main"
 import { AnimatePresence, motion } from "framer-motion"
 
 interface MultipleChoiceQuestionProps {
-    data: Quiz
+    data: quiztype
     isOpen: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     handleAnswerClick: (answer: string) => void

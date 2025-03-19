@@ -1,9 +1,9 @@
 "use server "
 
 import { url } from "@/app/types";
-import { LocationData, Quiz, QuizData } from "@/app/types/Main";
+import { LocationData, quiztype} from "@/app/types/Main";
 
-async function getAllQuests(): Promise<QuizData>  {
+async function getAllQuests(): Promise<quiztype>  {
     const res = await fetch(`${url}quests/`);
     if (!res.ok) {
         console.log(res.status)
@@ -23,7 +23,7 @@ async function getAllLocations(): Promise<LocationData | LocationData[]>  {
     console.log(receiveddata)
     return receiveddata
 }
-async function getAllQuestsByLatLon(id:number): Promise<QuizData>  {
+async function getAllQuestsByLatLon(id:number): Promise<quiztype[] | quiztype>  {
 
         const res = await fetch(`${url}quests/byLocation/${id}`);
         if (!res.ok) {
@@ -37,18 +37,17 @@ async function getAllQuestsByLatLon(id:number): Promise<QuizData>  {
     async function getLocationByLatLon(lat:number,lon:number): Promise<LocationData>  {
         
 
-        const res = await fetch(`http://localhost:8000/location/byCoordinates/${lat}/${lon}`);
+        const res = await fetch(`${url}location/byCoordinates/${lat}/${lon}`);
         if (!res.ok) {
             console.log(res.status)
-            throw new Error(`${url}location/byCoordinates/${lat}/${lon} status ${res.status}`)
-        }   
+                }   
         const response= await res.json();
   
         return response
     }
-    async function getNextLocation(quizId:number): Promise<QuizData>  {
+    async function getNextLocation(quizId:number): Promise<quiztype>  {
 
-        const res = await fetch(`${url}Quests/byId/${quizId}`);
+        const res = await fetch(`${url}quests/byId/${quizId}`);
         if (!res.ok) {
             console.log(res.status)
             throw new Error('Failed to fetch data')
@@ -66,7 +65,7 @@ async function getAllQuestsByLatLon(id:number): Promise<QuizData>  {
         const receiveddata = await res.json();
         return receiveddata
     }
-    async function createNewQuest(quest:Quiz): Promise<any>  {
+    async function createNewQuest(quest:quiztype): Promise<any>  {
     const res = await fetch(`${url}quests/`, {
         method: 'POST',
         headers: {

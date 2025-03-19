@@ -10,6 +10,7 @@ import { CgAttachment } from "react-icons/cg";
 import { useBackButton } from '@tma.js/sdk-react'
 import { useRouter } from 'next/navigation'
 import { Team } from '../types/Main'
+import { url } from '../types'
 type Props = {}
 
 function AdminPanel({}: Props) {
@@ -32,6 +33,7 @@ backButton.on('click', () =>{
   }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
     <span>Создать</span>
     </Link>
+  
     <Link href={" /location"} prefetch={false} onClick={()=>{
   }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
     <span>Карта</span>
@@ -40,10 +42,11 @@ backButton.on('click', () =>{
 </header>
 
 <section className="flex-1 p-6">
+  <h1>ПУТЬ БЕКА {url}</h1>
   {/* Отображение команды, если данные загружены */}
   {isLoading ? (
     <Loading text="Загрузка данных" />
-  ) : Array.isArray(teamData) && teamData.length > 0 ? (
+  ) : Array.isArray(teamData) && teamData?.length > 0 ? (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {teamData.map((team: Team, index: number) => (
         <article
@@ -77,7 +80,7 @@ backButton.on('click', () =>{
                     УДАЛИТЬ
                   </button>
                   <p className="text-sm text-scin-base text-center">
-                    Всего выполнено {team.solved.length}
+                    Всего выполнено {team.solved && team.solved.length}
                   </p>
                 </div>
               </div>
