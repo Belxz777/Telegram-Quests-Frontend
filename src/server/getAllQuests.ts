@@ -17,7 +17,7 @@ async function getAllLocations(): Promise<LocationData | LocationData[]>  {
     const res = await fetch(`${url}location/`);
     if (!res.ok) {
         console.log(res.status)
-        throw new Error('Failed to fetch data')
+        throw new Error('Ошибка при получении всех локаций.')
     }
     const receiveddata = await res.json();
     console.log(receiveddata)

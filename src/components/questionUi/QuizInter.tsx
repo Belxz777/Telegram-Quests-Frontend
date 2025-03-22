@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 import Result from "../Result"
 import { quiztype } from "@/app/types/Main"
+import { getRandomEncouragingPhrase } from "../utils/func"
 
 
 // Типы данных
@@ -60,15 +61,16 @@ export default function QuizInterface(props: QuizProps) {
   }
 
   // Случайные фразы поддержки
-  const encouragingPhrases = ["Отлично!", "Так держать!", "Вы молодец!", "Продолжайте в том же духе!", "Замечательно!"]
 
-  const getRandomEncouragingPhrase = () => {
-    return encouragingPhrases[Math.floor(Math.random() * encouragingPhrases.length)]
+useEffect(() => {
+  
+  if (!props.quizData) {
+    alert("Задания не найдены")
+    return
   }
-
+},[])
   // Обработка клика по ответу
   const handleAnswerClick = (answer: string) => {
-    setlocation(1)
     const newUserAnswers = [...userAnswers]
     newUserAnswers[currentQuestion] = answer
     setUserAnswers(newUserAnswers)
@@ -104,11 +106,6 @@ export default function QuizInterface(props: QuizProps) {
       setShowResult(true)
     }
   }
-
-  if (!props.quizData) {
-    return null
-  }
-const [location, setlocation] = useState(0)
 if (showResult) {
     return <Result quizData={props.quizData} userAnswers={userAnswers} todoItems={todoItems} answers={answers} />
   }

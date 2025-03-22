@@ -3,7 +3,7 @@ import { quiztype } from '@/app/types/Main';
 import QuizInterface from './questionUi/QuizInter';
 
 type Props = {
-    quizData:quiztype[] 
+    quizData:quiztype[] | quiztype
   }
 
   // TODO разобраться сделась проверить как работает с ребусом вообщем 
@@ -39,10 +39,10 @@ const  Quiz= (props: Props) => {
   // if(props.quizData[currentQuestion].todo){
   //   settodo(selectedVariant)
   // }
-
+const arrayedifnot = Array.isArray(props.quizData) ? props.quizData : [props.quizData]
 return (
   <main className="container mx-auto p-4">
-  <QuizInterface quizData={props.quizData} />
+  <QuizInterface quizData={arrayedifnot} />
 </main>
 )
 }

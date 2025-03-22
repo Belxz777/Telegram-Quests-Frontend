@@ -21,22 +21,7 @@ const itemVariants: Variants = {
 };
 
 function Quest({ params }: Props) {
-const [quizData, setQuizData] = useState<quiztype[]>([{
-    id:0,
-    question:"",
-    answer:"",
-    variants:["", "","",""],
-    location: {
-        id:0,
-        lat: 0,
-        lon: 0,
-        name: '',
-        description: ''
-      },
-    image:"",
-    rebus:false,  
-    todo:false
-    }])
+const [quizData, setQuizData] = useState<quiztype[] | quiztype | null>(null)
 //http://localhost:4000/Quests/46.147.176.2
 const backButton = useBackButton()
 const router = useRouter()
@@ -51,14 +36,13 @@ const [loading, setloading] = useState(false)
 useEffect(() => {
 const fetchData = async () => {
 setloading(true)
-try {
-const data = await getAllQuestsByLatLon(params.id)
-setQuizData(data);
-}
+if(!params.id) return
 
-catch (e) {
-console.error(e)
-}
+const data = await getAllQuestsByLatLon(params.id)
+
+if(!data) return
+
+setQuizData(data);
 setloading(false)
 }
 fetchData()
@@ -71,7 +55,7 @@ return (
   loading ? (
     <Loading text="Загрузка данных подождите..." />
   ) : (
-    <h1 className='text-3xl'>Ошибка </h1>
+    <h1 className='text-3xl'>Ошибка при загрузке</h1>
   )
 )}
 </>
