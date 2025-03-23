@@ -7,10 +7,11 @@ import { useEffect, useState } from "react"
 import Confetti from "./Confetti"
 import ErrorPage from "./errorMessage/error"
 import Reroute from "./Reroute"
+import { answer } from "@/app/types"
 
 type Props = {
   quizData: any[]
-  userAnswers: string[]
+  userAnswers: answer[] | null
   todoItems: any[]
   answers: string[]
   location?: number
@@ -26,10 +27,13 @@ const Result = (props: Props) => {
 
   // Вычисление количества правильных ответов
   const calculateScore = () => {
-    const correctAnswers = props.answers.filter(
-      (answer: any) => typeof answer === "object" && "isCorrect" in answer && answer,
+    if (!props?.userAnswers) {
+      return
+    }
+    const correctAnswers = props?.userAnswers.filter(
+      (answer: any) => answer.isCorrect
     ).length
-alert(correctAnswers)
+
     setCorrect(correctAnswers + 1)
 
     if (correctAnswers === props.answers.length - 1) {
@@ -43,36 +47,43 @@ useEffect(() => {
 },[]);
   // Отправка фотографии
   const sendPhoto = async () => {
-    const teamName = localStorage.getItem("team") || ""
-    setLoading(true)
-
+    const teamName = localStorage.getItem("team") || "";
+    setLoading(true);
+  
     if (!correct) {
-      alert("Не удалось определить количество правильных ответов")
-      setLoading(false)
-      return
+      alert("Не удалось определить количество правильных ответов");
+      setLoading(false);
+      return;
     }
-
+  
     if (!photoUrl) {
-      alert("Фотография не выбрана")
-      setLoading(false)
-      return
+      alert("Фотография не выбрана");
+      setLoading(false);
+      return;
     }
-
-
-    const location = props.location || 0
-    
-    const response = await addImage(teamName, photoUrl, location, correct.toString(), props.answers)
-
+  
+    const location = props.location || 1
+  
+    // Создаем FormData и добавляем в него данные
+    const formData = new FormData();
+    formData.append('file', photoUrl); // Добавляем файл
+    formData.append('location', location.toString());
+    formData.append('result', correct.toString());
+    formData.append('answers', props.answers.join(','));
+  
+    // Вызываем серверную функцию и передаем FormData
+    const response = await addImage(teamName, formData);
+  
     if (!response) {
-      setLoading(false)
-      setError(true)
-      setIsAddedPhoto(false)
-      return
+      setLoading(false);
+      setError(true);
+      setIsAddedPhoto(false);
+      return;
     }
-
-    setLoading(false)
-    setIsAddedPhoto(true)
-  }
+  
+    setLoading(false);
+    setIsAddedPhoto(true);
+  };
 
   // Если есть ошибка и нет перенаправления, показываем страницу ошибки
   if (error && !isReroute) {
@@ -111,7 +122,7 @@ useEffect(() => {
               </div>
 
               <Link
-                className="block w-full px-4 py-3 text-xl font-medium bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                className="block w-full px-4 py-3 text-xl font-medium  bg-button-base hover:bg-button-base/15 text-button-base rounded-lg transition-colors"
                 href="/period"
                 onClick={() => setIsReroute(true)}
               >
@@ -130,6 +141,7 @@ useEffect(() => {
                     <h2 className="text-2xl font-extrabold text-blue-600 mt-1">
                       {props.todoItems[props.todoItems.length - 1].question}
                     </h2>
+                    <p className="text-gray-500 mt-2"> Вы ответили правильно на <b>{ correct} </b></p>
                   </>
                 )}
               </div>

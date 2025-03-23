@@ -7,6 +7,10 @@ export interface ITelegramUser {
     username: string;
     language_code: string;
 }
+export type answer = {
+  answer:string,
+  isCorrect:boolean
+}
   export interface IWebApp extends Window {
     initData: string;
     initDataUnsafe: {

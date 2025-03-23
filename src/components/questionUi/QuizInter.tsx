@@ -21,12 +21,15 @@ interface QuizQuestion {
 interface QuizProps {
   quizData: quiztype[] 
 }
-
+type answer = {
+  answer:string,
+  isCorrect:boolean
+}
 // Компонент квеста
 export default function QuizInterface(props: QuizProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
-  const [userAnswers, setUserAnswers] = useState<string[]>([])
+  const [userAnswers, setUserAnswers] = useState<answer[] | null>([])
   const [rebusAnswer, setRebusAnswer] = useState("")
   const [showResult, setShowResult] = useState(false)
   const [todoItems, setTodoItems] = useState<QuizQuestion[]>([])
@@ -69,14 +72,19 @@ useEffect(() => {
     return
   }
 },[])
+const normalizeAnswer = (answer: string) => answer.toLowerCase().trim()
+
   // Обработка клика по ответу
   const handleAnswerClick = (answer: string) => {
-    const newUserAnswers = [...userAnswers]
-    newUserAnswers[currentQuestion] = answer
+    const answerObj = {
+      answer: answer,
+      isCorrect: normalizeAnswer(answer) === normalizeAnswer(props.quizData[currentQuestion].answer),
+    }
+    const newUserAnswers = [...(userAnswers || [])]
+    newUserAnswers[currentQuestion] = answerObj
     setUserAnswers(newUserAnswers)
-
     setAnswers([...answers, answer])
-
+console.log(answerObj,props.quizData[currentQuestion].answer)
     const currentQuizItem = props.quizData[currentQuestion]
     if ('todo' in currentQuizItem && currentQuizItem.todo) {
       setTodoItems([...todoItems, currentQuizItem as unknown as QuizQuestion])
@@ -92,8 +100,7 @@ useEffect(() => {
       setShowResult(true)
       alert('end')
     }
-  }
-  // Переход к следующему вопросу для todo-типа вопросов
+  }  // Переход к следующему вопросу для todo-типа вопросов
   const handleNextQuestion = () => {
     const currentItem = props.quizData[currentQuestion]
     if ('todo' in currentItem && currentItem.todo) {
@@ -104,10 +111,11 @@ useEffect(() => {
       setCurrentQuestion(currentQuestion + 1)
     } else {
       setShowResult(true)
+      console.log(userAnswers)
     }
   }
 if (showResult) {
-    return <Result quizData={props.quizData} userAnswers={userAnswers} todoItems={todoItems} answers={answers} />
+    return <Result quizData={props.quizData} userAnswers={userAnswers} todoItems={todoItems} answers={answers} location={props.quizData[currentQuestion].location.id} />
   }
 
   const currentQuizItem = props.quizData[currentQuestion] as unknown as quiztype

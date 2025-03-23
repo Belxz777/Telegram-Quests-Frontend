@@ -124,9 +124,6 @@ backButton.on('click', () =>{
     e.preventDefault()
     // Here you would typically send the data to your backend
     alert("Form submitted with data:\n" + JSON.stringify(formData, null, 2))
- 
-
-    // You can add your API call here
   }
 
   return (

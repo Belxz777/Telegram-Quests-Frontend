@@ -43,23 +43,17 @@ return response
     
 //     return response
 //     }
-    async function  addImage(name:string,image: File,location:number,result:string,answers:string[]): Promise<any> {
-      console.log(image.size)
-      const formData = new FormData();
-      formData.append('file', image); 
-      formData.append('location', location.toString());
-    formData.append('result', result);
-      formData.append('answers',answers.join(','));
-        const res = await fetch(`${url}teams/uploadPhotoUrls/${name}`, {
-        method: 'POST',
-        body: formData
-        });
-        if (res.status !== 201) {
-        return 
-        }
+async function addImage(name: string, formData: FormData): Promise<any> {
+  const res = await fetch(`${url}teams/uploadPhotoUrls/${name}`, {
+    method: 'POST',
+    body: formData, // Передаем FormData напрямую
+  });
 
-        const response= await res.json();
-        
-        return response
-      }
+  if (res.status !== 201) {
+    return null;
+  }
+
+  const response = await res.json();
+  return response;
+}
 export  { createTeam,addImage }

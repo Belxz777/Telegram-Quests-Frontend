@@ -6,6 +6,7 @@ import usePrevious from "@/server/prev";
 import Reroute from "@/components/Reroute";
 import { useBackButton } from "@tma.js/sdk-react";
 import { getLocationByLatLon } from "@/server/getAllQuests";
+import { url } from "../types";
 export default function Scaner() {
   type ScanResult = {
     text: string;
@@ -24,7 +25,10 @@ export default function Scaner() {
     let timeoutId: NodeJS.Timeout;
     if (!isResultChecked && result && !data) {
       setIsResultChecked(true); 
+      alert(result.text);
       const coordinatesArray = result.text.split(',').map(coord => parseFloat(coord).toFixed(6));
+      alert(coordinatesArray[0]);
+      alert(coordinatesArray[1])
       if (
         coordinatesArray.length !== 2 ||
         isNaN(parseFloat(coordinatesArray[0])) ||
@@ -34,7 +38,7 @@ export default function Scaner() {
       } else {
         setData(true);
         setcoordinatesArray(coordinatesArray.map(coord => parseFloat(coord)));
-        getLocationIfIS()
+getLocationIfIS();
       }
     }
     if (error) {
@@ -54,25 +58,22 @@ export default function Scaner() {
   backButton.on('click', () =>{
     router.push("/")
   })
-  const getLocationIfIS = async()=>{
-    if (coordinatesArray) {
-      const check = await getLocationByLatLon(coordinatesArray[0], coordinatesArray[1])
-    alert(check.id)
-      if(check.id!==undefined) {
-        alert(check.id)
-              router.push(`/quest/${check.id}`)
-      }
-      alert("checl robot")
-
+  const getLocationIfIS = async () => {
+    if (!coordinatesArray) {
+      console.error('Coordinates are not set');
+      return;
     }
-    else{
-      alert("issue")
-    }
-
-    // onClick={() => coordinatesArray && router.push(`/quest/${coordinatesArray[0]}/${coordinatesArray[1]}`)}
-
+    const lat = coordinatesArray[0];
+    const lon = coordinatesArray[1];
+  const location = await getLocationByLatLon(lat, lon);
+  if (location) {
+    router.push(`/quest/${location.id}`);
+  } else {
+    alert("Location not found");
   }
-  return (
+  router.push(`/quest/1`);
+
+  };  return (
     <div className=" bg-scin-base h-screen w-screen ">
       <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">
         <QrReader
@@ -86,6 +87,7 @@ export default function Scaner() {
             if (!!error) {
               console.info(error);
           }
+          return;
           }}
           scanDelay={300}
           constraints={{ facingMode: "environment" }}

@@ -16,7 +16,7 @@ function Confetti({}: Props) {
     {[...Array(50)].map((_, i) => (
       <div
         key={i}
-        className="absolute w-2 h-2  bg-button-base rounded-lg"
+        className="absolute w-2 h-2  bg-hint-base rounded-lg"
         style={{
           left: `${Math.random() * 100}%`,
           top: '-20px',

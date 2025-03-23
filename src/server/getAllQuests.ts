@@ -34,17 +34,23 @@ async function getAllQuestsByLatLon(id:number): Promise<quiztype[] | quiztype>  
         console.log(receiveddata)
         return receiveddata
     }
-    async function getLocationByLatLon(lat:number,lon:number): Promise<LocationData>  {
-        
-
-        const res = await fetch(`${url}location/byCoordinates/${lat}/${lon}`);
-        if (!res.ok) {
-            console.log(res.status)
-                }   
-        const response= await res.json();
-  
-        return response
-    }
+    async function getLocationByLatLon(lat: number, lon: number): Promise<LocationData> {
+        try {
+          const res = await fetch(`https://telegram-quests-backend.onrender.com/location/coords/`,{
+            method: 'POST', 
+            body: JSON.stringify({ lat:lat, lon:lon}),
+          });
+          if (!res.ok) {
+            throw new Error(`Server returned ${res.status}: ${res.statusText}`);
+          }
+          console.log(res)
+          const resp = await res.json();
+          return resp;
+        } catch (error) {
+          console.error('Error fetching location:', error);
+          throw error;
+        }
+      }
     async function getNextLocation(quizId:number): Promise<quiztype>  {
 
         const res = await fetch(`${url}quests/byId/${quizId}`);
