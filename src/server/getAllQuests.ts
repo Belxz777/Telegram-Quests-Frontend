@@ -24,7 +24,7 @@ async function getAllLocations(): Promise<LocationData | LocationData[]>  {
     return receiveddata
 }
 async function getAllQuestsByLatLon(id:number): Promise<quiztype[] | quiztype>  {
-
+console.log(id)
         const res = await fetch(`${url}quests/byLocation/${id}`);
         if (!res.ok) {
             console.log(res.status)
@@ -36,9 +36,11 @@ async function getAllQuestsByLatLon(id:number): Promise<quiztype[] | quiztype>  
     }
     async function getLocationByLatLon(lat: number, lon: number): Promise<LocationData> {
         try {
-          const res = await fetch(`https://telegram-quests-backend.onrender.com/location/coords/`,{
-            method: 'POST', 
-            body: JSON.stringify({ lat:lat, lon:lon}),
+          const res = await fetch(`${url}location/coords/${lat}/${lon}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
           });
           if (!res.ok) {
             throw new Error(`Server returned ${res.status}: ${res.statusText}`);

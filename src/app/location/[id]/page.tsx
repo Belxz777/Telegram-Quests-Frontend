@@ -37,7 +37,7 @@ useEffect(() => {
 const fetchData = async () => {
 setloading(true)
 if(!params.id) return
-
+alert(params.id)
 const data = await getAllQuestsByLatLon(params.id)
 
 if(!data) return

@@ -27,8 +27,6 @@ export default function Scaner() {
       setIsResultChecked(true); 
       alert(result.text);
       const coordinatesArray = result.text.split(',').map(coord => parseFloat(coord).toFixed(6));
-      alert(coordinatesArray[0]);
-      alert(coordinatesArray[1])
       if (
         coordinatesArray.length !== 2 ||
         isNaN(parseFloat(coordinatesArray[0])) ||
@@ -37,9 +35,7 @@ export default function Scaner() {
         setData(false);
       } else {
         setData(true);
-        setcoordinatesArray(coordinatesArray.map(coord => parseFloat(coord)));
-getLocationIfIS();
-      }
+        setcoordinatesArray(coordinatesArray.map(coord => parseFloat(coord)));      }
     }
     if (error) {
       console.log(error);
@@ -67,12 +63,8 @@ getLocationIfIS();
     const lon = coordinatesArray[1];
   const location = await getLocationByLatLon(lat, lon);
   if (location) {
-    router.push(`/quest/${location.id}`);
-  } else {
-    alert("Location not found");
+    router.push(`/location/${location.id}`);
   }
-  router.push(`/quest/1`);
-
   };  return (
     <div className=" bg-scin-base h-screen w-screen ">
       <div className=" rounded-xl  border-4 border-base mt-5 w-screen ">
