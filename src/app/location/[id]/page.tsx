@@ -2,11 +2,12 @@
 import React,{useEffect, useState} from 'react'
 import {Variants} from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { getAllQuestsByLatLon, getLocationByLatLon } from '@/server/getAllQuests'
+import { getAllQuestsFromLocation } from '@/server/getAllQuests'
 import Quiz from '@/components/Quiz'
 import { useBackButton } from '@tma.js/sdk-react'
 import Loading from '@/components/Loading'
 import { quiztype } from '@/app/types/Main'
+import ErrorPage from '@/components/errorMessage/error'
 interface Props  {
     params:{id:number}
 }
@@ -21,7 +22,7 @@ const itemVariants: Variants = {
 };
 
 function Quest({ params }: Props) {
-const [quizData, setQuizData] = useState<quiztype[] | quiztype | null>(null)
+const [quizData, setQuizData] = useState<quiztype[] | quiztype>({} as quiztype)
 //http://localhost:4000/Quests/46.147.176.2
 const backButton = useBackButton()
 const router = useRouter()
@@ -29,37 +30,39 @@ backButton.show()
 backButton.on('click', () =>{
   router.back()
 })
-const [loading, setloading] = useState(false)
-
+const [loading, setloading] = useState(true)
+const [isEmpty, setIsEmpty] = useState(true)
 
 
 useEffect(() => {
 const fetchData = async () => {
 setloading(true)
 if(!params.id) return
-alert(params.id)
-const data = await getAllQuestsByLatLon(params.id)
+
+const data = await getAllQuestsFromLocation(params.id)
 
 if(!data) return
-
-setQuizData(data);
-setloading(false)
+if (Array.isArray(data) && data.length > 0) {
+  setloading(false)
+  setIsEmpty(false)
+  setQuizData(data)
+  alert(data)
+  return
+}
+else{
+  setloading(false)
+  setIsEmpty(true)
+}
 }
 fetchData()
 }, [])
 return (
 <>
-{quizData && !loading ? (
-  <Quiz quizData={quizData}  />
-) : (
-  loading ? (
-    <Loading text="Загрузка данных подождите..." />
-  ) : (
-    <h1 className='text-3xl'>Ошибка при загрузке</h1>
-  )
-)}
+{
+  loading ? <Loading text={''}/> :
+  !isEmpty ? <Quiz quizData={quizData}/> : <ErrorPage linkHref='' linkText='Перезагрузить ' errorMessage={'Произошла ошибка при загрузке информации о заданиях. Попробуйте еще раз или ообратитеaсь к организатору. ' } />
+}
 </>
 );
 }
-
 export default Quest

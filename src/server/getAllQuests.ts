@@ -23,7 +23,7 @@ async function getAllLocations(): Promise<LocationData | LocationData[]>  {
     console.log(receiveddata)
     return receiveddata
 }
-async function getAllQuestsByLatLon(id:number): Promise<quiztype[] | quiztype>  {
+async function getAllQuestsFromLocation(id:number): Promise<quiztype[] | quiztype>  {
 console.log(id)
         const res = await fetch(`${url}quests/byLocation/${id}`);
         if (!res.ok) {
@@ -88,4 +88,4 @@ console.log(id)
     const receiveddata = await res.json();
     return receiveddata
     }
-export { getAllQuests,getAllQuestsByLatLon,getNextLocation,getTeamLocations,createNewQuest, getLocationByLatLon,getAllLocations};
+export { getAllQuests,getAllQuestsFromLocation,getNextLocation,getTeamLocations,createNewQuest, getLocationByLatLon,getAllLocations};

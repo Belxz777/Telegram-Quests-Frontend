@@ -1,4 +1,4 @@
-export let url = process.env.BACKEND_URL || "https://telegram-quests-backend.onrender.com/"
+export let url = process.env.BACKEND_URL || "http://localhost:8000/"
 console.log(url)
 export interface ITelegramUser {
     id: number;

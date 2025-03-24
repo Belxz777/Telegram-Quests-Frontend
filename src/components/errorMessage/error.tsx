@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Reroute from '../Reroute'
 
 interface ErrorPageProps {
   errorMessage: string
@@ -11,6 +12,10 @@ interface ErrorPageProps {
 }
 
 const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage, linkText, linkHref }) => {
+  const [reroute, setReroute] = React.useState(false)
+  if(reroute) {
+    return <Reroute  text='Переход   . . .'/>
+  }
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
       <motion.div
@@ -56,7 +61,9 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage, linkText, linkHref 
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
-        <Link href={linkHref} className="  bg-hint-base hover:bg-button-base text-white font-bold py-4 px-8 text-2xl rounded transition duration-300">
+        <Link href={linkHref}
+        onClick={() => setReroute(true)}
+         className="  bg-hint-base hover:bg-button-base text-white font-bold py-4 px-8 text-2xl rounded transition duration-300">
      {linkText}
         </Link>
       </motion.div>

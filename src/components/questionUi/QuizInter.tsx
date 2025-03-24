@@ -125,11 +125,11 @@ if (showResult) {
       {/* Заголовок квеста */}
       <div className="bg-hint-base  text-button-base p-4 text-center">
         <h1 className="text-2xl font-bold">Локация:</h1>
-        <p className="text-xl ">{currentQuizItem.location.name.toString()}</p>
+        <p className="text-xl ">{currentQuizItem?.location?.name.toString()}</p>
       </div>
 
       <div className="p-4">
-        {currentQuizItem.rebus ? (
+        {currentQuizItem?.rebus ? (
           <RebusQuestion
             question={currentQuizItem.question}
             image={currentQuizItem.image}
@@ -174,7 +174,7 @@ function VariantsQuestion({
 }) {
   return (
     <div className="flex flex-col items-center">
-      {currentQuizItem.todo ? (
+      {currentQuizItem?.todo ? (
         <>
           <div className="text-center mb-4">
             <h2 className="text-2xl font-bold text-hint-base">{getRandomEncouragingPhrase()}</h2>
@@ -194,7 +194,7 @@ function VariantsQuestion({
             onClick={() => setIsOpen(!isOpen)}
             className="bg-button-base text-button-base  font-bold py-3 px-6 rounded-lg text-xl mb-4 w-full text-center"
           >
-            {currentQuizItem.question}
+            {currentQuizItem?.question}
           </motion.button>
 
           <AnimatePresence>

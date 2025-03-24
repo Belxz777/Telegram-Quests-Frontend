@@ -107,6 +107,7 @@
 "use client"
 
 import Loading from "@/components/Loading"
+import Reroute from "@/components/Reroute"
 import { createTeam } from "@/server/teamManage"
 import { useBackButton } from "@tma.js/sdk-react"
 import { useRouter } from "next/navigation"
@@ -130,6 +131,7 @@ backButton.on('click', () =>{
 
 
   const [error, seterror] = useState("")
+  const [reroute, setreroute] = useState(false)
 //   const [loading, setloading] = useState(false)
 //   const [reroute, setreroute] = useState(false)
 //   const [isExpanded, setisExpanded] = useState(false)
@@ -167,12 +169,15 @@ localStorage.setItem("time",  new Date().getTime().toString())
   }
 
   const handleImAtLocation = () => {
+    setreroute(true)
     // Here you would typically send a location confirmation to your backend
 router.push("/qrscanner")
     // Additional logic for when a team arrives at the location
     // For example, you might want to navigate to the first quest
   }
-
+if(reroute){
+  return  <Reroute text="Переход  . . ."/>
+}
   return (
     <div className="min-h-screen   flex flex-col">
 
@@ -186,7 +191,7 @@ router.push("/qrscanner")
       <main className="flex-1 container mx-auto max-w-md p-4 bg-scin-base">
         {!isTeamCreated ? (
           <section className=" rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-6 text-center text-scin-base">Создание команды</h2>
+            <h2 className="text-xl font-bold mb-6 text-center  text-link-base">Создание команды</h2>
 
             <form onSubmit={handleCreateTeam}>
               <div className="space-y-4">
