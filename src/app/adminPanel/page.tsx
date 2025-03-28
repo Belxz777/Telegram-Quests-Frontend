@@ -26,24 +26,22 @@ backButton.on('click', () =>{
   return (
 <main key="1" className="flex min-h-screen  overflow-hidden   min-w-full flex-col bg-scin-base">
 
-<header className="flex items-center justify-between min-w-full    bg-scin-base px-6 py-4 shadow ">
+<header className="flex items-center justify-between min-w-full   select-none  bg-scin-base px-6 py-4 shadow ">
   <div className="flex items-center gap-4">
     <h1 className="text-xl font-bold text-link-base">Прогресс команд</h1>
-    <Link href={"/createQuests"} prefetch={false} onClick={()=>{
+    {/* <Link href={"/createQuests"} prefetch={false} onClick={()=>{
   }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
     <span>Создать</span>
-    </Link>
+    </Link> */}
   
     <Link href={" /location"} prefetch={false} onClick={()=>{
-  }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
+  }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-button-base rounded-xl font-medium transition-colors" >
     <span>Карта</span>
     </Link>
   </div>
 </header>
 
-<section className="flex-1 p-6">
-  <h1>ПУТЬ БЕКА {url}</h1>
-  {/* Отображение команды, если данные загружены */}
+<section className="flex-1 p-6">  {/* Отображение команды, если данные загружены */}
   {isLoading ? (
     <Loading text="Загрузка данных" />
   ) : Array.isArray(teamData) && teamData?.length > 0 ? (

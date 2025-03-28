@@ -151,14 +151,15 @@ backButton.on('click', () =>{
       // Here you would typically send the team name to your backend
       const response  = await createTeam(teamName)
       console.log(response)
-if(!response){
+if(!response || response == 'issue'){
   setLoading(false)
-  alert(`Извините ,возникла ошибка, возможно имя команды уже занято`)
+  alert(`Извините , возникла ошибка, возможно имя команды уже занято`)
 setTeamName("")
 return
 }
 setLoading(false)
 localStorage.setItem("team", response.name)
+alert(`Команда ${localStorage.getItem("team")} создана`)
 localStorage.setItem("time",  new Date().getTime().toString())
 
       // Store the created team name and update state

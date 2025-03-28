@@ -40,13 +40,22 @@ console.log(id)
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
+              'Accept': 'application/json'
             },
+            cache: 'no-store'
           });
+          
           if (!res.ok) {
-            throw new Error(`Server returned ${res.status}: ${res.statusText}`);
+            const errorText = await res.text();
+            throw new Error(`Server returned ${res.status}: ${errorText}`);
           }
-          console.log(res)
-          const resp = await res.json();
+          
+          const text = await res.text();
+          if (!text) {
+            throw new Error('Empty response received');
+          }
+          console.log(res.status)
+          const resp = JSON.parse(text);
           return resp;
         } catch (error) {
           console.error('Error fetching location:', error);

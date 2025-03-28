@@ -64,14 +64,13 @@ const [isLoading , setIsLoading] = useState(true)
       setisTeam(false)
       setlanding(false)
       setIsLoading(false)
-          return
+      return
     }
     fetchData(teamName)
   }, [])
   const fetchData = async (name:string) => {
     try {
         const data = await getTeamDataByName(name);
-
         if (data === null) {
             setteam(null);
             setlanding(false)
@@ -86,7 +85,12 @@ const [isLoading , setIsLoading] = useState(true)
     } catch (error) {
       seterror(true)
       setlanding(false)
-        console.log(error);
+      setTimeout(()=>{
+        seterror(false)
+    setisTeam(false)
+      }
+      , 7000)
+      
     }
 };
   return (
@@ -107,105 +111,111 @@ const [isLoading , setIsLoading] = useState(true)
   {
       reroute && <Reroute text="Переход  . . ."/>
     }
-    <div className=" h-screen">
-    <header className="bg-scin-base shadow-sm p-4 top-0 w-full z-10  h-1/5 mb-10">
-        <nav className="max-w-screen-sm mx-auto flex justify-between gap-4">
-          <Link
-            href="/qrscanner"
-            onClick={() => {
-              if (team) {
-                setreroute(true)
-                setTimeout(() => {
-                  router.push("/qrscanner")
-                }, 1000)
-              }
-            }}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors"
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="7" height="7" />
-              <rect x="14" y="3" width="7" height="7" />
-              <rect x="14" y="14" width="7" height="7" />
-              <rect x="3" y="14" width="7" height="7" />
-            </svg>
-            <span>QR сканер</span>
-          </Link>
-
-          <Link
-            href={team ? "/period" : "/start"}
-            onClick={() => {
-              if (team) {
-                setreroute(true)
-        
-                  setTimeout(() => {
-                    router.push("/period")
-                  }, 1000)
-              }
-                else {
+    {
+      error ?
+      <ErrorPage linkText='Ошибка' linkHref='/' errorMessage='Ошибка при подключении к серверу' />
+      :
+      <div className=" h-screen">
+      <header className="bg-scin-base shadow-sm p-4 top-0 w-full z-10  h-1/5 mb-10">
+          <nav className="max-w-screen-sm mx-auto flex justify-between gap-4">
+            <Link
+              href="/qrscanner"
+              onClick={() => {
+                if (team) {
                   setreroute(true)
                   setTimeout(() => {
-                    router.push("/start")
+                    router.push("/qrscanner")
                   }, 1000)
                 }
-                
-            }}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-button-base text-hint-base rounded-xl font-medium transition-colors"
-          >
-            {team ? (
-              <>
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
-                <span>Продолжить</span>
-              </>
-            ) : (
-              <>
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="8" x2="12" y2="16" />
-                  <line x1="8" y1="12" x2="16" y2="12" />
-                </svg>
-                <span>Начать</span>
-              </>
-            )}
-          </Link>
-        </nav>
-      </header>
-
-      <main className='flex w-screen h-3/5 justify-center items-center flex-col mt-2  '>
-      {team?.name  && <> <h1 className='text-2xl font-bold tracking-tight text-link-base text-center mb-1 mt-2'>Ваша команда: {team?.name}</h1>
-          <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-2'>
-            {(() => {
-            
-              const startTime = localStorage.getItem("time")
-              if (startTime) {
-                const elapsedTime = new Date().getTime() - parseInt(startTime)
-                const seconds = Math.floor(elapsedTime / 1000)
-                const minutes = Math.floor(seconds / 60)
-                const hours = Math.floor(minutes / 60)
-                return `Прошло времени: ${hours}ч ${minutes % 60}м ${seconds % 60}с`
-              }
-              else{
-                localStorage.setItem("time",  new Date().getTime().toString())
-                return "Время  не установлено"
-              }
-            })()}
-          </h2>
-      </>}
-        <Image src={pint} alt=''  
-        onDoubleClick={()=>{
-          let isAdmin = prompt("Введите пароль администратора")
-          if(isAdmin == "ivan"){
-            setreroute(true)
-            setTimeout(() => {
-              router.push("/adminPanel")
-            }, 1000)
-          }
-        }} className=' bg-button-base rounded-full mx-8     size-96   select-none '  loading='lazy' />{/*width={width} height={height}*/}
-        <h1 className='text-center text-xl text-scin-base font-extrabold select-none'>Заводские Игры: Квестбот по городу на велосипедах</h1>
-      </main>
-    </div>
+              }}
+              className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
+              <span>QR сканер</span>
+            </Link>
+  
+            <Link
+              href={team ? "/period" : "/start"}
+              onClick={() => {
+                if (team) {
+                  setreroute(true)
+          
+                    setTimeout(() => {
+                      router.push("/period")
+                    }, 1000)
+                }
+                  else {
+                    setreroute(true)
+                    setTimeout(() => {
+                      router.push("/start")
+                    }, 1000)
+                  }
+                  
+              }}
+              className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-button-base text-hint-base rounded-xl font-medium transition-colors"
+            >
+              {team ? (
+                <>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                  <span>Продолжить</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="16" />
+                    <line x1="8" y1="12" x2="16" y2="12" />
+                  </svg>
+                  <span>Начать</span>
+                </>
+              )}
+            </Link>
+          </nav>
+        </header>
+  
+        <main className='flex w-screen h-3/5 justify-center items-center flex-col mt-2  '>
+        {team?.name  && <> <h1 className='text-2xl font-bold tracking-tight text-link-base text-center mb-1 mt-2'>Ваша команда: {team?.name}</h1>
+            <h2  className='text-2xl font-bold tracking-tight text-link-base text-center mb-2'>
+              {(() => {
+              
+                const startTime = localStorage.getItem("time")
+                if (startTime) {
+                  const elapsedTime = new Date().getTime() - parseInt(startTime)
+                  const seconds = Math.floor(elapsedTime / 1000)
+                  const minutes = Math.floor(seconds / 60)
+                  const hours = Math.floor(minutes / 60)
+                  return `Прошло времени: ${hours}ч ${minutes % 60}м ${seconds % 60}с`
+                }
+                else{
+                  localStorage.setItem("time",  new Date().getTime().toString())
+                  return "Время  не установлено"
+                }
+              })()}
+            </h2>
+        </>}
+          <Image src={pint} alt=''  
+          onDoubleClick={()=>{
+            let isAdmin = prompt("Введите пароль администратора")
+            if(isAdmin == "ivan"){
+              setreroute(true)
+              setTimeout(() => {
+                router.push("/adminPanel")
+              }, 1000)
+            }
+          }} className=' bg-button-base rounded-full mx-8     size-96   select-none '  loading='lazy' />{/*width={width} height={height}*/}
+          <h1 className='text-center text-xl text-scin-base font-extrabold select-none'>Заводские Игры: Квестбот по городу на велосипедах</h1>
+        </main>
+      </div>
+    }
+  
   </>
 }
     </Suspense>

@@ -13,7 +13,7 @@ name: name
 })
 });
 if (!res.ok) {
-throw new Error('Failed to create')
+return "issue"
 }
 
 const response= await res.json();

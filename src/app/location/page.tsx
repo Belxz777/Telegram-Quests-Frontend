@@ -6,6 +6,7 @@ import { getAllLocations, getAllQuests } from '@/server/getAllQuests'
 import { useBackButton } from '@tma.js/sdk-react'
 import { augedInfo, LocationData } from '../types/Main'
 import Reroute from '@/components/Reroute'
+import { url } from '../types'
 type Props = {}
 
   function FullQuestsMap ({}: Props) {
@@ -108,8 +109,8 @@ type Props = {}
                 />
                 <ZoomControl options={{}} />
                 <Button
-                  options={{ maxWidth: 128 }}
-                  data={{ content: "Расширить " }}
+                  options={{ maxWidth: 450 }}
+                  data={{ content: url }}
                   defaultState={{ selected: true }}
                 />
               </Map>

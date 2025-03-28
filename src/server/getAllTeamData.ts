@@ -45,8 +45,10 @@ async function getTeamDataByName(name: string): Promise<Team |  null> {
     message: "Error",
     statusCode: res.status
   })
+  throw new Error('Failed to fetch data')
     }
     const response = await res.json();
+  
     return response
 }
 export { getAllTeams,deleteTeam,getTeamDataByName };

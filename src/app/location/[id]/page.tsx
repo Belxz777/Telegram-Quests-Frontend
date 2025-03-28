@@ -60,7 +60,7 @@ return (
 <>
 {
   loading ? <Loading text={''}/> :
-  !isEmpty ? <Quiz quizData={quizData}/> : <ErrorPage linkHref='' linkText='Перезагрузить ' errorMessage={'Произошла ошибка при загрузке информации о заданиях. Попробуйте еще раз или ообратитеaсь к организатору. ' } />
+  !isEmpty ? <Quiz quizData={quizData}/> : <ErrorPage linkHref='' linkText='Перезагрузить ' errorMessage={`Произошла ошибка при загрузке информации о заданиях. Попробуйте еще раз или обратитеaсь к организатору. | Пусто:${isEmpty} `} />
 }
 </>
 );
