@@ -1,4 +1,14 @@
-export let url = process.env.BACKEND_URL || "http://localhost:8000/"
+export let url:string;
+if (process.env.IS_PRODUCTION=="False") {
+  url = "http://localhost:8000/"
+} else {
+  url = process.env.BACKEND_URL || "http://localhost:8000/"
+}
+
+export type error = {
+  status:number,
+  message:string
+}
 console.log(url)
 export interface ITelegramUser {
     id: number;

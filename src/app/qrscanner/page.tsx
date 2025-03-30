@@ -4,15 +4,14 @@ import { useCallback, useEffect, useState } from "react"
 import { QrReader } from "react-qr-reader"
 import { useRouter } from "next/navigation"
 import { useBackButton } from "@tma.js/sdk-react"
-import { getLocationByLatLon } from "@/server/getAllQuests"
+import Reroute from "@/components/Reroute"
+import { locationCoords } from "@/server/special/location"
 
 export default function Scanner() {
-  type ScanResult = {
-    text: string
-  }
-
   type ScanStatus = "idle" | "success" | "error" | "loading"
-  const [scanStatus, setScanStatus] = useState<ScanStatus>("idle")
+  const [scanStatus, setScanStatus] = useState<ScanStatus >("idle")
+const [reroute, setreroute]  = useState(false)
+ 
   const [coordinates, setCoordinates] = useState<[number, number] | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const router = useRouter()
@@ -38,11 +37,9 @@ export default function Scanner() {
 
   // Process QR code result
   const handleScan = useCallback(
-
     (result: { text: string } | null | undefined, error: Error | null) => {
       // Skip if already processing a result
       if (isProcessing) return
-
 
       if (result?.text) {
         setIsProcessing(true)
@@ -85,22 +82,28 @@ export default function Scanner() {
   // Navigate to location page
   const navigateToLocation = async () => {
     if (!coordinates) return
+    setreroute(true)
 
     try {
       setScanStatus("loading")
       const [lat, lon] = coordinates
-      const location = await getLocationByLatLon(lat, lon)
+      const location = await locationCoords(lat, lon)
+if("status" in location){
+setScanStatus("error")
 
-      if (location) {
-        router.push(`/location/${location.id}`)
-      } else {
-        setScanStatus("error")
-      }
+}
+else{
+  setScanStatus("success")
+  router.push(`/location/${location.id}`)
+
+}
     } catch (error) {
       console.error("Navigation error:", error)
       setScanStatus("error")
-      
     }
+  }
+  if(reroute){
+    return <Reroute text="Переход на страницу локации" />
   }
 
   return (
@@ -108,7 +111,8 @@ export default function Scanner() {
       <div className="w-full max-w-md mx-auto mt-5 rounded-xl border-4 border-base overflow-hidden">
         <QrReader
           constraints={{ facingMode: "environment" }}
-          onResult={handleScan}
+          onResult={
+            (result, error) => handleScan(result?.getText() ? { text: result.getText() } : null, error || null)          }
           scanDelay={300}
           containerStyle={{ width: "100%" }}
           className="rounded-xl"
@@ -118,18 +122,16 @@ export default function Scanner() {
           <div className="p-4 flex flex-col items-center justify-center">
             <h2 className="text-link-base text-2xl text-center">Код отсканирован</h2>
             <h3 className="text-link-base text-2xl text-center">
-              {coordinates[0]}, {coordinates[1]}
+              {coordinates[0]}|{coordinates[1]}
             </h3>
             <button
               className="bg-button-base hover:bg-hint-base text-button-base font-bold py-2 px-4 rounded-full text-xl flex items-center justify-center mt-4"
               onClick={navigateToLocation}
-              disabled={scanStatus === "loading"}
             >
-              {scanStatus === "loading" ? "Загрузка..." : "Перейти"}
+               Перейти
             </button>
           </div>
         )}
-
         {scanStatus === "error" && <h2 className="text-red-500 text-center p-4">Ошибка сканирования</h2>}
       </div>
 

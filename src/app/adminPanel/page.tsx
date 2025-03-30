@@ -1,16 +1,13 @@
 "use client"
 import { useTeamData } from '@/hooks/useTeamData'
 import React from 'react'
-import { deleteTeam } from '@/server/getAllTeamData'
 import Link from 'next/link'
 import Loading from '@/components/Loading'
-import { CgAdd } from "react-icons/cg"
-import { CgAttachment } from "react-icons/cg";
-
 import { useBackButton } from '@tma.js/sdk-react'
 import { useRouter } from 'next/navigation'
 import { Team } from '../types/Main'
 import { url } from '../types'
+import { deleteTeam } from '@/server/team/delete'
 type Props = {}
 
 function AdminPanel({}: Props) {
@@ -30,7 +27,7 @@ backButton.on('click', () =>{
   <div className="flex items-center gap-4">
     <h1 className="text-xl font-bold text-link-base">Прогресс команд</h1>
     {/* <Link href={"/createQuests"} prefetch={false} onClick={()=>{
-  }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-hint-base rounded-xl font-medium transition-colors" >
+  }}    className="flex-1 flex items-center justify-center gap-2 py-3 px-4  bg-button-base text-link-base rounded-xl font-medium transition-colors" >
     <span>Создать</span>
     </Link> */}
   
@@ -54,7 +51,7 @@ backButton.on('click', () =>{
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center rounded-md bg-scin-base">
-                <h3 className="text-lg font-medium  text-hint-base">
+                <h3 className="text-lg font-medium  text-link-base">
                   Команда:{" "}
                   <span className="text-xl font-extrabold">{team.name}</span>
                 </h3>
@@ -70,6 +67,7 @@ backButton.on('click', () =>{
                       deleteTeam(team.id);
                       alert("Команда удалена");
                       fetchData();
+                      router.refresh()
                      }
   
 
@@ -98,7 +96,7 @@ backButton.on('click', () =>{
                   Правильно выполнено {team.results[index]}
                 </p>
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
-                  {team.solved[index]}
+                  {team.solved[index] && `Локация № ${team.solved[index]}`}
                 </div>
               </div>
             ))}

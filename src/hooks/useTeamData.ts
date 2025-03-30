@@ -1,5 +1,5 @@
 import { Team } from "@/app/types/Main";
-import { getAllTeams } from "@/server/getAllTeamData";
+import { allTeams } from "@/server/admin/allteams";
 import { useEffect, useState } from "react";
 
 export const useTeamData = () =>{
@@ -12,19 +12,19 @@ fetchData()
 },[])
     const fetchData = async () => {
         try {
-            const data = await getAllTeams();
+            const data = await allTeams();
             if(!data){
                 setIsLoading(false);
                 setIsNotFound(true);
                 return;
             }
-            setTeamData(data);
+            setTeamData(data as Team | Team[]);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
-    };
-    if(isNotFound){
+    };    if(isNotFound){
         setIsLoading(false);
     }
     return {teamData,fetchData,isLoading,isNotFound,isAdmin}

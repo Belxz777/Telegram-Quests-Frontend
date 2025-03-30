@@ -2,11 +2,11 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { YMaps, Map,Placemark,Panorama, Clusterer, Button,GeolocationControl,ZoomControl} from '@pbe/react-yandex-maps/'
 import { useRouter } from 'next/navigation'
-import { getAllLocations, getAllQuests } from '@/server/getAllQuests'
 import { useBackButton } from '@tma.js/sdk-react'
 import { augedInfo, LocationData } from '../types/Main'
 import Reroute from '@/components/Reroute'
 import { url } from '../types'
+import { locationsAll } from '@/server/admin/allLocations'
 type Props = {}
 
   function FullQuestsMap ({}: Props) {
@@ -35,21 +35,16 @@ type Props = {}
     const width = window.innerWidth
     const [reroute, setreroute] = useState(false)
     useEffect(() => {
-      /**
-      * Fetches all quest data and updates the location state.
-      * 
-      * This function is responsible for retrieving all the quest data from the backend and updating the location state with the fetched data. If there is an error during the fetch, it will throw an error.
-      */
       const fetchData = async () => {
-        const locations = await getAllLocations()
-        if (locations ){
-          if(Array.isArray(locations)){
-               setlocation(locations);
-          }
-       
-        } else  {
-          throw new Error('No quests found');
-        }
+        const locations = await locationsAll()
+   if ("status" in locations) {
+    throw new Error(locations.message)
+   }
+   else {
+    if(Array.isArray(locations)){
+      setlocation(locations);
+ }
+   }
       }
       fetchData()
     }, [])

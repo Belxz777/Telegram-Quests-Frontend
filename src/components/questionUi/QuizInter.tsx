@@ -129,8 +129,7 @@ if (showResult) {
       </div>
 
       <div className="p-4">
-        {currentQuizItem?.rebus ? (
-          <RebusQuestion
+        {currentQuizItem?.rebus || (currentQuizItem.image && currentQuizItem.image.length >= 3) ? (          <RebusQuestion
             question={currentQuizItem.question}
             image={currentQuizItem.image}
             rebusAnswer={rebusAnswer}

@@ -1,6 +1,5 @@
 "use client"
 
-import { addImage } from "@/server/teamManage"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -8,6 +7,7 @@ import Confetti from "./Confetti"
 import ErrorPage from "./errorMessage/error"
 import Reroute from "./Reroute"
 import { answer } from "@/app/types"
+import { sendResults } from "@/server/results"
 
 type Props = {
   quizData: any[]
@@ -72,7 +72,7 @@ useEffect(() => {
     formData.append('answers', props.answers.join(','));
   
     // Вызываем серверную функцию и передаем FormData
-    const response = await addImage(teamName, formData);
+    const response = await sendResults(teamName, formData);
   
     if (!response) {
       setLoading(false);
@@ -98,7 +98,7 @@ useEffect(() => {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-[100dvh] bg-scin-base px-4 md:px-6">
-      <div className="max-w-md w-full space-y-6 bg-white rounded-lg shadow-lg p-6">
+      <div className="max-w-md w-full space-y-6 rounded-lg shadow-lg p-6">
         {isReroute && <Reroute text="Переход..." />}
 
         <div className="text-center space-y-4">
@@ -106,9 +106,9 @@ useEffect(() => {
           {loading && (
             <div className="flex items-center justify-center py-8">
               <div className="flex space-x-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce"></div>
+                <div className="w-3 h-3 bg-button-base rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="w-3 h-3 bg-button-base  rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="w-3 h-3 bg-button-base  rounded-full animate-bounce"></div>
               </div>
             </div>
           )}
@@ -118,7 +118,6 @@ useEffect(() => {
             <>
               <div className="bg-green-100 text-green-800 p-4 rounded-lg mb-4">
                 <h1 className="text-3xl font-bold tracking-tight">Задание успешно выполнено!</h1>
-                <p className="text-4xl font-extrabold mt-2">Правильных ответов: {correct}</p>
               </div>
 
               <Link
@@ -137,24 +136,23 @@ useEffect(() => {
               <div>
                 {props.todoItems.length > 0 && props.todoItems[props.todoItems.length - 1]?.question && (
                   <>
-                    <h1 className="text-xl font-bold text-gray-700">Последнее задание:</h1>
-                    <h2 className="text-2xl font-extrabold text-blue-600 mt-1">
+                    <h1 className="text-xl font-bold text-link-base">Последнее задание:</h1>
+                    <h2 className="text-2xl font-extrabold text-link-base mt-1">
                       {props.todoItems[props.todoItems.length - 1].question}
                     </h2>
-                    <p className="text-gray-500 mt-2"> Вы ответили правильно на <b>{ correct} </b></p>
                   </>
                 )}
               </div>
 
               {/* Область загрузки фото */}
               <div className="mt-4">
-                <div className="flex justify-center flex-col w-full h-[400px] border-2 border-gray-300 border-dashed rounded-lg overflow-hidden">
+                <div className="flex justify-center flex-col w-full h-[400px] border-2  border-base border-dashed rounded-lg overflow-hidden">
                   {!photoUrl ? (
                     <div className="flex flex-col items-center justify-center h-full">
                       <svg
-                        className="w-12 h-12 text-gray-400 mb-3"
+                        className="w-12 h-12 text-hint-base mb-3 "
                         fill="none"
-                        stroke="currentColor"
+                        stroke={"currentColor"}
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -167,7 +165,7 @@ useEffect(() => {
                       </svg>
                       <p className="text-gray-600 mb-2">Загрузите фотографию выполненного задания</p>
                       <label
-                        className="cursor-pointer px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                        className="cursor-pointer px-4 py-2  bg-button-base rounded-lg text-button-base transition-colors"
                         htmlFor="file"
                       >
                         Выбрать файл
@@ -207,7 +205,7 @@ useEffect(() => {
 
               {/* Кнопка отправки */}
               <button
-                className="w-full px-4 py-3 text-xl font-medium bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 text-xl font-medium bg-button-base text-button-base rounded-lg transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
                 onClick={() => sendPhoto()}
                 disabled={!photoUrl}
               >
@@ -216,7 +214,7 @@ useEffect(() => {
 
               {/* Результаты квиза */}
               <div className="mt-6 border-t pt-4">
-                <h3 className="text-xl font-bold text-gray-700 mb-3">Ваши ответы:</h3>
+                <h3 className="text-xl font-bold text-link-base mb-3">Ваши ответы:</h3>
                 <ul className="space-y-2">
                   {props.answers.map((answer, index) => (
                     <li key={index} className="bg-gray-100 p-3 rounded-lg text-left">

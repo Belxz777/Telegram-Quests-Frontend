@@ -2,12 +2,12 @@
 import React,{useEffect, useState} from 'react'
 import {Variants} from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { getAllQuestsFromLocation } from '@/server/getAllQuests'
 import Quiz from '@/components/Quiz'
 import { useBackButton } from '@tma.js/sdk-react'
 import Loading from '@/components/Loading'
 import { quiztype } from '@/app/types/Main'
 import ErrorPage from '@/components/errorMessage/error'
+import { locationQuests } from '@/server/special/questsfromloc'
 interface Props  {
     params:{id:number}
 }
@@ -38,15 +38,13 @@ useEffect(() => {
 const fetchData = async () => {
 setloading(true)
 if(!params.id) return
-
-const data = await getAllQuestsFromLocation(params.id)
+const data = await locationQuests(params.id)
 
 if(!data) return
 if (Array.isArray(data) && data.length > 0) {
   setloading(false)
   setIsEmpty(false)
   setQuizData(data)
-  alert(data)
   return
 }
 else{

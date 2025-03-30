@@ -2,11 +2,11 @@
  import React, { useEffect, useRef, useState } from 'react'
  import { Button, Placemark, YMaps, ZoomControl, Map } from '@pbe/react-yandex-maps'
 import { useBackButton, useCloudStorage } from '@tma.js/sdk-react'
-import { getNextLocation, getTeamLocations } from '@/server/getAllQuests'
 import Loading from '@/components/Loading'
 import { useRouter } from 'next/navigation'
 import Reroute from '@/components/Reroute'
 import ErrorPage from '@/components/errorMessage/error'
+import { teamLocations } from '@/server/team/locations'
  type Props = {}
  
 const Periodic = (props: Props) => {
@@ -27,10 +27,15 @@ backButton.on('click', () =>{
     const setCurrentQuiz = async () => {
       setloading(true)
       const name = localStorage.getItem("team") || ''
-      const response = await getTeamLocations(name)
-      if (!response) {
+      const response = await teamLocations(name)
+      if ('status' in response) {
         seterror(true)
+        alert(`Возникла ошибка ${response.status} `)
+setTimeout(()=>{
+  router.push("/")
+},5000)
       }
+  
       setnextData(response)
       setloading(false)
     }

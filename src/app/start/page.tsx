@@ -108,7 +108,7 @@
 
 import Loading from "@/components/Loading"
 import Reroute from "@/components/Reroute"
-import { createTeam } from "@/server/teamManage"
+import { createTeam } from "@/server/team/create"
 import { useBackButton } from "@tma.js/sdk-react"
 import { useRouter } from "next/navigation"
 import type React from "react"
@@ -151,9 +151,9 @@ backButton.on('click', () =>{
       // Here you would typically send the team name to your backend
       const response  = await createTeam(teamName)
       console.log(response)
-if(!response || response == 'issue'){
+if('status' in response) {
   setLoading(false)
-  alert(`Извините , возникла ошибка, возможно имя команды уже занято`)
+  alert(`Извините , возникла ошибка, возможно имя команды уже занято | статус ${response.status}`)
 setTeamName("")
 return
 }
@@ -161,8 +161,7 @@ setLoading(false)
 localStorage.setItem("team", response.name)
 alert(`Команда ${localStorage.getItem("team")} создана`)
 localStorage.setItem("time",  new Date().getTime().toString())
-
-      // Store the created team name and update state
+  // Store the created team name and update state
       setCreatedTeamName(teamName)
       setIsTeamCreated(true)
       setTeamName("")

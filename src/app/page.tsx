@@ -9,11 +9,11 @@ import { ClosingBehavior, postEvent } from '@tma.js/sdk';
 import Link from 'next/link';
 import Reroute from '@/components/Reroute';
 import { GoArrowUpRight } from 'react-icons/go';
-import { getTeamDataByName } from '@/server/getAllTeamData';
 import { Team } from './types/Main';
 import Landing from '@/components/Landing';
 import React from 'react';
 import ErrorPage from '@/components/errorMessage/error';
+import { findTeam } from '@/server/team/find';
 
 export default function General() {
 const initData = useInitData()
@@ -70,20 +70,25 @@ const [isLoading , setIsLoading] = useState(true)
   }, [])
   const fetchData = async (name:string) => {
     try {
-        const data = await getTeamDataByName(name);
-        if (data === null) {
-            setteam(null);
-            setlanding(false)
-        } else if ('statusCode' in data) {
-            setisTeam(false);
-            setlanding(false)
-        } else {
-            setteam(data);
-            setisTeam(true);
-            setlanding(false)
-        }
+      const data = await findTeam(name);
+      if('status' in data){
+        setisTeam(false)
+        alert(
+        'Извините, команда не найдена'
+        )
+        setIsLoading(false)
+        setlanding(false)
+        return
+      }
+      else{
+        setteam(data)
+        setisTeam(true)
+        setIsLoading(false)
+        setlanding(false)
+      }
     } catch (error) {
       seterror(true)
+      alert(error )
       setlanding(false)
       setTimeout(()=>{
         seterror(false)
