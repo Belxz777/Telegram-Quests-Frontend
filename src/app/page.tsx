@@ -72,10 +72,8 @@ const [isLoading , setIsLoading] = useState(true)
     try {
       const data = await findTeam(name);
       if('status' in data){
+    
         setisTeam(false)
-        alert(
-        'Извините, команда не найдена'
-        )
         setIsLoading(false)
         setlanding(false)
         return
