@@ -159,7 +159,6 @@ return
 }
 setLoading(false)
 localStorage.setItem("team", response.name)
-alert(`Команда ${localStorage.getItem("team")} создана`)
 localStorage.setItem("time",  new Date().getTime().toString())
   // Store the created team name and update state
       setCreatedTeamName(teamName)
