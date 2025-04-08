@@ -214,7 +214,7 @@ const [isLoading , setIsLoading] = useState(true)
               }, 1000)
             }
           }} className=' bg-button-base rounded-full mx-8     size-96   select-none '  loading='lazy' />{/*width={width} height={height}*/}
-          <h1 className='text-center text-xl text-scin-base font-extrabold select-none'>Заводские Игры: Квестбот по городу на велосипедах</h1>
+          <h1 className='text-center text-xl text-scin-base font-extrabold select-none'>Заводские Игры: Квестбот по городу на велосипедах к 80 летию победы</h1>
         </main>
       </div>
     }
