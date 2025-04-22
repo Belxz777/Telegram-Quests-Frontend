@@ -158,9 +158,7 @@ setTeamName("")
 return
 }
 setLoading(false)
-
 localStorage.setItem("team", response.name)
-
 localStorage.setItem("time",  new Date().getTime().toString())
   // Store the created team name and update state
       setCreatedTeamName(teamName)

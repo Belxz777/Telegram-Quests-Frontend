@@ -66,20 +66,18 @@ setTimeout(()=>{
               <Map defaultState={{ center: [56.8496, 53.2052], zoom: 12 }} width={window.outerWidth} height={window.outerHeight-100} >
                 <>
                   {
-                    nextData.map((item: any, index: number) =>
+                    nextData.length > 0 &&
                       <>
-                        <Placemark geometry={[item.lat, item.lon]} properties={{
-                          iconCaption: `${item.name}`,
+                        <Placemark geometry={[nextData[0].lat, nextData[0].lon]} properties={{
+                          iconCaption: `${nextData[0].name}`,
                         }}
                           options={{
                             preset: "islands#circleDotIcon",
                             cursor: "pointer",
                           }
                           }
-                          key={index}
                         />
                       </>
-                    )
                   }
                 </>
                 <ZoomControl options={{
