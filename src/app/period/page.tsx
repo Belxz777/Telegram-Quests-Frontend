@@ -66,17 +66,27 @@ setTimeout(()=>{
               <Map defaultState={{ center: [56.8496, 53.2052], zoom: 12 }} width={window.outerWidth} height={window.outerHeight-100} >
                 <>
                   {
-                    nextData.length > 0 &&
+                    nextData.length > 0 && 
                       <>
-                        <Placemark geometry={[nextData[0].lat, nextData[0].lon]} properties={{
-                          iconCaption: `${nextData[0].name}`,
-                        }}
-                          options={{
-                            preset: "islands#circleDotIcon",
-                            cursor: "pointer",
+                        {[4, 8, 9, 1, 5, 2, 7, 6].map(id => {
+                          const location = nextData.find((loc: { id: number }) => loc.id === id)
+                          if (location) {
+                            return (
+                              <Placemark 
+                                key={location.id}
+                                geometry={[location.lat, location.lon]} 
+                                properties={{
+                                  iconCaption: `${location.name}`,
+                                }}
+                                options={{
+                                  preset: "islands#circleDotIcon",
+                                  cursor: "pointer",
+                                }}
+                              />
+                            )
                           }
-                          }
-                        />
+                          return null
+                        })[0]}
                       </>
                   }
                 </>
