@@ -19,6 +19,7 @@ export default function General() {
 const initData = useInitData()
 const [isTeam, setisTeam] = useState(false)
 const [team, setteam] = useState<Team | null>(null)
+const [isComplete, setisComplete] = useState(false)
 const [isLoading , setIsLoading] = useState(true)
   const closingBehaviour = new ClosingBehavior(false, postEvent);
   closingBehaviour.enableConfirmation()
@@ -70,9 +71,8 @@ const [isLoading , setIsLoading] = useState(true)
   }, [])
   const fetchData = async (name:string) => {
     try {
-      const data = await findTeam(name);
-      if('status' in data){
-    
+        const data = await findTeam(name);
+        if('status' in data){    
         setisTeam(false)
         setIsLoading(false)
         setlanding(false)
@@ -80,6 +80,19 @@ const [isLoading , setIsLoading] = useState(true)
       }
       else{
         setteam(data)
+        if ('solved' in data && data.solved && data.solved.length === 8 && 
+          data.solved.includes("1") && 
+          data.solved.includes("2") && 
+          data.solved.includes("4") && 
+          data.solved.includes("5") && 
+          data.solved.includes("6") && 
+          data.solved.includes("7") && 
+          data.solved.includes("8") && 
+          data.solved.includes("9") && 
+          !data.solved.includes("3")) {
+        alert("Веловест пройден");
+        setisComplete(true)
+      }
         setisTeam(true)
         setIsLoading(false)
         setlanding(false)
@@ -95,8 +108,7 @@ const [isLoading , setIsLoading] = useState(true)
       , 7000)
       
     }
-};
-  return (
+};  return (
 <Suspense fallback={<Reroute text='Загрузка'/>}  >
 {
   landing ?
@@ -203,6 +215,7 @@ const [isLoading , setIsLoading] = useState(true)
                 }
               })()}
             </h2>
+            <h1 className='text-3xl font-bold tracking-tight text-link-base text-center mb-1 mt-2' >{isComplete && "Велоквест успешно пройден ! Спасибо за участие !"}</h1>
         </>}
           <Image src={pint} alt=''  
           onDoubleClick={()=>{

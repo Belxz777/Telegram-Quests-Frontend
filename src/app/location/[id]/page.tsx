@@ -39,7 +39,10 @@ const fetchData = async () => {
 setloading(true)
 if(!params.id) return
 const data = await locationQuests(params.id)
-
+if(params.id === 3){
+  alert("Вы проехали весь велоквест! Спасибо за участие!")
+  router.push("/")
+}
 if(!data) return
 if (Array.isArray(data) && data.length > 0) {
   setloading(false)
