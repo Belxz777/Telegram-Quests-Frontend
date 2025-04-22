@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: 'Made by belxz777 and vercel',
   
 }
+console.log(process.env.BACKEND_URL)
 
 export default function RootLayout({
   children,
