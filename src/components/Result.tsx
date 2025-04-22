@@ -90,7 +90,7 @@ useEffect(() => {
     return (
       <ErrorPage
         linkHref="/qrscanner"
-        linkText="Сканируйте еще раз"
+        linkText="Перезагрузить"
         errorMessage="Произошла ошибка при отправке фотографии (ошибка с форматом фотографии, обратитесь к администратору)"
       />
     )
@@ -213,7 +213,7 @@ useEffect(() => {
               </button>
 
               {/* Результаты квиза */}
-              <div className="mt-6 border-t pt-4">
+              {/* <div className="mt-6 border-t pt-4">
                 <h3 className="text-xl font-bold text-link-base mb-3">Ваши ответы:</h3>
                 <ul className="space-y-2">
                   {props.answers.map((answer, index) => (
@@ -223,7 +223,7 @@ useEffect(() => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </>
           )}
         </div>
