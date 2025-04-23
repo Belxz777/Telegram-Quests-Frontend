@@ -148,33 +148,15 @@ interface Props {
     const backButton = useBackButton();
     const [locations, setLocations] = useState([]);
     useEffect(() => {
+      fetchLocations();
       fetchData();
       backButton.show();
       backButton.on("click", () => {
         router.push("/adminPanel");;
       });
-      useEffect(()=>{
 
-  
-        const fetchLocations = async () => {
-          try {
-            const response = await fetch('https://telegram-quests-backend.onrender.com/location');
-            const data = await response.json();
-            const locationNames = data.map((location:any)=> ({
-              id: location.id,
-              name: location.name
-            }));
-            setLocations(locationNames);
-          } catch (error) {
-            console.error('Error fetching locations:', error);
-          }
-        };
-        
-        fetchLocations();
-        
       },[])
       // Очистка обработчика события при размонтировании компонента
-    }, []);
   
     const fetchData = async () => {
       try {
@@ -198,7 +180,19 @@ interface Props {
   },5000)
       }
     };
-  
+    const fetchLocations = async () => {
+      try {
+        const response = await fetch('https://telegram-quests-backend.onrender.com/location');
+        const data = await response.json();
+        const locationNames = data.map((location:any)=> ({
+          id: location.id,
+          name: location.name
+        }));
+        setLocations(locationNames);
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+      }
+    };
     return (
       <div className="min-h-screen   text-link-base bg-scin-base font-sans">
         {loading ? (
