@@ -185,7 +185,7 @@ interface Props {
           <Loading text="Загрузка данных подождите..." />
         ) : (
           <>    
-               <header className="sticky top-0 z-10 w-full border-b  bg-scin shadow-sm">
+               <header className=" z-10 w-full border-b  bg-scin shadow-sm">
         <div className="flex h-14 items-center px-4">
           <h1 className="text-lg font-semibold">Админ панель</h1>
         </div>
@@ -202,7 +202,9 @@ interface Props {
         </div>
 
         <h2 className="text-lg font-semibold mb-4">Прогресс команды</h2>
-
+        <pre className="bg-gray-900 p-4 rounded-md overflow-x-auto text-sm text-gray-300">
+              {JSON.stringify(teamData, null, 2)}
+            </pre>
         {/* Team progress items */}
         {teamData?.solved.map((location, index) => (
           <div key={index} className="bg-scin-base/20 rounded-lg border-2 border-gray-100 shadow-md mb-4 overflow-hidden">
@@ -217,7 +219,13 @@ interface Props {
             <div className="p-4">
               <div>
                 <h4 className="text-sm font-medium mb-1">Ответы:</h4>
-                <p className=" text-xl font-bold text-hint-base whitespace-pre-line">{teamData.answers[index]}</p>
+                <p className=" text-xl font-bold text-hint-base whitespace-pre-line">{teamData.answers.map(
+                  (answer, index) => (
+                    <span key={index} className="inline-block mr-2">
+                      {answer}
+                    </span>
+                  )
+                )}</p>
               </div>
             </div>
           </div>

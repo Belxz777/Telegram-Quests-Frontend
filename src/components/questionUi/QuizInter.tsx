@@ -98,7 +98,6 @@ console.log(answerObj,props.quizData[currentQuestion].answer)
       setIsOpen(false)
     } else {
       setShowResult(true)
-      alert('end')
     }
   }  // Переход к следующему вопросу для todo-типа вопросов
   const handleNextQuestion = () => {
