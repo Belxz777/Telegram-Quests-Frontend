@@ -136,55 +136,64 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GoCheck } from "react-icons/go";
 
-
 interface Props {
     params: { team: string };
-  }
+}
+
+interface Location {
+  id: string;
+  name: string;
+}
   
-  export default function Component(params: Props) {
-    const [teamData, setTeamData] = useState<Team  |  null>();
+export default function Component(params: Props) {
+    const [teamData, setTeamData] = useState<Team | null>(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
     const backButton = useBackButton();
-    const [locations, setLocations] = useState([]);
+    const [locations, setLocations] = useState<Location[]>([]);
+
     useEffect(() => {
       fetchLocations();
       fetchData();
       backButton.show();
       backButton.on("click", () => {
-        router.push("/adminPanel");;
+        router.push("/adminPanel");
       });
 
-      },[])
-      // Очистка обработчика события при размонтировании компонента
-  
+      return () => {
+        backButton.off("click", () => {
+          router.push("/adminPanel");
+        });
+      };    },[backButton, router]);
+
     const fetchData = async () => {
       try {
         const data = await findTeam(params.params.team);
         if('status' in data ) {
-          alert(`Возникла ошибка ${data.status} вы будете переброщены обратно через 5 секунд`)
+          alert(`Возникла ошибка ${data.status} вы будете переброщены обратно через 5 секунд`);
           setLoading(false);
-  setTimeout(()=>{
-    router.push("/adminPanel")
-  },5000)
+          setTimeout(()=>{
+            router.push("/adminPanel");
+          },5000);
         }
         else{
           setTeamData(data);
           setLoading(false);
         }
       } catch (error) {
-        alert(`Возникла ошибка ${error} вы будете переброщены обратно через 5 секунд`)
+        alert(`Возникла ошибка ${error} вы будете переброщены обратно через 5 секунд`);
         setLoading(false);
-  setTimeout(()=>{
-  router.push("/adminPanel")
-  },5000)
+        setTimeout(()=>{
+          router.push("/adminPanel");
+        },5000);
       }
     };
+
     const fetchLocations = async () => {
       try {
         const response = await fetch('https://telegram-quests-backend.onrender.com/location');
         const data = await response.json();
-        const locationNames = data.map((location:any)=> ({
+        const locationNames = data.map((location: any) => ({
           id: location.id,
           name: location.name
         }));
@@ -193,63 +202,61 @@ interface Props {
         console.error('Error fetching locations:', error);
       }
     };
+
+    if (!teamData) {
+      return <Loading text="Загрузка данных подождите..." />;
+    }
+
     return (
-      <div className="min-h-screen   text-link-base bg-scin-base font-sans">
+      <div className="min-h-screen text-link-base bg-scin-base font-sans">
         {loading ? (
           <Loading text="Загрузка данных подождите..." />
         ) : (
           <>    
-               <header className=" z-10 w-full border-b  bg-scin shadow-sm">
-        <div className="flex h-14 items-center px-4">
-          <h1 className="text-lg font-semibold">Админ панель</h1>
-        </div>
-      </header>
-
-      {/* Main content */}
-      <main className="max-w-md mx-auto p-4">
-        {/* Team header */}
-        <div className=" rounded-lg shadow-md mb-6 p-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold">Команда: {teamData?.name}</h2>
-            <span className="px-2 py-1 text-sm bg-gray-100 rounded-full border border-gray-200">ID: {teamData?.id}</span>
-          </div>
-        </div>
-
-        <h2 className="text-lg font-semibold mb-4">Прогресс команды</h2>
-        <pre className="bg-gray-900 p-4 rounded-md overflow-x-auto text-sm text-gray-300">
-              {JSON.stringify(teamData, null, 2)}
-            </pre>
-        {/* Team progress items */}
-        {teamData?.solved.map((location, index) => (
-          <div key={index} className="bg-scin-base/20 rounded-lg border-2 border-gray-100 shadow-md mb-4 overflow-hidden">
-            <div className="p-4  ">
-              <div className="flex justify-between items-center">
-                <h3 className="text-base font-semibold">Локация #{locations[Number(location)]} </h3>
-                <span className="px-2 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">
-                  Результат: {teamData.results[index]}
-                </span>
+            <header className="z-10 w-full border-b bg-scin shadow-sm">
+              <div className="flex h-14 items-center px-4">
+                <h1 className="text-lg font-semibold">Админ панель</h1>
               </div>
-            </div>
-            <div className="p-4">
-              <div>
-                <h4 className="text-sm font-medium mb-1">Ответы:</h4>
-                <p className=" text-xl font-bold text-hint-base whitespace-pre-line">{teamData.answers.map(
-                  (answer, index) => (
-                    <span key={index} className="inline-block mr-2">
-                      {answer}
-                    </span>
-                  )
-                )}</p>
+            </header>
+
+            <main className="max-w-md mx-auto p-4">
+              <div className="rounded-lg shadow-md mb-6 p-4">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-bold">Команда: {teamData.name}</h2>
+                  <span className="px-2 py-1 text-sm bg-gray-100 rounded-full border border-gray-200">ID: {teamData.id}</span>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
-      </main>
- </>
-  )
-}
-</div>
-)
-}
 
+              <h2 className="text-lg font-semibold mb-4">Прогресс команды</h2>
+              <pre className="bg-gray-900 p-4 rounded-md overflow-x-auto text-sm text-gray-300">
+                {JSON.stringify(teamData, null, 2)}
+              </pre>
 
+              {teamData.solved.map((location, index) => (
+                <div key={index} className="bg-scin-base/20 rounded-lg border-2 border-gray-100 shadow-md mb-4 overflow-hidden">
+                  <div className="p-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-base font-semibold">
+                        Локация #{locations[Number(location)]?.name || location}
+                      </h3>
+                      <span className="px-2 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">
+                        Результат: {teamData.results[index]}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div>
+                      <h4 className="text-sm font-medium mb-1">Ответы:</h4>
+                      <p className="text-xl font-bold text-hint-base whitespace-pre-line">
+                        {teamData.answers[index]}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </main>
+          </>
+        )}
+      </div>
+    );
+}
