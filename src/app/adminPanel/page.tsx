@@ -13,7 +13,6 @@ type Props = {}
 function AdminPanel({}: Props) {
   const backButton = useBackButton()
 const router = useRouter()
-const [locations, setLocations] = useState([]);
 const {teamData,fetchData,isLoading,isNotFound,isAdmin}  = useTeamData()
 
 backButton.show()
@@ -116,7 +115,3 @@ backButton.on('click', () =>{
   )
 }
 export default AdminPanel
-
-function useState(arg0: never[]): [any, any] {
-  throw new Error('Function not implemented.')
-}
