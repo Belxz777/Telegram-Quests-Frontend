@@ -146,13 +146,33 @@ interface Props {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
     const backButton = useBackButton();
-  
+    const [locations, setLocations] = useState([]);
     useEffect(() => {
       fetchData();
       backButton.show();
       backButton.on("click", () => {
         router.push("/adminPanel");;
       });
+      useEffect(()=>{
+
+  
+        const fetchLocations = async () => {
+          try {
+            const response = await fetch('https://telegram-quests-backend.onrender.com/location');
+            const data = await response.json();
+            const locationNames = data.map((location:any)=> ({
+              id: location.id,
+              name: location.name
+            }));
+            setLocations(locationNames);
+          } catch (error) {
+            console.error('Error fetching locations:', error);
+          }
+        };
+        
+        fetchLocations();
+        
+      },[])
       // Очистка обработчика события при размонтировании компонента
     }, []);
   
@@ -210,7 +230,7 @@ interface Props {
           <div key={index} className="bg-scin-base/20 rounded-lg border-2 border-gray-100 shadow-md mb-4 overflow-hidden">
             <div className="p-4  ">
               <div className="flex justify-between items-center">
-                <h3 className="text-base font-semibold">Локация #{location}</h3>
+                <h3 className="text-base font-semibold">Локация #{locations[Number(location)]} </h3>
                 <span className="px-2 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">
                   Результат: {teamData.results[index]}
                 </span>
